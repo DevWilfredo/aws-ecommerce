@@ -21,8 +21,17 @@ export class AwsS3Service {
         });
     }
 
-    async uploadFile(file: Express.Multer.File): Promise<{ url: string, key: string }> {
-        const key = `${this.prefix}/${randomUUID()}-${file.originalname}`;
+    private buildKey(fileName: string, folder?: string) {
+        const normalizedPrefix = this.prefix ? `${this.prefix}/` : '';
+        const normalizedFolder = folder ? `${folder.replace(/^\//, '').replace(/\/$/, '')}/` : '';
+        return `${normalizedPrefix}${normalizedFolder}${randomUUID()}-${fileName}`;
+    }
+
+    async uploadFile(
+        file: Express.Multer.File,
+        folder?: string,
+    ): Promise<{ url: string; key: string }> {
+        const key = this.buildKey(file.originalname, folder);
 
         await this.s3.send(
             new PutObjectCommand({
@@ -38,6 +47,12 @@ export class AwsS3Service {
         return { url, key };
     }
 
+    async uploadFiles(
+        files: Express.Multer.File[],
+        folder?: string,
+    ): Promise<{ url: string; key: string }[]> {
+        return Promise.all(files.map((file) => this.uploadFile(file, folder)));
+    }
 
     async deleteFile(key: string) {
         await this.s3.send(
@@ -46,5 +61,9 @@ export class AwsS3Service {
                 Key: key
             })
         )
+    }
+
+    async deleteFiles(keys: string[]) {
+        await Promise.all(keys.map((key) => this.deleteFile(key)));
     }
 }
