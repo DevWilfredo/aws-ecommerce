@@ -4,6 +4,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
 import { AwsS3Module } from './aws-s3/aws-s3.module';
+import { BrandsModule } from './brands/brands.module';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -27,6 +29,10 @@ import { AwsS3Module } from './aws-s3/aws-s3.module';
   UsersModule,
 
   ProductsModule,
+
+  BrandsModule,
+
+  CategoriesModule,
 
   AwsS3Module
   ],
