@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import type { Multer } from 'multer';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -18,7 +19,7 @@ export class ProductsService {
     private readonly awsS3: AwsS3Service,
   ) { }
 
-  async create(createProductDto: CreateProductDto, files: Express.Multer.File[]) {
+  async create(createProductDto: CreateProductDto, files: Multer.File[]) {
     const productId = randomUUID();
     const newProduct = this.productsRepo.create({
       ...createProductDto,
@@ -82,7 +83,7 @@ export class ProductsService {
   async update(
     id: string,
     updateProductDto: UpdateProductDto,
-    files: Express.Multer.File[],
+    files: Multer.File[],
   ) {
     const product = await this.productsRepo.findOne({
       where: { id },

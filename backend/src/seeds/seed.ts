@@ -1,7 +1,18 @@
 import 'reflect-metadata';
+import { join } from 'path';
+import { randomUUID } from 'crypto';
+import { config } from 'dotenv';
 import { DataSource } from 'typeorm';
 import { Brand } from '../brands/entities/brand.entity';
 import { Category } from '../categories/entities/category.entity';
+import { Product } from '../products/entities/product.entity';
+import { ProductImage } from '../products/entities/product-image.entity';
+import { ProductAttributeValue } from '../products/entities/product-attribute-value.entity';
+import { AttributeDefinition } from '../products/entities/attribute-definition.entity';
+import { OptionGroup } from '../products/entities/option-group.entity';
+import { OptionValue } from '../products/entities/option-value.entity';
+
+config({ path: join(__dirname, '../../.env') });
 
 const dataSource = new DataSource({
   type: 'postgres',
@@ -10,7 +21,16 @@ const dataSource = new DataSource({
   username: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
-  entities: [Brand, Category],
+  entities: [
+    Brand,
+    Category,
+    Product,
+    ProductImage,
+    ProductAttributeValue,
+    AttributeDefinition,
+    OptionGroup,
+    OptionValue,
+  ],
   synchronize: true,
 });
 
@@ -45,8 +65,20 @@ async function seed() {
   const brandRepo = dataSource.getRepository(Brand);
   const categoryRepo = dataSource.getRepository(Category);
 
-  await brandRepo.upsert(brands, ['slug']);
-  await categoryRepo.upsert(categories, ['slug']);
+  await brandRepo.upsert(
+    brands.map((brand) => ({
+      ...brand,
+      id: randomUUID(),
+    })),
+    ['slug'],
+  );
+  await categoryRepo.upsert(
+    categories.map((category) => ({
+      ...category,
+      id: randomUUID(),
+    })),
+    ['slug'],
+  );
 
   await dataSource.destroy();
 

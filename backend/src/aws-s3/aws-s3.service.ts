@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3';
 import { ConfigService } from '@nestjs/config';
 import { randomUUID } from 'crypto';
+import type { Multer } from 'multer';
 
 @Injectable()
 export class AwsS3Service {
@@ -28,7 +29,7 @@ export class AwsS3Service {
     }
 
     async uploadFile(
-        file: Express.Multer.File,
+        file: Multer.File,
         folder?: string,
     ): Promise<{ url: string; key: string }> {
         const key = this.buildKey(file.originalname, folder);
@@ -39,7 +40,6 @@ export class AwsS3Service {
                 Key: key,
                 Body: file.buffer,
                 ContentType: file.mimetype,
-                ACL: 'public-read',
             }),
         );
 
@@ -48,7 +48,7 @@ export class AwsS3Service {
     }
 
     async uploadFiles(
-        files: Express.Multer.File[],
+        files: Multer.File[],
         folder?: string,
     ): Promise<{ url: string; key: string }[]> {
         return Promise.all(files.map((file) => this.uploadFile(file, folder)));

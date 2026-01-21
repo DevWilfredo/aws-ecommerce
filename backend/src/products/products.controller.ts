@@ -3,6 +3,7 @@ import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { FilesInterceptor } from '@nestjs/platform-express';
+import type { Multer } from 'multer';
 
 @Controller('products')
 export class ProductsController {
@@ -12,7 +13,7 @@ export class ProductsController {
   @UseInterceptors(FilesInterceptor('images', 10))
   async create(
     @Body() createProductDto: CreateProductDto,
-    @UploadedFiles() files: Express.Multer.File[],
+    @UploadedFiles() files: Multer.File[],
   ) {
     return this.productsService.create(createProductDto, files ?? []);
   }
@@ -32,7 +33,7 @@ export class ProductsController {
   async update(
     @Param('id') id: string,
     @Body() updateProductDto: UpdateProductDto,
-    @UploadedFiles() files: Express.Multer.File[],
+    @UploadedFiles() files: Multer.File[],
   ) {
     return this.productsService.update(id, updateProductDto, files ?? []);
   }
