@@ -1,13 +1,16 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import type { Multer } from 'multer';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from './entities/product.entity';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { ProductImage } from './entities/product-image.entity';
 import { AwsS3Service } from 'src/aws-s3/aws-s3.service';
 import { randomUUID } from 'crypto';
+import { OptionGroup } from './entities/option-group.entity';
+import { AttributeDefinition, AttributeDataType } from './entities/attribute-definition.entity';
+import { ProductAttributeValue } from './entities/product-attribute-value.entity';
 
 @Injectable()
 export class ProductsService {
@@ -16,16 +19,122 @@ export class ProductsService {
     private readonly productsRepo: Repository<Product>,
     @InjectRepository(ProductImage)
     private readonly productImagesRepo: Repository<ProductImage>,
+    @InjectRepository(OptionGroup)
+    private readonly optionGroupsRepo: Repository<OptionGroup>,
+    @InjectRepository(AttributeDefinition)
+    private readonly attributeDefinitionsRepo: Repository<AttributeDefinition>,
+    @InjectRepository(ProductAttributeValue)
+    private readonly productAttributeValuesRepo: Repository<ProductAttributeValue>,
     private readonly awsS3: AwsS3Service,
   ) { }
 
   async create(createProductDto: CreateProductDto, files: Multer.File[]) {
     const productId = randomUUID();
+    const { optionGroupIds, attributeValues, ...productData } = createProductDto;
     const newProduct = this.productsRepo.create({
-      ...createProductDto,
+      ...productData,
       id: productId,
     });
     const product = await this.productsRepo.save(newProduct);
+
+    if (optionGroupIds?.length) {
+      const optionGroups = await this.optionGroupsRepo.find({
+        where: { id: In(optionGroupIds) },
+      });
+      if (optionGroups.length !== optionGroupIds.length) {
+        const foundIds = new Set(optionGroups.map((group) => group.id));
+        const missingIds = optionGroupIds.filter((id) => !foundIds.has(id));
+        throw new NotFoundException(
+          `Option groups no encontrados: ${missingIds.join(', ')}`,
+        );
+      }
+
+      const invalidOptionGroups = optionGroups.filter(
+        (group) => group.categoryId !== product.categoryId,
+      );
+      if (invalidOptionGroups.length) {
+        throw new BadRequestException(
+          'Todos los option groups deben pertenecer a la misma categoría del producto.',
+        );
+      }
+
+      await this.productsRepo.save({
+        id: productId,
+        optionGroups,
+      });
+    }
+
+    if (attributeValues?.length) {
+      const attributeIds = Array.from(
+        new Set(attributeValues.map((value) => value.attributeId)),
+      );
+      const attributes = await this.attributeDefinitionsRepo.find({
+        where: { id: In(attributeIds) },
+      });
+      if (attributes.length !== attributeIds.length) {
+        const foundIds = new Set(attributes.map((attribute) => attribute.id));
+        const missingIds = attributeIds.filter((id) => !foundIds.has(id));
+        throw new NotFoundException(
+          `Atributos no encontrados: ${missingIds.join(', ')}`,
+        );
+      }
+
+      const invalidAttributes = attributes.filter(
+        (attribute) => attribute.categoryId !== product.categoryId,
+      );
+      if (invalidAttributes.length) {
+        throw new BadRequestException(
+          'Todos los atributos deben pertenecer a la misma categoría del producto.',
+        );
+      }
+
+      const attributeMap = new Map(
+        attributes.map((attribute) => [attribute.id, attribute]),
+      );
+
+      const valuesToSave = attributeValues.map((value) => {
+        const attribute = attributeMap.get(value.attributeId);
+        if (!attribute) {
+          throw new NotFoundException(
+            `Atributo ${value.attributeId} no encontrado.`,
+          );
+        }
+
+        switch (attribute.dataType) {
+          case AttributeDataType.Text:
+            if (value.valueText === undefined || value.valueText === null) {
+              throw new BadRequestException(
+                `El atributo ${attribute.name} requiere un valor de texto.`,
+              );
+            }
+            break;
+          case AttributeDataType.Number:
+            if (value.valueNumber === undefined || value.valueNumber === null) {
+              throw new BadRequestException(
+                `El atributo ${attribute.name} requiere un valor numérico.`,
+              );
+            }
+            break;
+          case AttributeDataType.Boolean:
+            if (value.valueBoolean === undefined || value.valueBoolean === null) {
+              throw new BadRequestException(
+                `El atributo ${attribute.name} requiere un valor booleano.`,
+              );
+            }
+            break;
+        }
+
+        return this.productAttributeValuesRepo.create({
+          productId,
+          attributeId: attribute.id,
+          valueText: value.valueText,
+          valueNumber: value.valueNumber,
+          valueBoolean: value.valueBoolean,
+        });
+      });
+
+      await this.productAttributeValuesRepo.save(valuesToSave);
+    }
 
     if (files.length) {
       const uploads = await this.awsS3.uploadFiles(
@@ -54,7 +163,9 @@ export class ProductsService {
         'category',
         'images',
         'attributeValues',
+        'attributeValues.attribute',
         'optionGroups',
+        'optionGroups.optionValues',
       ],
       order: { createdAt: 'DESC' },
     });
@@ -68,7 +179,9 @@ export class ProductsService {
         'category',
         'images',
         'attributeValues',
+        'attributeValues.attribute',
         'optionGroups',
+        'optionGroups.optionValues',
       ],
       order: { images: { position: 'ASC' } },
     });
