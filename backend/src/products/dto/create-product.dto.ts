@@ -1,5 +1,9 @@
 import { Type } from 'class-transformer';
 import {
+  ArrayUnique,
+  IsArray,
+  IsBoolean,
+  IsOptional,
   IsNotEmpty,
   IsString,
   MaxLength,
@@ -7,7 +11,30 @@ import {
   Min,
   IsUUID,
   IsInt,
+  ValidateNested,
 } from 'class-validator';
+
+export class CreateProductAttributeValueDto {
+  @IsUUID()
+  attributeId: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(255)
+  valueText?: string;
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsNumber(
+    { maxDecimalPlaces: 2 },
+    { message: 'El valor numérico debe tener hasta 2 decimales' },
+  )
+  valueNumber?: number;
+
+  @IsOptional()
+  @IsBoolean()
+  valueBoolean?: boolean;
+}
 
 export class CreateProductDto {
   @IsString()
@@ -38,4 +65,15 @@ export class CreateProductDto {
   @IsUUID()
   brandId: string;
 
+  @IsOptional()
+  @IsArray()
+  @ArrayUnique()
+  @IsUUID(undefined, { each: true })
+  optionGroupIds?: string[];
+
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => CreateProductAttributeValueDto)
+  attributeValues?: CreateProductAttributeValueDto[];
 }
