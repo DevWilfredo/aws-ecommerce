@@ -9,10 +9,27 @@ import { ProductAttributeValue } from './entities/product-attribute-value.entity
 import { OptionGroup } from './entities/option-group.entity';
 import { OptionValue } from './entities/option-value.entity';
 import { ProductImage } from './entities/product-image.entity';
+import { OptionGroupsController } from './option-groups.controller';
+import { OptionGroupsService } from './option-groups.service';
+import { OptionValuesController } from './option-values.controller';
+import { OptionValuesService } from './option-values.service';
+import { AttributeDefinitionsController } from './attribute-definitions.controller';
+import { AttributeDefinitionsService } from './attribute-definitions.service';
 
 @Module({
-  controllers: [ProductsController],
-  providers: [ProductsService, AwsS3Service],
+  controllers: [
+    ProductsController,
+    OptionGroupsController,
+    OptionValuesController,
+    AttributeDefinitionsController,
+  ],
+  providers: [
+    ProductsService,
+    OptionGroupsService,
+    OptionValuesService,
+    AttributeDefinitionsService,
+    AwsS3Service,
+  ],
   imports: [
     TypeOrmModule.forFeature([
       Product,

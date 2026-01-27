@@ -10,6 +10,12 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "geotech-shop-bucket.s3.eu-south-2.amazonaws.com",
+        port: "",
+        pathname: "/**",
+      },
     ]
   }
 };
