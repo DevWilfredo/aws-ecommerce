@@ -162,10 +162,6 @@ export class ProductsService {
         'brand',
         'category',
         'images',
-        'attributeValues',
-        'attributeValues.attribute',
-        'optionGroups',
-        'optionGroups.optionValues',
       ],
       order: { createdAt: 'DESC' },
     });

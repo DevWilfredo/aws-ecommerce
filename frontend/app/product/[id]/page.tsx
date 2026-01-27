@@ -1,32 +1,31 @@
 'use client';
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import ProductGallery from "@/components/ProductDetail/ProductGallery";
 import ProductInfo from "@/components/ProductDetail/ProductInfo";
 import Reviews from "@/components/ProductDetail/Reviews";
 
-type Product = {
+type ApiProduct = {
   id: string;
-  title: string;
-  price: number;
-  originalPrice: number;
-  colors: string[];
-  storage: string[];
-  image: string;
-  images: string[];
-  rating: number;
-  reviews: number;
-  specs: {
-    processor: string;
-    ram: string;
-    mainCamera: string;
-    frontCamera: string;
-    battery: string;
-    display: string;
-  };
+  name: string;
   description: string;
-  inStock: boolean;
+  price: string;
+  stock: number;
+  category: { id: string; name: string; slug: string };
+  brand: { id: string; name: string; slug: string };
+  images: Array<{ imageUrl: string; position: number }>;
+  attributeValues: Array<{
+    attribute: { name: string; unit?: string | null; dataType: string };
+    valueText: string | null;
+    valueNumber: string | null;
+    valueBoolean: boolean | null;
+  }>;
+  optionGroups: Array<{
+    name: string;
+    optionValues: Array<{ label: string }>;
+  }>;
 };
 
 type Review = {
@@ -40,29 +39,7 @@ type Review = {
   images?: string[];
 };
 
-const mockProduct: Product = {
-  id: "1",
-  title: "Apple iPhone 14 Pro Max",
-  price: 1399,
-  originalPrice: 1499,
-  colors: ["#1a1a1a", "#c9b5d8", "#e8e8e8", "#d4af37"],
-  storage: ["128GB", "256GB", "512GB", "1TB"],
-  image: "/Iphone-pro-1.png",
-  images: ["/Iphone-pro-1.png", "/Iphone.webp", "/PlayStation.webp", "/Iphone-pro-1.png"],
-  rating: 4.8,
-  reviews: 125,
-  specs: {
-    processor: "Apple A16 Bionic",
-    ram: "6GB",
-    mainCamera: "48+12+12 MP",
-    frontCamera: "12 MP",
-    battery: "4323 mAh",
-    display: "6.7 inch",
-  },
-  description:
-    "Enhanced capabilities thanks foam enlarged display of 6.7 millimeter work without recharging throughout the day. Incredible photos in weak, yestand in bright lightning in the new sympathetic two-camera setup.",
-  inStock: true,
-};
+const placeholderImage = "https://placehold.co/600x600?text=Producto";
 
 const mockReviews: Review[] = [
   {
@@ -73,7 +50,7 @@ const mockReviews: Review[] = [
     date: "24 January 2023",
     title: "",
     content:
-      "I was a bit nervous to be buying a secondhand phone from Amazon, but I couldn't be happier with my purchase! ... Highly recommend! ❤️",
+      "I was a bit nervous to be buying a secondhand phone from Amazon, but I couldn't be happier with my purchase! ... Highly recommend! <3",
     images: [],
   },
   {
@@ -99,40 +76,165 @@ const mockReviews: Review[] = [
   },
 ];
 
-export default function ProductDetail({ params }: { params: { id: string } }) {
-  const product = mockProduct;
+const formatAttributeValue = (
+  value: ApiProduct["attributeValues"][number]
+) => {
+  if (value.valueText) return value.valueText;
+  if (value.valueNumber) {
+    return value.attribute.unit
+      ? `${value.valueNumber} ${value.attribute.unit}`
+      : value.valueNumber;
+  }
+  if (value.valueBoolean !== null) {
+    return value.valueBoolean ? "Si" : "No";
+  }
+  return "N/A";
+};
 
-  const [mainImage, setMainImage] = useState(product.image);
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
-  const [selectedStorage, setSelectedStorage] = useState(product.storage[0]);
+export default function ProductDetail() {
+  const params = useParams<{ id: string }>();
+  const id = params?.id;
+  const [product, setProduct] = useState<ApiProduct | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [mainImage, setMainImage] = useState(placeholderImage);
+  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedStorage, setSelectedStorage] = useState("");
+
+  useEffect(() => {
+    if (!id) return;
+    let isMounted = true;
+
+    const loadProduct = async () => {
+      try {
+        const res = await fetch(`/api/products/${id}`);
+        if (!res.ok) {
+          throw new Error("No se pudo cargar el producto");
+        }
+        const data: ApiProduct = await res.json();
+        if (isMounted) {
+          setProduct(data);
+          setError(null);
+        }
+      } catch (err: any) {
+        if (isMounted) {
+          setError(String(err?.message ?? err));
+        }
+      }
+    };
+
+    loadProduct();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [id]);
+
+  const images = useMemo(() => {
+    if (!product?.images?.length) return [placeholderImage];
+    return [...product.images]
+      .sort((a, b) => a.position - b.position)
+      .map((img) => img.imageUrl);
+  }, [product]);
+
+  const colorOptions = useMemo(() => {
+    const group = product?.optionGroups?.find((g) =>
+      g.name.toLowerCase().includes("color")
+    );
+    return group?.optionValues?.map((v) => v.label) ?? [];
+  }, [product]);
+
+  const storageOptions = useMemo(() => {
+    const group = product?.optionGroups?.find((g) =>
+      g.name.toLowerCase().includes("almacenamiento")
+    );
+    return group?.optionValues?.map((v) => v.label) ?? [];
+  }, [product]);
+
+  const specs = useMemo(() => {
+    if (!product?.attributeValues?.length) return [];
+    return product.attributeValues.map((item) => ({
+      label: item.attribute.name,
+      value: formatAttributeValue(item),
+    }));
+  }, [product]);
+
+  useEffect(() => {
+    if (images.length) setMainImage(images[0]);
+  }, [images]);
+
+  useEffect(() => {
+    if (colorOptions.length) setSelectedColor(colorOptions[0]);
+  }, [colorOptions]);
+
+  useEffect(() => {
+    if (storageOptions.length) setSelectedStorage(storageOptions[0]);
+  }, [storageOptions]);
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <p className="text-sm text-red-600">{error}</p>
+      </div>
+    );
+  }
+
+  if (!product) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <p className="text-sm text-gray-600">Cargando producto...</p>
+      </div>
+    );
+  }
+
+  const price = Number(product.price);
 
   return (
     <div className="min-h-screen bg-white">
       <div className="max-w-7xl mx-auto px-6 py-4 border-b">
         <div className="flex items-center gap-2 text-sm text-gray-600">
-          <Link href="/" className="hover:text-gray-900">Inicio</Link>
+          <Link href="/" className="hover:text-gray-900">
+            Inicio
+          </Link>
           <span>/</span>
-          <Link href="/catalog" className="hover:text-gray-900">Catálogo</Link>
+          <Link href="/catalog" className="hover:text-gray-900">
+            Catalogo
+          </Link>
           <span>/</span>
-          <Link href="/catalog?category=smartphones" className="hover:text-gray-900">Smartphones</Link>
+          <Link
+            href={`/catalog?category=${product.category.slug}`}
+            className="hover:text-gray-900"
+          >
+            {product.category.name}
+          </Link>
           <span>/</span>
-          <Link href="/catalog?brand=apple" className="hover:text-gray-900">Apple</Link>
+          <Link
+            href={`/catalog?brand=${product.brand.slug}`}
+            className="hover:text-gray-900"
+          >
+            {product.brand.name}
+          </Link>
           <span>/</span>
-          <span className="text-gray-900 font-medium">{product.title}</span>
+          <span className="text-gray-900 font-medium">{product.name}</span>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <ProductGallery images={product.images} mainImage={mainImage} onSelect={setMainImage} />
+          <ProductGallery
+            images={images}
+            mainImage={mainImage}
+            onSelect={setMainImage}
+          />
 
           <ProductInfo
-            title={product.title}
-            price={product.price}
-            originalPrice={product.originalPrice}
-            colors={product.colors}
-            storage={product.storage}
-            specs={product.specs}
+            title={product.name}
+            price={price}
+            originalPrice={null}
+            colors={colorOptions}
+            storage={storageOptions}
+            specs={specs}
+            description={product.description}
+            inStock={product.stock > 0}
             selectedColor={selectedColor}
             setSelectedColor={setSelectedColor}
             selectedStorage={selectedStorage}
@@ -141,7 +243,7 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
         </div>
       </div>
 
-      <Reviews reviews={mockReviews} rating={product.rating} total={product.reviews} />
+      <Reviews reviews={mockReviews} rating={4.8} total={125} />
     </div>
   );
 }

@@ -3,25 +3,18 @@ import Image from "next/image";
 
 type Product = {
   id: string;
-  title: string;
+  name: string;
   price: number;
-  image: string;
-  brand?: string;
-  category?: string;
+  stock: number;
+  images: object[];
+  brand: object;
+  category: string;
 };
 
-const mockProducts: Product[] = Array.from({ length: 12 }).map((_, i) => ({
-  id: String(i + 1),
-  title: `Apple iPhone ${i + 11} 128GB`,
-  price: Math.round(499 + Math.random() * 1200),
-  image: "/Iphone-pro-1.png",
-  brand: i % 3 === 0 ? "Apple" : i % 3 === 1 ? "Samsung" : "Xiaomi",
-  category: "phones",
-}));
+const res = await fetch("http://localhost:3000/api/products", { cache: "no-store" });
+const products = await res.json();
 
 export default function Catalog() {
-  const products = mockProducts;
-
   return (
     <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-4 gap-8">
       {/* Sidebar - filtros*/}
@@ -92,18 +85,18 @@ export default function Catalog() {
 
         {/* Grid de productos */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {products.map((p) => (
-            <article key={p.id} className="bg-white rounded-lg shadow p-4 flex flex-col">
+          {products.map((product : any) => (
+            <article key={product.id} className="bg-white rounded-lg shadow p-4 flex flex-col">
               <div className="relative w-full h-44 mb-4 bg-gray-100 rounded overflow-hidden">
-                <Image src={p.image} alt={p.title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-contain p-4" />
+                <Image src={product.images[2].imageUrl} alt='holaa' fill sizes="(max-width: 768px) 100vw, 33vw" className="object-contain p-4" />
               </div>
-              <Link href={`/product/${p.id}`} className="text-sm font-medium text-gray-800 hover:underline">
-                {p.title}
+              <Link href={`/product/${product.id}`} className="text-sm font-medium text-gray-800 hover:underline">
+                {product.name}
               </Link>
               <div className="mt-auto flex items-center justify-between pt-4">
                 <div>
-                  <div className="text-lg font-bold">${p.price}</div>
-                  <div className="text-xs text-gray-500">{p.brand}</div>
+                  <div className="text-lg font-bold">${product.price}</div>
+                  <div className="text-xs text-gray-500">{product.brand.name}</div>
                 </div>
                 <button className="bg-black text-white px-4 py-2 rounded text-sm">Comprar Ahora</button>
               </div>

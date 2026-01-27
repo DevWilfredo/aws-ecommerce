@@ -1,0 +1,862 @@
+[
+  {
+    "name": "Apple iPhone 16 Pro Max",
+    "description": "Generacion anterior con gran camara y autonomia.",
+    "price": 1299,
+    "stock": 65,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "ef269a5e-5062-4a50-9284-b9edb4bc3e43",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "iOS 18" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP68" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 120 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 512 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Apple A18 Pro" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 12 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 48 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 4500 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.7 }
+    ]
+  },
+  {
+    "name": "Apple iPhone 16",
+    "description": "Equilibrio entre precio y rendimiento.",
+    "price": 899,
+    "stock": 110,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "ef269a5e-5062-4a50-9284-b9edb4bc3e43",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "iOS 18" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP68" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 120 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 128 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Apple A18" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 8 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 48 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 4000 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.1 }
+    ]
+  },
+  {
+    "name": "Apple iPhone SE 4",
+    "description": "Compacto y accesible con potencia actual.",
+    "price": 499,
+    "stock": 120,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "ef269a5e-5062-4a50-9284-b9edb4bc3e43",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "iOS 18" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP67" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 60 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 128 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Apple A16" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 4 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 12 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 2800 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 4.7 }
+    ]
+  },
+  {
+    "name": "Apple iPhone 15 Pro",
+    "description": "Pro ligero con potencia y camara avanzada.",
+    "price": 1099,
+    "stock": 60,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "ef269a5e-5062-4a50-9284-b9edb4bc3e43",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "iOS 17" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP68" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 120 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 256 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Apple A17 Pro" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 8 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 48 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 3300 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.1 }
+    ]
+  },
+
+  {
+    "name": "Samsung Galaxy S25 Ultra",
+    "description": "Ultra premium con camara avanzada y S Pen.",
+    "price": 1399,
+    "stock": 85,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "734aff08-06a3-4ccb-87dc-2b236ca6e14b",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 15" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP68" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 120 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 512 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Snapdragon 8 Gen 4" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 12 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 200 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 5000 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.8 }
+    ]
+  },
+
+  {
+    "name": "Samsung Galaxy S25+",
+    "description": "Gran pantalla y bateria con rendimiento premium.",
+    "price": 1099,
+    "stock": 70,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "734aff08-06a3-4ccb-87dc-2b236ca6e14b",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 15" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP68" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 120 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 256 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Snapdragon 8 Gen 4" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 12 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 50 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 4900 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.7 }
+    ]
+  },
+
+  {
+    "name": "Samsung Galaxy S25",
+    "description": "Modelo base con alta eficiencia y potencia.",
+    "price": 899,
+    "stock": 100,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "734aff08-06a3-4ccb-87dc-2b236ca6e14b",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 15" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP68" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 120 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 128 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Snapdragon 8 Gen 4" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 8 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 50 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 4500 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.2 }
+    ]
+  },
+
+  {
+    "name": "Samsung Galaxy Z Fold6",
+    "description": "Plegable premium con pantalla grande.",
+    "price": 1799,
+    "stock": 40,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "734aff08-06a3-4ccb-87dc-2b236ca6e14b",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 14" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IPX8" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 120 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 512 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Snapdragon 8 Gen 3" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 12 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 50 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 4400 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 7.6 }
+    ]
+  },
+
+  {
+    "name": "Samsung Galaxy Z Flip6",
+    "description": "Plegable compacto y elegante.",
+    "price": 1099,
+    "stock": 50,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "734aff08-06a3-4ccb-87dc-2b236ca6e14b",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 14" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IPX8" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 120 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 256 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Snapdragon 8 Gen 3" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 8 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 12 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 3700 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.7 }
+    ]
+  },
+
+  {
+    "name": "Samsung Galaxy A55",
+    "description": "Gama media balanceada.",
+    "price": 399,
+    "stock": 140,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "734aff08-06a3-4ccb-87dc-2b236ca6e14b",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 14" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP67" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 120 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 128 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Exynos 1480" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 8 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 50 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 5000 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.6 }
+    ]
+  },
+
+  {
+    "name": "Samsung Galaxy S24 FE",
+    "description": "FE con buena camara y pantalla fluida.",
+    "price": 699,
+    "stock": 95,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "734aff08-06a3-4ccb-87dc-2b236ca6e14b",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 14" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP68" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 120 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 256 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Exynos 2400" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 8 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 50 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 4500 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.4 }
+    ]
+  },
+
+  {
+    "name": "Sony Xperia 1 VI",
+    "description": "Flagship Sony con pantalla 4K.",
+    "price": 1299,
+    "stock": 35,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "f52e9b7a-04c5-41c0-96ea-f0cc22387ca0",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 14" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP68" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 120 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 256 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Snapdragon 8 Gen 3" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 12 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 48 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 5000 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.5 }
+    ]
+  },
+
+  {
+    "name": "Sony Xperia 5 V",
+    "description": "Compacto premium con camara avanzada.",
+    "price": 899,
+    "stock": 30,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "f52e9b7a-04c5-41c0-96ea-f0cc22387ca0",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 13" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP68" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 120 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 128 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Snapdragon 8 Gen 2" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 8 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 48 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 5000 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.1 }
+    ]
+  },
+
+  {
+    "name": "Sony Xperia 10 VI",
+    "description": "Gama media con buena autonomia.",
+    "price": 399,
+    "stock": 60,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "f52e9b7a-04c5-41c0-96ea-f0cc22387ca0",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 14" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP65" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 60 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 128 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Snapdragon 6 Gen 1" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 6 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 48 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 5000 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.1 }
+    ]
+  },
+
+  {
+    "name": "Sony Xperia Pro-I II",
+    "description": "Telefono para creadores con sensor avanzado.",
+    "price": 1799,
+    "stock": 15,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "f52e9b7a-04c5-41c0-96ea-f0cc22387ca0",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 14" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP68" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 120 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 512 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Snapdragon 8 Gen 3" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 12 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 50 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 5000 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.5 }
+    ]
+  },
+
+  {
+    "name": "Sony Xperia 1 V",
+    "description": "Flagship anterior con gran audio y pantalla.",
+    "price": 999,
+    "stock": 25,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "f52e9b7a-04c5-41c0-96ea-f0cc22387ca0",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 13" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP68" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 120 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 256 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Snapdragon 8 Gen 2" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 12 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 48 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 5000 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.5 }
+    ]
+  },
+
+  {
+    "name": "Sony Xperia 5 IV",
+    "description": "Compacto premium con buen video.",
+    "price": 699,
+    "stock": 28,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "f52e9b7a-04c5-41c0-96ea-f0cc22387ca0",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 12" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP68" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 120 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 128 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Snapdragon 8 Gen 1" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 8 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 12 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 5000 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.1 }
+    ]
+  },
+
+  {
+    "name": "Sony Xperia 10 V",
+    "description": "Entrada con buena autonomia.",
+    "price": 299,
+    "stock": 80,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "f52e9b7a-04c5-41c0-96ea-f0cc22387ca0",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 13" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP65" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 60 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 128 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Snapdragon 695" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 6 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 48 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 5000 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.1 }
+    ]
+  },
+
+  {
+    "name": "Xiaomi 14 Ultra",
+    "description": "Camara avanzada y carga rapida.",
+    "price": 1199,
+    "stock": 55,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "d9479a16-f797-4b22-96ba-2d5b1a0871bb",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 14" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP68" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 120 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 512 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Snapdragon 8 Gen 3" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 16 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 50 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 5300 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.73 }
+    ]
+  },
+
+  {
+    "name": "Xiaomi 14 Pro",
+    "description": "Pantalla brillante y carga rapida.",
+    "price": 999,
+    "stock": 65,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "d9479a16-f797-4b22-96ba-2d5b1a0871bb",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 14" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP68" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 120 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 256 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Snapdragon 8 Gen 3" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 12 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 50 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 5000 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.73 }
+    ]
+  },
+
+  {
+    "name": "Xiaomi 14",
+    "description": "Compacto potente con buena camara.",
+    "price": 799,
+    "stock": 80,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "d9479a16-f797-4b22-96ba-2d5b1a0871bb",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 14" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP68" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 120 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 256 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Snapdragon 8 Gen 3" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 12 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 50 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 4610 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.36 }
+    ]
+  },
+
+  {
+    "name": "Xiaomi 13T Pro",
+    "description": "Rendimiento alto con buena camara.",
+    "price": 649,
+    "stock": 90,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "d9479a16-f797-4b22-96ba-2d5b1a0871bb",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 13" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP68" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 144 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 256 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Dimensity 9200+" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 12 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 50 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 5000 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.67 }
+    ]
+  },
+
+  {
+    "name": "Xiaomi Redmi Note 14 Pro",
+    "description": "Gama media con buena pantalla.",
+    "price": 349,
+    "stock": 140,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "d9479a16-f797-4b22-96ba-2d5b1a0871bb",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 14" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP54" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 120 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 128 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Snapdragon 7s Gen 2" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 8 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 50 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 5000 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.67 }
+    ]
+  },
+
+  {
+    "name": "Xiaomi Poco F6 Pro",
+    "description": "Potencia gaming a buen precio.",
+    "price": 529,
+    "stock": 95,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "d9479a16-f797-4b22-96ba-2d5b1a0871bb",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 14" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP54" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 120 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 256 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Snapdragon 8 Gen 2" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 12 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 50 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 5000 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.67 }
+    ]
+  },
+
+  {
+    "name": "Xiaomi Mix Flip",
+    "description": "Plegable compacto premium.",
+    "price": 1199,
+    "stock": 35,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "d9479a16-f797-4b22-96ba-2d5b1a0871bb",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 14" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IPX8" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 120 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 512 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Snapdragon 8 Gen 3" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 12 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 50 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 4800 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.8 }
+    ]
+  },
+
+  {
+    "name": "ASUS ROG Phone 9",
+    "description": "Telefono gaming con alto rendimiento.",
+    "price": 1299,
+    "stock": 45,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "8637a847-00ca-4df7-a3e0-1f7cbd03b4c6",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 15" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP54" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 165 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 512 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Snapdragon 8 Gen 4" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 16 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 50 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 6000 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.78 }
+    ]
+  },
+
+  {
+    "name": "ASUS Zenfone 11",
+    "description": "Compacto premium con buena bateria.",
+    "price": 699,
+    "stock": 55,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "8637a847-00ca-4df7-a3e0-1f7cbd03b4c6",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 14" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP68" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 120 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 256 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Snapdragon 8 Gen 3" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 12 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 50 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 4300 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.2 }
+    ]
+  },
+
+  {
+    "name": "ASUS ROG Phone 8",
+    "description": "Gaming potente con pantalla fluida.",
+    "price": 1099,
+    "stock": 50,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "8637a847-00ca-4df7-a3e0-1f7cbd03b4c6",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 14" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP54" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 165 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 512 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Snapdragon 8 Gen 3" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 16 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 50 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 5500 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.78 }
+    ]
+  },
+
+  {
+    "name": "ASUS Zenfone 10",
+    "description": "Compacto potente con buena camara.",
+    "price": 599,
+    "stock": 70,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "8637a847-00ca-4df7-a3e0-1f7cbd03b4c6",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 13" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP68" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 144 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 256 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Snapdragon 8 Gen 2" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 8 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 50 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 4300 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 5.9 }
+    ]
+  },
+
+  {
+    "name": "ASUS ROG Phone 7",
+    "description": "Gaming potente con enfasis en rendimiento.",
+    "price": 899,
+    "stock": 55,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "8637a847-00ca-4df7-a3e0-1f7cbd03b4c6",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 13" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP54" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 165 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 512 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Snapdragon 8 Gen 2" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 16 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 50 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 6000 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.78 }
+    ]
+  },
+
+  {
+    "name": "ASUS Zenfone 9",
+    "description": "Compacto con buen rendimiento.",
+    "price": 499,
+    "stock": 60,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "8637a847-00ca-4df7-a3e0-1f7cbd03b4c6",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 12" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP68" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 120 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 128 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Snapdragon 8+ Gen 1" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 8 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 50 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 4300 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 5.9 }
+    ]
+  },
+
+  {
+    "name": "ASUS ROG Phone 6",
+    "description": "Gaming con gran bateria.",
+    "price": 699,
+    "stock": 45,
+    "categoryId": "6d19fb26-c506-4ebd-952d-f7667b2b77bc",
+    "brandId": "8637a847-00ca-4df7-a3e0-1f7cbd03b4c6",
+    "optionGroupIds": [
+      "1c0d8985-29db-4c50-b6fa-b173099563fa",
+      "705bd294-b3d2-4aea-8f5e-62c60ef5bbab",
+      "0a90d2d5-b3bd-4fd4-bf78-db31c48bc7f8"
+    ],
+    "attributeValues": [
+      { "attributeId": "1b527859-1b98-42fe-b761-448db3572f54", "valueText": "Android 12" },
+      { "attributeId": "c7029d40-3368-4779-a8a4-8c2338659fba", "valueText": "IP54" },
+      { "attributeId": "7cfc69ca-ef16-4ad2-ad70-1e142cf5f330", "valueBoolean": true },
+      { "attributeId": "36c2418c-ba51-44ec-9d84-f3e283ca649a", "valueBoolean": true },
+      { "attributeId": "105a9c03-b888-42bc-91e3-008a9d165ce9", "valueNumber": 165 },
+      { "attributeId": "5af14d4a-6700-49db-b062-4149904d8784", "valueNumber": 256 },
+      { "attributeId": "3b2b22bc-254d-4696-b83d-943b37237aa3", "valueText": "Snapdragon 8+ Gen 1" },
+      { "attributeId": "485b6dab-312e-4041-867d-7229bdc3144d", "valueNumber": 12 },
+      { "attributeId": "371267e9-badd-4587-9097-e80ad6d18ff6", "valueNumber": 50 },
+      { "attributeId": "e6a297c0-9351-4728-bbd8-328de2d75ae9", "valueNumber": 6000 },
+      { "attributeId": "867b981e-7c92-4d36-974a-3051844bf435", "valueNumber": 6.78 }
+    ]
+  }
+]
