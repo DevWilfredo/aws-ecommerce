@@ -38,6 +38,15 @@ export class ProductsController {
     return this.productsService.update(id, updateProductDto, files ?? []);
   }
 
+  @Post(':id/images')
+  @UseInterceptors(FilesInterceptor('images', 10))
+  async addImages(
+    @Param('id') id: string,
+    @UploadedFiles() files: Multer.File[],
+  ) {
+    return this.productsService.addImages(id, files ?? []);
+  }
+
   @Delete(':id')
   async remove(@Param('id') id: string) {
     return this.productsService.remove(id);
