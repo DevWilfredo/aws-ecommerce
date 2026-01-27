@@ -28,7 +28,10 @@ export class ProductsService {
     private readonly awsS3: AwsS3Service,
   ) { }
 
-  async create(createProductDto: CreateProductDto, files: Multer.File[]) {
+  async create(
+    createProductDto: CreateProductDto,
+    files: Multer.File[] = [],
+  ) {
     const productId = randomUUID();
     const { optionGroupIds, attributeValues, ...productData } = createProductDto;
     const newProduct = this.productsRepo.create({
@@ -192,7 +195,7 @@ export class ProductsService {
   async update(
     id: string,
     updateProductDto: UpdateProductDto,
-    files: Multer.File[],
+    files: Multer.File[] = [],
   ) {
     const product = await this.productsRepo.findOne({
       where: { id },
@@ -254,5 +257,36 @@ export class ProductsService {
     await this.productImagesRepo.delete({ productId: id });
     await this.productsRepo.remove(product);
     return { message: `Producto ${id} eliminado correctamente.` };
+  }
+
+  async addImages(id: string, files: Multer.File[] = []) {
+    if (!files.length) {
+      throw new BadRequestException('Debe enviar al menos una imagen.');
+    }
+
+    const product = await this.productsRepo.findOne({
+      where: { id },
+      relations: ['images'],
+    });
+
+    if (!product) {
+      throw new NotFoundException(`Producto con id ${id} no existe.`);
+    }
+
+    const uploads = await this.awsS3.uploadFiles(files, `products/${id}`);
+    const currentCount = product.images?.length ?? 0;
+
+    const images = uploads.map((upload, index) =>
+      this.productImagesRepo.create({
+        productId: id,
+        imageUrl: upload.url,
+        imageKey: upload.key,
+        isFeatured: currentCount === 0 && index === 0,
+        position: currentCount + index,
+      }),
+    );
+    await this.productImagesRepo.save(images);
+
+    return this.findOne(id);
   }
 }

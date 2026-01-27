@@ -1,8 +1,9 @@
 import 'reflect-metadata';
 import { join } from 'path';
+import { readFile } from 'fs/promises';
 import { randomUUID } from 'crypto';
 import { config } from 'dotenv';
-import { DataSource } from 'typeorm';
+import { DataSource, In } from 'typeorm';
 import { Brand } from '../brands/entities/brand.entity';
 import { Category } from '../categories/entities/category.entity';
 import { Product } from '../products/entities/product.entity';
@@ -329,6 +330,9 @@ async function seed() {
 
   const brandRepo = dataSource.getRepository(Brand);
   const categoryRepo = dataSource.getRepository(Category);
+  const productRepo = dataSource.getRepository(Product);
+  const productAttributeValuesRepo =
+    dataSource.getRepository(ProductAttributeValue);
   const attributeDefinitionRepo =
     dataSource.getRepository(AttributeDefinition);
   const optionGroupRepo = dataSource.getRepository(OptionGroup);
@@ -413,10 +417,102 @@ async function seed() {
     }
   }
 
+  const telefonosPath = join(__dirname, '../../telefonos.json');
+  try {
+    const productsRaw = await readFile(telefonosPath, 'utf-8');
+    const products = JSON.parse(productsRaw) as Array<{
+      name: string;
+      description: string;
+      price: number;
+      stock: number;
+      categoryId: string;
+      brandId: string;
+      optionGroupIds?: string[];
+      attributeValues?: Array<{
+        attributeId: string;
+        valueText?: string;
+        valueNumber?: number;
+        valueBoolean?: boolean;
+      }>;
+    }>;
+
+    for (const productData of products) {
+      const {
+        optionGroupIds,
+        attributeValues,
+        ...productFields
+      } = productData;
+
+      const existingProduct = await productRepo.findOneBy({
+        name: productFields.name,
+        brandId: productFields.brandId,
+        categoryId: productFields.categoryId,
+      });
+
+      const product = await productRepo.save(
+        existingProduct
+          ? productRepo.merge(existingProduct, productFields)
+          : productRepo.create(productFields),
+      );
+
+      if (optionGroupIds?.length) {
+        const optionGroups = await optionGroupRepo.findBy({
+          id: In(optionGroupIds),
+        });
+        if (optionGroups.length !== optionGroupIds.length) {
+          const foundIds = new Set(optionGroups.map((group) => group.id));
+          const missingIds = optionGroupIds.filter((id) => !foundIds.has(id));
+          throw new Error(
+            `Option groups no encontrados: ${missingIds.join(', ')}`,
+          );
+        }
+
+        await productRepo.save({ id: product.id, optionGroups });
+      }
+
+      if (attributeValues?.length) {
+        const attributeIds = Array.from(
+          new Set(attributeValues.map((value) => value.attributeId)),
+        );
+        const attributes = await attributeDefinitionRepo.findBy({
+          id: In(attributeIds),
+        });
+        if (attributes.length !== attributeIds.length) {
+          const foundIds = new Set(
+            attributes.map((attribute) => attribute.id),
+          );
+          const missingIds = attributeIds.filter((id) => !foundIds.has(id));
+          throw new Error(
+            `Atributos no encontrados: ${missingIds.join(', ')}`,
+          );
+        }
+
+        await productAttributeValuesRepo.delete({ productId: product.id });
+
+        const valuesToSave = attributeValues.map((value) =>
+          productAttributeValuesRepo.create({
+            productId: product.id,
+            attributeId: value.attributeId,
+            valueText: value.valueText,
+            valueNumber: value.valueNumber,
+            valueBoolean: value.valueBoolean,
+          }),
+        );
+
+        await productAttributeValuesRepo.save(valuesToSave);
+      }
+    }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn('No se pudo cargar el seed de telefonos.', error);
+  }
+
   await dataSource.destroy();
 
   // eslint-disable-next-line no-console
-  console.log('Seed completado: marcas, categorias, atributos y opciones.');
+  console.log(
+    'Seed completado: marcas, categorias, atributos, opciones y productos.',
+  );
 }
 
 seed().catch(async (error) => {
