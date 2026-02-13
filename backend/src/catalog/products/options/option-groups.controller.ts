@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { OptionGroupsService } from './option-groups.service';
-import { CreateOptionGroupDto } from './dto/create-option-group.dto';
-import { UpdateOptionGroupDto } from './dto/update-option-group.dto';
+import { CreateOptionGroupDto } from '../dto/create-option-group.dto'; 
+import { UpdateOptionGroupDto } from '../dto/update-option-group.dto'; 
 
 @Controller('option-groups')
 export class OptionGroupsController {

@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { AttributeDefinitionsService } from './attribute-definitions.service';
-import { CreateAttributeDefinitionDto } from './dto/create-attribute-definition.dto';
-import { UpdateAttributeDefinitionDto } from './dto/update-attribute-definition.dto';
+import { CreateAttributeDefinitionDto } from '../dto/create-attribute-definition.dto';
+import { UpdateAttributeDefinitionDto } from '../dto/update-attribute-definition.dto';
 
 @Controller('attribute-definitions')
 export class AttributeDefinitionsController {
