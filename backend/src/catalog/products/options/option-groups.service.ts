@@ -1,11 +1,11 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { OptionGroup } from './entities/option-group.entity';
-import { OptionValue } from './entities/option-value.entity';
-import { Product } from './entities/product.entity';
-import { CreateOptionGroupDto } from './dto/create-option-group.dto';
-import { UpdateOptionGroupDto } from './dto/update-option-group.dto';
+import { OptionGroup } from '../entities/option-group.entity'; 
+import { OptionValue } from '../entities/option-value.entity'; 
+import { Product } from '../entities/product.entity'; 
+import { CreateOptionGroupDto } from '../dto/create-option-group.dto'; 
+import { UpdateOptionGroupDto } from '../dto/update-option-group.dto'; 
 
 @Injectable()
 export class OptionGroupsService {
