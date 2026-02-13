@@ -1,10 +1,10 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { AttributeDefinition } from './entities/attribute-definition.entity';
-import { ProductAttributeValue } from './entities/product-attribute-value.entity';
-import { CreateAttributeDefinitionDto } from './dto/create-attribute-definition.dto';
-import { UpdateAttributeDefinitionDto } from './dto/update-attribute-definition.dto';
+import { AttributeDefinition } from '../entities/attribute-definition.entity';
+import { ProductAttributeValue } from '../entities/product-attribute-value.entity';
+import { CreateAttributeDefinitionDto } from '../dto/create-attribute-definition.dto';
+import { UpdateAttributeDefinitionDto } from '../dto/update-attribute-definition.dto';
 
 @Injectable()
 export class AttributeDefinitionsService {

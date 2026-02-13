@@ -85,10 +85,21 @@ export default function Catalog() {
 
         {/* Grid de productos */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {products.map((product : any) => (
+          {products.map((product: any) => {
+            const imageUrl =
+              product?.images?.find((img: any) => img?.isFeatured && img?.imageUrl)?.imageUrl ??
+              product?.images?.find((img: any) => img?.imageUrl)?.imageUrl ??
+              "https://placehold.co/600x400?text=No+Image";
+            return (
             <article key={product.id} className="bg-white rounded-lg shadow p-4 flex flex-col">
               <div className="relative w-full h-44 mb-4 bg-gray-100 rounded overflow-hidden">
-                <Image src={product.images[2].imageUrl} alt='holaa' fill sizes="(max-width: 768px) 100vw, 33vw" className="object-contain p-4" />
+                <Image
+                  src={imageUrl}
+                  alt={product?.name ?? "Producto"}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-contain p-4"
+                />
               </div>
               <Link href={`/product/${product.id}`} className="text-sm font-medium text-gray-800 hover:underline">
                 {product.name}
@@ -101,7 +112,8 @@ export default function Catalog() {
                 <button className="bg-black text-white px-4 py-2 rounded text-sm">Comprar Ahora</button>
               </div>
             </article>
-          ))}
+            );
+          })}
         </div>
 
         {/* Paginación - estructura */}

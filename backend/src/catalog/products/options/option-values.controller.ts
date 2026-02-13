@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { OptionValuesService } from './option-values.service';
-import { CreateOptionValueDto } from './dto/create-option-value.dto';
-import { UpdateOptionValueDto } from './dto/update-option-value.dto';
+import { OptionValuesService } from './option-values.service'; 
+import { CreateOptionValueDto } from '../dto/create-option-value.dto'; 
+import { UpdateOptionValueDto } from '../dto/update-option-value.dto'; 
 
 @Controller('option-values')
 export class OptionValuesController {
