@@ -6,6 +6,8 @@ import { AwsS3Module } from './aws-s3/aws-s3.module';
 import { BrandsModule } from './catalog/brands/brands.module';
 import { CategoriesModule } from './catalog/categories/categories.module';
 import { ProductsModule } from './catalog/products/products.module';
+import { AuthModule } from './auth/auth.module';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -34,7 +36,11 @@ import { ProductsModule } from './catalog/products/products.module';
 
   CategoriesModule,
 
-  AwsS3Module
+  AwsS3Module,
+
+  AuthModule,
+
+  OrdersModule
   ],
   controllers: [],
   providers: [],

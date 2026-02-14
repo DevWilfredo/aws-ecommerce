@@ -1,4 +1,5 @@
 import { randomUUID } from 'crypto';
+import { Order } from 'src/orders/entities/order.entity';
 import {
     Entity,
     PrimaryColumn,
@@ -6,6 +7,7 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     BeforeInsert,
+    OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -18,30 +20,27 @@ export class User {
         if (!this.id) this.id = randomUUID();
     }
 
-    @Column()
-    firstname: string;
+    @Column({ type: 'varchar', nullable: true })
+    firstname?: string | null;
 
-    @Column()
-    lastname: string;
+    @Column({ type: 'varchar', nullable: true })
+    lastname?: string | null;
 
     @Column({ unique: true })
     email: string;
 
-    @Column({ select: false })
-    password: string;
+    @Column({ unique: true })
+    cognitoSub: string;
 
     @Column({ default: false })
     isEmailVerified: boolean;
-
-    @Column({ type: 'varchar', nullable: true })
-    verificationToken?: string | null;
-
-    @Column({ nullable: true, type: 'timestamp' })
-    verificationTokenExpiresAt?: Date | null;
 
     @CreateDateColumn()
     createdAt: Date;
 
     @UpdateDateColumn()
     updatedAt: Date;
+
+    @OneToMany(() => Order, (order) => order.user)
+    orders: Order[];
 }
