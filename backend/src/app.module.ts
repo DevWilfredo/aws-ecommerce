@@ -7,6 +7,7 @@ import { BrandsModule } from './catalog/brands/brands.module';
 import { CategoriesModule } from './catalog/categories/categories.module';
 import { ProductsModule } from './catalog/products/products.module';
 import { AuthModule } from './auth/auth.module';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -37,7 +38,9 @@ import { AuthModule } from './auth/auth.module';
 
   AwsS3Module,
 
-  AuthModule
+  AuthModule,
+
+  OrdersModule
   ],
   controllers: [],
   providers: [],

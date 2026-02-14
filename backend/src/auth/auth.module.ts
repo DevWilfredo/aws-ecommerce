@@ -1,12 +1,15 @@
 import { Module } from '@nestjs/common';
-import { AuthController } from './auth.controller';
-import { JwtStrategy } from './strategies/jwt.strategy';
 import { PassportModule } from '@nestjs/passport';
-import { UsersModule } from 'src/users/users.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from '../users/entities/user.entity';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
-    imports: [PassportModule, UsersModule],
-    controllers: [AuthController],
-    providers: [JwtStrategy]
+  imports: [
+    PassportModule.register({ defaultStrategy: 'cognito-jwt' }),
+    TypeOrmModule.forFeature([User]),
+  ],
+  providers: [JwtStrategy],
+  exports: [PassportModule],
 })
-export class AuthModule { }
+export class AuthModule {}
