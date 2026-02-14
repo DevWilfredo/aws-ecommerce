@@ -18,26 +18,20 @@ export class User {
         if (!this.id) this.id = randomUUID();
     }
 
-    @Column()
-    firstname: string;
+    @Column({ type: 'varchar', nullable: true })
+    firstname?: string | null;
 
-    @Column()
-    lastname: string;
+    @Column({ type: 'varchar', nullable: true })
+    lastname?: string | null;
 
     @Column({ unique: true })
     email: string;
 
-    @Column({ select: false })
-    password: string;
+    @Column({ unique: true })
+    cognitoSub: string;
 
     @Column({ default: false })
     isEmailVerified: boolean;
-
-    @Column({ type: 'varchar', nullable: true })
-    verificationToken?: string | null;
-
-    @Column({ nullable: true, type: 'timestamp' })
-    verificationTokenExpiresAt?: Date | null;
 
     @CreateDateColumn()
     createdAt: Date;

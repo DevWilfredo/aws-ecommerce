@@ -1,20 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
+import { getProducts } from "@/services/products.service";
 
-type Product = {
-  id: string;
-  name: string;
-  price: number;
-  stock: number;
-  images: object[];
-  brand: object;
-  category: string;
-};
-
-const res = await fetch("http://localhost:3000/api/products", { cache: "no-store" });
-const products = await res.json();
-
-export default function Catalog() {
+export default async function Catalog() {
+  const products = await getProducts();
   return (
     <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-4 gap-8">
       {/* Sidebar - filtros*/}
