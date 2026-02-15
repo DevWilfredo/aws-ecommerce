@@ -6,6 +6,7 @@ import { ArrowUpRight, Clock3, Package, Search, Wallet } from 'lucide-react';
 import { clientApiFetch } from '@/services/client-api';
 import { useAuthGuard } from '@/hooks/useAuthGuard';
 import type { Order } from '@/types/commerce';
+import { ApiUnavailableState, AuthCheckLoader } from '@/components/ui/loaders';
 
 const moneyFormatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -60,7 +61,7 @@ function resolveStatus(statusRaw: string) {
 }
 
 export default function ProfilePage() {
-  const { isChecking, isAuthenticated } = useAuthGuard();
+  const { isChecking, isAuthenticated, authError, retryAuthCheck } = useAuthGuard();
   const [orders, setOrders] = useState<Order[]>([]);
   const [loadingOrders, setLoadingOrders] = useState(true);
   const [error, setError] = useState('');
@@ -118,22 +119,29 @@ export default function ProfilePage() {
   }, [searchTerm, sortedOrders, statusFilter]);
 
   if (isChecking) {
+    return <AuthCheckLoader className="max-w-6xl py-10" />;
+  }
+
+  if (authError) {
     return (
-      <div className="mx-auto max-w-6xl px-4 py-10 text-sm text-slate-600">
-        Verificando sesion...
-      </div>
+      <ApiUnavailableState
+        className="max-w-6xl py-10"
+        title="No pudimos validar tu sesion"
+        message={authError}
+        onRetry={retryAuthCheck}
+      />
     );
   }
 
   if (!isAuthenticated) return null;
 
   return (
-    <div className="relative overflow-hidden bg-slate-50">
+    <div className="relative overflow-hidden bg-slate-50 animate-fade-in">
       <div className="pointer-events-none absolute -left-20 top-0 h-72 w-72 rounded-full bg-cyan-200/30 blur-3xl" />
       <div className="pointer-events-none absolute -right-24 top-16 h-80 w-80 rounded-full bg-sky-300/20 blur-3xl" />
 
       <div className="mx-auto max-w-6xl px-4 py-10">
-        <section className="mb-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <section className="mb-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm animate-fade-up">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
             Account overview
           </p>
@@ -169,7 +177,7 @@ export default function ProfilePage() {
           </div>
         </section>
 
-        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm animate-fade-up sm:p-6" style={{ animationDelay: '110ms' }}>
           <div className="mb-4 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex flex-wrap gap-2">
               <button

@@ -9,6 +9,7 @@ import { clientApiFetch } from '@/services/client-api';
 import { useAuthGuard } from '@/hooks/useAuthGuard';
 import type { Order } from '@/types/commerce';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { ApiUnavailableState, AuthCheckLoader } from '@/components/ui/loaders';
 
 const moneyFormatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -22,7 +23,7 @@ const dateFormatter = new Intl.DateTimeFormat('es-ES', {
 
 export default function CheckoutSuccessPage() {
   const searchParams = useSearchParams();
-  const { isChecking, isAuthenticated } = useAuthGuard();
+  const { isChecking, isAuthenticated, authError, retryAuthCheck } = useAuthGuard();
   const [order, setOrder] = useState<Order | null>(null);
   const [error, setError] = useState('');
 
@@ -76,22 +77,29 @@ export default function CheckoutSuccessPage() {
   const isLoadingOrder = Boolean(orderId) && !order && !error;
 
   if (isChecking) {
+    return <AuthCheckLoader className="max-w-5xl" />;
+  }
+
+  if (authError) {
     return (
-      <div className="mx-auto max-w-5xl px-4 py-16 text-sm text-slate-600">
-        Verificando sesion...
-      </div>
+      <ApiUnavailableState
+        className="max-w-5xl"
+        title="No pudimos validar tu sesion"
+        message={authError}
+        onRetry={retryAuthCheck}
+      />
     );
   }
 
   if (!isAuthenticated) return null;
 
   return (
-    <div className="relative overflow-hidden bg-slate-50">
+    <div className="relative overflow-hidden bg-slate-50 animate-fade-in">
       <div className="pointer-events-none absolute -left-20 top-0 h-72 w-72 rounded-full bg-cyan-200/30 blur-3xl" />
       <div className="pointer-events-none absolute -right-20 top-10 h-80 w-80 rounded-full bg-sky-300/20 blur-3xl" />
 
       <div className="mx-auto grid max-w-6xl gap-6 px-4 py-10 md:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:py-14">
-        <section className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm sm:p-8">
+        <section className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm animate-fade-up sm:p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
             Pago confirmado
           </p>
@@ -129,7 +137,7 @@ export default function CheckoutSuccessPage() {
           </div>
         </section>
 
-        <section className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm sm:p-8">
+        <section className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm animate-fade-up sm:p-8" style={{ animationDelay: '100ms' }}>
           <h2 className="text-xl font-semibold text-slate-900">Resumen de la compra</h2>
 
           {error ? (

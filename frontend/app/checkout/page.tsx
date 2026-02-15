@@ -17,6 +17,7 @@ import { useAuthGuard } from '@/hooks/useAuthGuard';
 import { clientApiFetch } from '@/services/client-api';
 import type { ShippingForm } from '@/types/commerce';
 import { toast } from 'sonner';
+import { ApiUnavailableState, AuthCheckLoader } from '@/components/ui/loaders';
 
 const initialShipping: ShippingForm = {
   fullName: '',
@@ -143,7 +144,7 @@ function isShippingReady(shipping: ShippingForm) {
 
 export default function CheckoutPage() {
   const { items, subtotal, clearCart } = useCart();
-  const { isChecking, isAuthenticated } = useAuthGuard();
+  const { isChecking, isAuthenticated, authError, retryAuthCheck } = useAuthGuard();
   const [shipping, setShipping] = useState<ShippingForm>(initialShipping);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -251,17 +252,24 @@ export default function CheckoutPage() {
   };
 
   if (isChecking) {
+    return <AuthCheckLoader className="md:px-6" />;
+  }
+
+  if (authError) {
     return (
-      <div className="mx-auto max-w-7xl px-4 py-16 text-sm text-slate-600 md:px-6">
-        Verificando sesion...
-      </div>
+      <ApiUnavailableState
+        className="md:px-6"
+        title="No pudimos validar tu sesion"
+        message={authError}
+        onRetry={retryAuthCheck}
+      />
     );
   }
 
   if (!isAuthenticated) return null;
 
   return (
-    <div className="relative overflow-hidden bg-slate-50">
+    <div className="relative overflow-hidden bg-slate-50 animate-fade-in">
       <div className="pointer-events-none absolute -left-24 top-0 h-80 w-80 rounded-full bg-cyan-200/30 blur-3xl" />
       <div className="pointer-events-none absolute -right-16 top-12 h-72 w-72 rounded-full bg-sky-300/20 blur-3xl" />
 
@@ -304,7 +312,7 @@ export default function CheckoutPage() {
         <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <form
             onSubmit={onSubmit}
-            className="space-y-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8"
+            className="space-y-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm animate-fade-up md:p-8"
           >
             <div className="space-y-4">
               <div className="grid grid-cols-[auto_1fr_auto] items-center gap-3">
@@ -489,7 +497,7 @@ export default function CheckoutPage() {
             </div>
           </form>
 
-          <aside className="h-fit rounded-2xl border border-slate-200 bg-white p-6 shadow-sm lg:sticky lg:top-24">
+          <aside className="h-fit rounded-2xl border border-slate-200 bg-white p-6 shadow-sm animate-fade-up lg:sticky lg:top-24" style={{ animationDelay: '120ms' }}>
             <div className="mb-5 flex items-center justify-between">
               <h2 className="text-xl font-semibold text-slate-900">Resumen de compra</h2>
               <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">

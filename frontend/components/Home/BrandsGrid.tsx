@@ -18,12 +18,12 @@ export default function BrandsGrid({ title = "Explora las marcas Oficiales que t
           : "lg:grid-cols-6";
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
+    <section className="mx-auto max-w-7xl px-4 py-10 animate-fade-up sm:px-6">
       <h2 className="mb-6 text-lg font-semibold">{title}</h2>
 
       <div className={`grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 ${lgColsClass}`}>
-        {brands.map((b) => (
-          <BrandCard key={b.id} brand={b} />
+        {brands.map((b, index) => (
+          <BrandCard key={b.id} brand={b} delayMs={index * 45} />
         ))}
       </div>
     </section>

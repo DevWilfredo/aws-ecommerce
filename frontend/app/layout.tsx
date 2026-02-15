@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { CartProvider } from '@/context/CartContext';
 import { Toaster } from '@/components/ui/sonner';
+import RouteTransition from '@/components/ui/route-transition';
 
 export const metadata: Metadata = {
   title: 'PrimeStore',
@@ -17,7 +18,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <CartProvider>
           <div className="flex min-h-screen flex-col">
             <Navbar />
-            <main className="flex-1">{children}</main>
+            <main className="flex-1">
+              <RouteTransition>{children}</RouteTransition>
+            </main>
             <Footer />
           </div>
           <Toaster />

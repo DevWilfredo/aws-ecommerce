@@ -1,49 +1,57 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { ClientApiError, clientApiFetch } from '@/services/client-api';
 
-const API = process.env.NEXT_PUBLIC_API_BASE_URL;
+type AuthStatus = 'checking' | 'authorized' | 'unauthorized' | 'service_error';
 
-type AuthStatus = 'checking' | 'authorized' | 'unauthorized';
+const DEFAULT_AUTH_ERROR =
+  'No pudimos verificar tu sesion en este momento. Intenta nuevamente mas tarde.';
 
 export function useAuthGuard() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [status, setStatus] = useState<AuthStatus>('checking');
+  const [authError, setAuthError] = useState<string | null>(null);
+  const [retrySeed, setRetrySeed] = useState(0);
+
+  const retryAuthCheck = useCallback(() => {
+    setAuthError(null);
+    setStatus('checking');
+    setRetrySeed((prev) => prev + 1);
+  }, []);
 
   useEffect(() => {
     let active = true;
 
     async function verifySession() {
       try {
-        if (!API) {
-          throw new Error('NEXT_PUBLIC_API_BASE_URL no configurada');
-        }
-
-        const res = await fetch(`${API}/auth/me`, {
+        await clientApiFetch<{ sub: string }>('/auth/me', {
           method: 'GET',
-          credentials: 'include',
-          headers: { Accept: 'application/json' },
-          cache: 'no-store',
+          timeoutMs: 9000,
         });
 
         if (!active) return;
 
-        if (res.ok) {
-          setStatus('authorized');
+        setAuthError(null);
+        setStatus('authorized');
+      } catch (error) {
+        if (!active) return;
+
+        if (error instanceof ClientApiError && error.status === 401) {
+          setAuthError(null);
+          setStatus('unauthorized');
+
+          const query = searchParams?.toString();
+          const nextPath = `${pathname ?? '/'}${query ? `?${query}` : ''}`;
+          router.replace(`/login?next=${encodeURIComponent(nextPath)}`);
           return;
         }
 
-        throw new Error('No autenticado');
-      } catch {
-        if (!active) return;
-        setStatus('unauthorized');
-
-        const query = searchParams?.toString();
-        const nextPath = `${pathname ?? '/'}${query ? `?${query}` : ''}`;
-        router.replace(`/login?next=${encodeURIComponent(nextPath)}`);
+        setAuthError(error instanceof Error ? error.message : DEFAULT_AUTH_ERROR);
+        setStatus('service_error');
       }
     }
 
@@ -52,11 +60,13 @@ export function useAuthGuard() {
     return () => {
       active = false;
     };
-  }, [pathname, router, searchParams]);
+  }, [pathname, retrySeed, router, searchParams]);
 
   return {
     isChecking: status === 'checking',
     isAuthenticated: status === 'authorized',
+    isUnauthorized: status === 'unauthorized',
+    authError,
+    retryAuthCheck,
   };
 }
-

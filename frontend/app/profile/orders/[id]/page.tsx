@@ -8,6 +8,7 @@ import { ArrowLeft, CalendarDays, MapPin, PackageSearch, ReceiptText } from 'luc
 import { clientApiFetch } from '@/services/client-api';
 import { useAuthGuard } from '@/hooks/useAuthGuard';
 import type { Order, Product } from '@/types/commerce';
+import { ApiUnavailableState, AuthCheckLoader } from '@/components/ui/loaders';
 
 const placeholderImage = 'https://placehold.co/600x400?text=Producto';
 
@@ -73,7 +74,7 @@ function firstImageFromProduct(product: Product) {
 
 export default function OrderDetailPage() {
   const params = useParams<{ id: string }>();
-  const { isChecking, isAuthenticated } = useAuthGuard();
+  const { isChecking, isAuthenticated, authError, retryAuthCheck } = useAuthGuard();
   const [order, setOrder] = useState<Order | null>(null);
   const [error, setError] = useState('');
   const [itemImageByProductId, setItemImageByProductId] = useState<Record<string, string>>({});
@@ -146,10 +147,17 @@ export default function OrderDetailPage() {
   }, [order]);
 
   if (isChecking) {
+    return <AuthCheckLoader className="max-w-4xl py-10" />;
+  }
+
+  if (authError) {
     return (
-      <div className="mx-auto max-w-4xl py-10 text-sm text-slate-600">
-        Verificando sesion...
-      </div>
+      <ApiUnavailableState
+        className="max-w-4xl py-10"
+        title="No pudimos validar tu sesion"
+        message={authError}
+        onRetry={retryAuthCheck}
+      />
     );
   }
 
@@ -187,7 +195,7 @@ export default function OrderDetailPage() {
   const statusTheme = resolveStatus(order.status);
 
   return (
-    <div className="relative overflow-hidden bg-slate-50">
+    <div className="relative overflow-hidden bg-slate-50 animate-fade-in">
       <div className="pointer-events-none absolute -left-20 top-0 h-72 w-72 rounded-full bg-cyan-200/30 blur-3xl" />
       <div className="pointer-events-none absolute -right-24 top-16 h-80 w-80 rounded-full bg-sky-300/20 blur-3xl" />
 
@@ -200,7 +208,7 @@ export default function OrderDetailPage() {
           Volver a mis ordenes
         </Link>
 
-        <header className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <header className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm animate-fade-up">
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
@@ -233,7 +241,7 @@ export default function OrderDetailPage() {
         </header>
 
         <div className="mt-6 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+          <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm animate-fade-up sm:p-6" style={{ animationDelay: '90ms' }}>
             <h2 className="text-lg font-semibold text-slate-900">Productos de la orden</h2>
             <div className="mt-4 space-y-3">
               {order.items.map((item) => {
@@ -290,7 +298,7 @@ export default function OrderDetailPage() {
             </div>
           </section>
 
-          <aside className="space-y-4 lg:sticky lg:top-24 lg:h-fit">
+          <aside className="space-y-4 animate-fade-up lg:sticky lg:top-24 lg:h-fit" style={{ animationDelay: '140ms' }}>
             <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
               <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-slate-500">
                 Envio

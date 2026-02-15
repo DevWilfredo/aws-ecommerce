@@ -40,6 +40,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Categories } from "@/mocks/categories";
+import { clientApiFetch } from "@/services/client-api";
 
 type MeResponse = {
   sub: string;
@@ -54,12 +55,13 @@ function normalizeCategoryKey(value: string) {
   return value
     .toLowerCase()
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "-");
 }
 
 const categoryIconByKey: Record<string, LucideIcon> = {
   telefonos: Smartphone,
-  "smart watches": Watch,
+  "smart-watches": Watch,
   camaras: Camera,
   auriculares: Headphones,
   computadoras: Laptop,
@@ -69,7 +71,10 @@ const categoryIconByKey: Record<string, LucideIcon> = {
 const catalogCategories = Categories.map((category) => ({
   id: category.id,
   name: category.name,
-  Icon: categoryIconByKey[normalizeCategoryKey(category.name)] ?? Grid2x2,
+  href: category.href ?? "/catalog",
+  Icon:
+    categoryIconByKey[normalizeCategoryKey(category.slug ?? category.name)] ??
+    Grid2x2,
 }));
 
 function initialsFromEmail(email?: string) {
@@ -100,21 +105,14 @@ export default function Navbar() {
           return;
         }
 
-        const res = await fetch(`${API}/auth/me`, {
+        const data = await clientApiFetch<MeResponse>('/auth/me', {
           method: "GET",
-          credentials: "include",
-          headers: { Accept: "application/json" },
-          cache: "no-store",
+          timeoutMs: 6000,
         });
 
         if (!alive) return;
 
-        if (res.ok) {
-          const data = (await res.json()) as MeResponse;
-          setMe(data);
-        } else {
-          setMe(null);
-        }
+        setMe(data);
       } catch {
         if (alive) setMe(null);
       } finally {
@@ -183,7 +181,7 @@ export default function Navbar() {
                           {catalogCategories.map((category) => (
                             <li key={category.id}>
                               <Link
-                                href="/catalog"
+                                href={category.href}
                                 className="group flex h-full flex-col rounded-lg border border-slate-200 bg-white p-3 transition-colors hover:border-slate-300 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300"
                               >
                                 <span className="inline-flex items-center gap-2 text-sm font-medium text-slate-900">

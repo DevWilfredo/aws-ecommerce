@@ -96,3 +96,13 @@ export type Order = {
     selectedOptions?: CartSelection[];
   }>;
 };
+
+export type HomeProductsResponse = {
+  perTab: number;
+  totalAvailable: number;
+  tabs: {
+    newArrival: Product[];
+    bestseller: Product[];
+    featured: Product[];
+  };
+};

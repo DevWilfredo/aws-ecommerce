@@ -12,7 +12,12 @@ export interface Brand {
   subtitle?: string;
 }
 
-export default function BrandCard({ brand }: { brand: Brand }) {
+type BrandCardProps = {
+  brand: Brand;
+  delayMs?: number;
+};
+
+export default function BrandCard({ brand, delayMs = 0 }: BrandCardProps) {
   const Logo = typeof brand.logo === "function" ? brand.logo : null;
 
   return (
@@ -21,7 +26,10 @@ export default function BrandCard({ brand }: { brand: Brand }) {
       className="block"
       aria-label={`Open ${brand.name} store`}
     >
-      <div className="bg-gray-50 rounded-xl p-4 flex items-center gap-4 shadow-sm hover:shadow-md transition-shadow">
+      <div
+        className="hover-lift bg-gray-50 rounded-xl p-4 flex items-center gap-4 shadow-sm hover:shadow-md transition-shadow animate-fade-up"
+        style={{ animationDelay: `${Math.min(delayMs, 360)}ms` }}
+      >
         <div className="w-12 h-12 rounded-lg flex items-center justify-center overflow-hidden shrink-0">
           {typeof brand.logo === "string" ? (
             <Image

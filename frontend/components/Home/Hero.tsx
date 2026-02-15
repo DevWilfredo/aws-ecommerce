@@ -4,8 +4,8 @@ import { Button } from "../ui/button";
 
 export default function Hero() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10">
-      <div className="overflow-hidden rounded-2xl bg-gray-900 text-white">
+    <section className="mx-auto max-w-7xl px-4 py-8 animate-fade-in sm:px-6 sm:py-10">
+      <div className="overflow-hidden rounded-2xl bg-gray-900 text-white animate-fade-up">
         <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-12">
           <div className="col-span-1 px-5 py-10 md:col-span-7 md:px-10 md:py-20">
             <p className="mb-3 text-sm text-gray-300">Pro.Beyond.</p>
@@ -32,7 +32,7 @@ export default function Hero() {
 
       <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
         <div className="flex flex-col gap-4">
-          <Link href="/catalog" className="relative h-56 overflow-hidden rounded-2xl bg-white md:h-80">
+          <Link href="/catalog" className="hover-lift relative h-56 overflow-hidden rounded-2xl bg-white animate-fade-up md:h-80" style={{ animationDelay: '80ms' }}>
             <div className="absolute inset-0 grid grid-cols-1 md:grid-cols-2">
               <div className="relative hidden md:block">
                 <Image src="/PlayStation.webp" alt="Playstation 5" fill className="object-cover" />
@@ -47,7 +47,7 @@ export default function Hero() {
           </Link>
 
           <div className="grid h-auto grid-cols-1 gap-4 md:h-[180px] md:grid-cols-2">
-            <Link href="/catalog" className="flex items-center gap-6 rounded-2xl bg-white p-6 md:p-8">
+            <Link href="/catalog" className="hover-lift flex items-center gap-6 rounded-2xl bg-white p-6 animate-fade-up md:p-8" style={{ animationDelay: '130ms' }}>
               <div className="relative h-20 w-20">
                 <Image src="/airpodsmax.webp" alt="AirPods Max" fill className="object-contain" />
               </div>
@@ -57,7 +57,7 @@ export default function Hero() {
               </div>
             </Link>
 
-            <Link href="/catalog" className="flex items-center gap-6 rounded-2xl bg-black p-6 text-white md:p-8">
+            <Link href="/catalog" className="hover-lift flex items-center gap-6 rounded-2xl bg-black p-6 text-white animate-fade-up md:p-8" style={{ animationDelay: '170ms' }}>
               <div className="relative h-20 w-20">
                 <Image src="/visionpro.webp" alt="Vision Pro" fill className="object-contain" />
               </div>
@@ -71,7 +71,8 @@ export default function Hero() {
 
         <Link
           href="/catalog"
-          className="flex h-auto flex-col items-center justify-between overflow-hidden rounded-2xl bg-gray-50 p-6 md:h-[500px] md:flex-row md:p-12"
+          className="hover-lift flex h-auto flex-col items-center justify-between overflow-hidden rounded-2xl bg-gray-50 p-6 animate-fade-up md:h-[500px] md:flex-row md:p-12"
+          style={{ animationDelay: '110ms' }}
         >
           <div className="w-full md:w-1/2">
             <h3 className="text-3xl font-light md:text-5xl">
