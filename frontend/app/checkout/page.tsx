@@ -1,152 +1,84 @@
 'use client';
 
-import { useState } from 'react';
-import {
-    StepIndicator,
-    CartSummary,
-    AddressStep,
-    ShippingStep,
-    PaymentStep
-} from '@/components/Checkout';
+import { FormEvent, useState } from 'react';
+import { useCart } from '@/context/CartContext';
+import { clientApiFetch } from '@/services/client-api';
+import type { ShippingForm } from '@/types/commerce';
 
-export default function Checkout() {
-    const [currentStep, setCurrentStep] = useState(1);
-    const [selectedAddress, setSelectedAddress] = useState('home');
-    const [selectedShipping, setSelectedShipping] = useState('free');
-    const [paymentMethod, setPaymentMethod] = useState('credit-card');
-    const [cardData, setCardData] = useState({
-        name: '',
-        number: '',
-        expiry: '',
-        cvv: ''
-    });
-    const [sameAsAddress, setSameAsAddress] = useState(true);
+const initialShipping: ShippingForm = {
+  fullName: '',
+  phone: '',
+  addressLine1: '',
+  addressLine2: '',
+  city: '',
+  state: '',
+  postalCode: '',
+  countryCode: 'ES',
+};
 
-    const addresses = [
-        {
-            id: 'home',
-            name: '2118 Thornridge',
-            type: 'HOME',
-            address: '2118 Thornridge Cir. Syracuse, Connecticut 35624',
-            phone: '(209) 555-0104'
-        },
-        {
-            id: 'office',
-            name: 'Headoffice',
-            type: 'OFFICE',
-            address: '2715 Ash Dr. San Jose, South Dakota 83475',
-            phone: '(704) 555-0127'
-        }
-    ];
+export default function CheckoutPage() {
+  const { items, subtotal, clearCart } = useCart();
+  const [shipping, setShipping] = useState<ShippingForm>(initialShipping);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-    const cartItems = [
-        {
-            id: 1,
-            name: 'Apple iPhone 14 Pro Max 128gb',
-            price: 1399,
-            image: '/Iphone-pro-1.png'
-        },
-        {
-            id: 2,
-            name: 'AirPods Max Silver',
-            price: 549,
-            image: '/Iphone-pro-1.png'
-        },
-        {
-            id: 3,
-            name: 'Apple Watch Series 9 GPS 41mm',
-            price: 399,
-            image: '/Iphone-pro-1.png'
-        }
-    ];
+  const onSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!items.length) return;
+    setLoading(true);
+    setError('');
 
-    const subtotal = 2347;
-    const tax = 50;
-    const shipping = selectedShipping === 'free' ? 29 : 50;
-    const total = subtotal + tax + shipping;
+    try {
+      const payload = {
+        currency: 'EUR',
+        shipping,
+        items: items.map((item) => ({
+          productId: item.productId,
+          quantity: item.quantity,
+          selectedOptions: item.selectedOptions.map((opt) => ({
+            optionGroupId: opt.optionGroupId,
+            optionValueId: opt.optionValueId,
+          })),
+        })),
+      };
 
-    const handleNextStep = () => {
-        if (currentStep < 3) setCurrentStep(currentStep + 1);
-    };
+      const session = await clientApiFetch<{ checkoutUrl: string }>('/payments/checkout-session', {
+        method: 'POST',
+        body: JSON.stringify(payload),
+      });
 
-    const handlePrevStep = () => {
-        if (currentStep > 1) setCurrentStep(currentStep - 1);
-    };
+      clearCart();
+      window.location.href = session.checkoutUrl;
+    } catch (err: any) {
+      setError(err.message ?? 'No se pudo iniciar checkout');
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setCardData(prev => ({
-            ...prev,
-            [name]: value
-        }));
-    };
+  return (
+    <div className="max-w-6xl mx-auto px-4 py-10 grid md:grid-cols-2 gap-8">
+      <form onSubmit={onSubmit} className="space-y-3 border p-4 rounded-lg">
+        <h2 className="font-semibold text-xl">Shipping</h2>
+        {Object.entries(shipping).map(([key, value]) => (
+          <input key={key} className="w-full border rounded p-2" placeholder={key} value={value} onChange={(e) => setShipping((prev) => ({ ...prev, [key]: e.target.value }))} required={key !== 'addressLine2'} />
+        ))}
+        {error ? <p className="text-red-500 text-sm">{error}</p> : null}
+        <button disabled={loading || !items.length} className="bg-black text-white px-4 py-2 rounded disabled:opacity-50">{loading ? 'Redirigiendo...' : 'Pagar con Stripe'}</button>
+      </form>
 
-    const handleFormatCardNumber = (value: string) => {
-        const formatted = value.replace(/\s/g, '').replace(/(\d{4})/g, '$1 ').trim();
-        setCardData(prev => ({
-            ...prev,
-            number: formatted
-        }));
-    };
-
-    return (
-        <div className="min-h-screen bg-white py-8 px-4 md:px-8">
-            <div className="max-w-6xl mx-auto">
-                {/* Steps Indicator */}
-                <StepIndicator currentStep={currentStep} />
-
-                <div className="grid md:grid-cols-3 gap-8">
-                    {/* Summary Sidebar */}
-                    <div className="md:col-span-2">
-                        <CartSummary
-                            items={cartItems}
-                            subtotal={subtotal}
-                            tax={tax}
-                            shipping={shipping}
-                            total={total}
-                            currentStep={currentStep}
-                            selectedAddress={selectedAddress}
-                            selectedShipping={selectedShipping}
-                            addresses={addresses}
-                            onNextStep={handleNextStep}
-                            onPrevStep={handlePrevStep}
-                        />
-                    </div>
-
-                    {/* Main Content */}
-                    <div className="md:col-span-1">
-                        {/* Step 1: Address */}
-                        {currentStep === 1 && (
-                            <AddressStep
-                                addresses={addresses}
-                                selectedAddress={selectedAddress}
-                                onSelectAddress={setSelectedAddress}
-                            />
-                        )}
-
-                        {/* Step 2: Shipping */}
-                        {currentStep === 2 && (
-                            <ShippingStep
-                                selectedShipping={selectedShipping}
-                                onSelectShipping={setSelectedShipping}
-                            />
-                        )}
-
-                        {/* Step 3: Payment */}
-                        {currentStep === 3 && (
-                            <PaymentStep
-                                paymentMethod={paymentMethod}
-                                onSelectPaymentMethod={setPaymentMethod}
-                                cardData={cardData}
-                                sameAsAddress={sameAsAddress}
-                                onCardInputChange={handleCardInputChange}
-                                onFormatCardNumber={handleFormatCardNumber}
-                                onSameAsAddressChange={setSameAsAddress}
-                            />
-                        )}
-                    </div>
-                </div>
+      <div className="border p-4 rounded-lg h-fit">
+        <h2 className="font-semibold text-xl mb-4">Resumen de compra</h2>
+        <div className="space-y-3">
+          {items.map((item) => (
+            <div key={item.lineId} className="border-b pb-2">
+              <p className="font-medium">{item.name} × {item.quantity}</p>
+              <p className="text-xs text-gray-500">{item.selectedOptions.map((opt) => `${opt.optionGroupName}: ${opt.optionValueLabel}`).join(' · ')}</p>
             </div>
+          ))}
         </div>
-    );
+        <div className="mt-3 flex justify-between font-semibold"><span>Total</span><span>${subtotal.toFixed(2)}</span></div>
+      </div>
+    </div>
+  );
 }

@@ -1,10 +1,12 @@
 'use client';
 
-import { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
-import ProductGallery from "@/components/ProductDetail/ProductGallery";
-import ProductInfo from "@/components/ProductDetail/ProductInfo";
-import Reviews from "@/components/ProductDetail/Reviews";
+import { useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
+import ProductGallery from '@/components/ProductDetail/ProductGallery';
+import ProductInfo from '@/components/ProductDetail/ProductInfo';
+import Reviews from '@/components/ProductDetail/Reviews';
+import { useCart } from '@/context/CartContext';
+import type { CartSelection, ProductOptionGroup } from '@/types/commerce';
 
 type ApiProduct = {
   id: string;
@@ -22,115 +24,72 @@ type ApiProduct = {
     valueBoolean: boolean | null;
   }>;
   optionGroups: Array<{
+    id: string;
     name: string;
-    optionValues: Array<{ label: string }>;
+    optionValues: Array<{ id: string; label: string; priceAdjustment: number }>;
   }>;
 };
 
-type Review = {
-  id: string;
-  author: string;
-  avatar: string;
-  rating: number;
-  date: string;
-  title: string;
-  content: string;
-  images?: string[];
-};
+const placeholderImage = 'https://placehold.co/600x600?text=Producto';
 
-const placeholderImage = "https://placehold.co/600x600?text=Producto";
-
-const mockReviews: Review[] = [
-  {
-    id: "1",
-    author: "Grace Carey",
-    avatar: "https://placehold.co/600x400?text=G",
-    rating: 4.5,
-    date: "24 January 2023",
-    title: "",
-    content:
-      "I was a bit nervous to be buying a secondhand phone from Amazon, but I couldn't be happier with my purchase! ... Highly recommend! <3",
-    images: [],
-  },
-  {
-    id: "2",
-    author: "Ronald Richards",
-    avatar: "https://placehold.co/600x400?text=R",
-    rating: 5,
-    date: "24 January 2023",
-    title: "",
-    content:
-      "This phone has 1T storage and is durable. Plus all the new iPhones have a C port! ...",
-    images: [],
-  },
-  {
-    id: "3",
-    author: "Darcy King",
-    avatar: "https://placehold.co/600x400?text=U",
-    rating: 4,
-    date: "24 January 2023",
-    title: "",
-    content: "Might be the only one to say this but the camera is a little funky. ...",
-    images: ["/Iphone.webp", "/Iphone-pro-1.png"],
-  },
-];
-
-const formatAttributeValue = (value: ApiProduct["attributeValues"][number]) => {
+const formatAttributeValue = (value: ApiProduct['attributeValues'][number]) => {
   if (value.valueText) return value.valueText;
-  if (value.valueNumber) {
-    return value.attribute.unit
-      ? `${value.valueNumber} ${value.attribute.unit}`
-      : value.valueNumber;
-  }
-  if (value.valueBoolean !== null) return value.valueBoolean ? "Si" : "No";
-  return "N/A";
+  if (value.valueNumber) return value.attribute.unit ? `${value.valueNumber} ${value.attribute.unit}` : value.valueNumber;
+  if (value.valueBoolean !== null) return value.valueBoolean ? 'Si' : 'No';
+  return 'N/A';
 };
 
 export default function ProductDetailClient({ product }: { product: ApiProduct }) {
   const [mainImage, setMainImage] = useState(placeholderImage);
-  const [selectedColor, setSelectedColor] = useState("");
-  const [selectedStorage, setSelectedStorage] = useState("");
+  const [selectedOptions, setSelectedOptions] = useState<CartSelection[]>([]);
+  const { addProduct } = useCart();
 
-  const images = useMemo(() => {
-    if (!product?.images?.length) return [placeholderImage];
-    return [...product.images]
-      .sort((a, b) => a.position - b.position)
-      .map((img) => img.imageUrl);
-  }, [product]);
+  const images = useMemo(() => (product?.images?.length ? [...product.images].sort((a, b) => a.position - b.position).map((img) => img.imageUrl) : [placeholderImage]), [product]);
 
-  const colorOptions = useMemo(() => {
-    const group = product?.optionGroups?.find((g) =>
-      g.name.toLowerCase().includes("color")
-    );
-    return group?.optionValues?.map((v) => v.label) ?? [];
-  }, [product]);
+  const optionGroups: ProductOptionGroup[] = useMemo(
+    () => (product.optionGroups ?? []).map((group) => ({ id: group.id, name: group.name, optionValues: group.optionValues.map((value) => ({ id: value.id, label: value.label, priceAdjustment: Number(value.priceAdjustment ?? 0) })) })),
+    [product.optionGroups],
+  );
 
-  const storageOptions = useMemo(() => {
-    const group = product?.optionGroups?.find((g) =>
-      g.name.toLowerCase().includes("almacenamiento")
-    );
-    return group?.optionValues?.map((v) => v.label) ?? [];
-  }, [product]);
-
-  const specs = useMemo(() => {
-    if (!product?.attributeValues?.length) return [];
-    return product.attributeValues.map((item) => ({
-      label: item.attribute.name,
-      value: formatAttributeValue(item),
-    }));
-  }, [product]);
+  const specs = useMemo(() => (product?.attributeValues?.length ? product.attributeValues.map((item) => ({ label: item.attribute.name, value: formatAttributeValue(item) })) : []), [product]);
 
   useEffect(() => {
     if (images.length) setMainImage(images[0]);
   }, [images]);
 
   useEffect(() => {
-    if (colorOptions.length) setSelectedColor(colorOptions[0]);
-  }, [colorOptions]);
+    setSelectedOptions(
+      optionGroups
+        .map((group) => {
+          const first = group.optionValues[0];
+          if (!first) return null;
+          return {
+            optionGroupId: group.id,
+            optionGroupName: group.name,
+            optionValueId: first.id,
+            optionValueLabel: first.label,
+            priceAdjustment: Number(first.priceAdjustment),
+          };
+        })
+        .filter((v): v is CartSelection => Boolean(v)),
+    );
+  }, [optionGroups]);
 
-  useEffect(() => {
-    if (storageOptions.length) setSelectedStorage(storageOptions[0]);
-  }, [storageOptions]);
+  const onSelectOption = (group: ProductOptionGroup, valueId: string) => {
+    const value = group.optionValues.find((item) => item.id === valueId);
+    if (!value) return;
+
+    setSelectedOptions((prev) => {
+      const rest = prev.filter((item) => item.optionGroupId !== group.id);
+      return [...rest, {
+        optionGroupId: group.id,
+        optionGroupName: group.name,
+        optionValueId: value.id,
+        optionValueLabel: value.label,
+        priceAdjustment: Number(value.priceAdjustment),
+      }];
+    });
+  };
 
   const price = Number(product.price);
 
@@ -138,44 +97,16 @@ export default function ProductDetailClient({ product }: { product: ApiProduct }
     <div className="min-h-screen bg-white">
       <div className="max-w-7xl mx-auto px-6 py-4 border-b">
         <div className="flex items-center gap-2 text-sm text-gray-600">
-          <Link href="/" className="hover:text-gray-900">Inicio</Link>
-          <span>/</span>
-          <Link href="/catalog" className="hover:text-gray-900">Catalogo</Link>
-          <span>/</span>
-          <Link href={`/catalog?category=${product.category.slug}`} className="hover:text-gray-900">
-            {product.category.name}
-          </Link>
-          <span>/</span>
-          <Link href={`/catalog?brand=${product.brand.slug}`} className="hover:text-gray-900">
-            {product.brand.name}
-          </Link>
-          <span>/</span>
-          <span className="text-gray-900 font-medium">{product.name}</span>
+          <Link href="/">Inicio</Link><span>/</span><Link href="/catalog">Catalogo</Link><span>/</span><span className="text-gray-900 font-medium">{product.name}</span>
         </div>
       </div>
-
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <ProductGallery images={images} mainImage={mainImage} onSelect={setMainImage} />
-
-          <ProductInfo
-            title={product.name}
-            price={price}
-            originalPrice={null}
-            colors={colorOptions}
-            storage={storageOptions}
-            specs={specs}
-            description={product.description}
-            inStock={product.stock > 0}
-            selectedColor={selectedColor}
-            setSelectedColor={setSelectedColor}
-            selectedStorage={selectedStorage}
-            setSelectedStorage={setSelectedStorage}
-          />
+          <ProductInfo productId={product.id} title={product.name} price={price} originalPrice={null} optionGroups={optionGroups} specs={specs} description={product.description} inStock={product.stock > 0} selectedOptions={selectedOptions} onSelectOption={onSelectOption} onAddToCart={() => addProduct({ ...product, price, optionGroups } as any, selectedOptions)} />
         </div>
       </div>
-
-      <Reviews reviews={mockReviews} rating={4.8} total={125} />
+      <Reviews reviews={[]} rating={4.8} total={125} />
     </div>
   );
 }

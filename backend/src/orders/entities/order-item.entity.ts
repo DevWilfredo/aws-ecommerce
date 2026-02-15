@@ -48,4 +48,13 @@ export class OrderItem {
 
   @Column({ type: 'decimal', precision: 10, scale: 2 })
   lineTotal: number;
+
+  @Column({ type: 'jsonb', default: () => "'[]'" })
+  selectedOptions: Array<{
+    optionGroupId: string;
+    optionGroupName: string;
+    optionValueId: string;
+    optionValueLabel: string;
+    priceAdjustment: number;
+  }>;
 }
