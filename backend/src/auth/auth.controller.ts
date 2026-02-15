@@ -1,5 +1,5 @@
 import { Controller, Get, Query, Req, Res, UseGuards } from '@nestjs/common';
-import type { Response } from 'express';
+import type { CookieOptions, Response } from 'express';
 import { CognitoAuthGuard } from './guards/auth.guard';
 import { UsersService } from 'src/users/users.service';
 
@@ -22,6 +22,41 @@ interface CognitoTokenResponse {
 @Controller('auth')
 export class AuthController {
   constructor(private readonly usersService: UsersService) {}
+
+  private isProduction() {
+    return process.env.NODE_ENV === 'production';
+  }
+
+  private getCookieDomain() {
+    const domain = process.env.COOKIE_DOMAIN?.trim();
+    return domain?.length ? domain : undefined;
+  }
+
+  private getSessionCookieOptions(maxAge: number): CookieOptions {
+    const isProduction = this.isProduction();
+    const domain = this.getCookieDomain();
+
+    return {
+      httpOnly: true,
+      sameSite: isProduction ? 'none' : 'lax',
+      secure: isProduction,
+      path: '/',
+      maxAge,
+      ...(domain ? { domain } : {}),
+    };
+  }
+
+  private getClearCookieOptions(): CookieOptions {
+    const isProduction = this.isProduction();
+    const domain = this.getCookieDomain();
+
+    return {
+      sameSite: isProduction ? 'none' : 'lax',
+      secure: isProduction,
+      path: '/',
+      ...(domain ? { domain } : {}),
+    };
+  }
 
   @Get('login')
   login(@Res() res: Response, @Query('provider') provider?: string) {
@@ -105,8 +140,9 @@ export class AuthController {
 
   @Get('logout')
   logout(@Res() res: Response) {
-    res.clearCookie('access_token', { path: '/' });
-    res.clearCookie('id_token', { path: '/' });
+    const clearCookieOptions = this.getClearCookieOptions();
+    res.clearCookie('access_token', clearCookieOptions);
+    res.clearCookie('id_token', clearCookieOptions);
 
     const domain = process.env.COGNITO_DOMAIN!;
     const clientId = process.env.COGNITO_CLIENT_ID!;
@@ -180,22 +216,11 @@ export class AuthController {
     }
 
     const maxAgeMs = (tokens.expires_in ?? 3600) * 1000;
+    const cookieOptions = this.getSessionCookieOptions(maxAgeMs);
 
-    res.cookie('access_token', tokens.access_token, {
-      httpOnly: true,
-      sameSite: 'lax',
-      secure: process.env.NODE_ENV === 'production',
-      path: '/',
-      maxAge: maxAgeMs,
-    });
+    res.cookie('access_token', tokens.access_token, cookieOptions);
 
-    res.cookie('id_token', tokens.id_token, {
-      httpOnly: true,
-      sameSite: 'lax',
-      secure: process.env.NODE_ENV === 'production',
-      path: '/',
-      maxAge: maxAgeMs,
-    });
+    res.cookie('id_token', tokens.id_token, cookieOptions);
 
     return res.redirect(`${process.env.APP_URL}/profile`);
   }

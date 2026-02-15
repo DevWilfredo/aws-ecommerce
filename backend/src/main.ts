@@ -17,8 +17,27 @@ async function bootstrap() {
 
   app.use('/api/v1/payments/webhook', raw({ type: 'application/json' }));
 
+  const allowedOrigins = [
+    'http://localhost:3000',
+    process.env.APP_URL,
+    process.env.FRONTEND_URL,
+  ]
+    .filter((origin): origin is string => Boolean(origin))
+    .map((origin) => origin.replace(/\/$/, ''));
+
   app.enableCors({
-    origin: ['http://localhost:3000'],
+    origin: (origin, callback) => {
+      if (!origin) {
+        return callback(null, true);
+      }
+
+      const normalizedOrigin = origin.replace(/\/$/, '');
+      if (allowedOrigins.includes(normalizedOrigin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error(`Origin ${origin} not allowed by CORS`), false);
+    },
     credentials: true,
   });
 
