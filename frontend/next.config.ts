@@ -12,7 +12,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "geotech-shop-bucket.s3.eu-south-2.amazonaws.com",
+        hostname: "dxg4uc5zd5r5g.cloudfront.net",
         port: "",
         pathname: "/**",
       },

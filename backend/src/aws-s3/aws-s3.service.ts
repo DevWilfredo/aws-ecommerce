@@ -9,10 +9,12 @@ export class AwsS3Service {
     private s3: S3Client;
     private bucket: string;
     private prefix: string;
+    private cloudFrontBaseUrl: string;
 
     constructor(private config: ConfigService) {
         this.bucket = this.config.get<string>('AWS_S3_BUCKET') || '';
         this.prefix = this.config.get<string>('AWS_S3_UPLOAD_PREFIX') || '';
+        this.cloudFrontBaseUrl = (this.config.get<string>('AWS_CLOUDFRONT_URL') || '').replace(/\/+$/, '');
         this.s3 = new S3Client({
             region: this.config.get<string>('AWS_REGION') || '',
             credentials: {
@@ -26,6 +28,14 @@ export class AwsS3Service {
         const normalizedPrefix = this.prefix ? `${this.prefix}/` : '';
         const normalizedFolder = folder ? `${folder.replace(/^\//, '').replace(/\/$/, '')}/` : '';
         return `${normalizedPrefix}${normalizedFolder}${randomUUID()}-${fileName}`;
+    }
+
+    private buildPublicUrl(key: string) {
+        if (this.cloudFrontBaseUrl) {
+            return `${this.cloudFrontBaseUrl}/${key}`;
+        }
+
+        return `https://${this.bucket}.s3.${this.config.get<string>('AWS_REGION')}.amazonaws.com/${key}`;
     }
 
     async uploadFile(
@@ -43,7 +53,7 @@ export class AwsS3Service {
             }),
         );
 
-        const url = `https://${this.bucket}.s3.${this.config.get<string>('AWS_REGION')}.amazonaws.com/${key}`;
+        const url = this.buildPublicUrl(key);
         return { url, key };
     }
 
