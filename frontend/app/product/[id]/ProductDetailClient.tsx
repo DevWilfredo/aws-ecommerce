@@ -1,12 +1,12 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import ProductGallery from '@/components/ProductDetail/ProductGallery';
 import ProductInfo from '@/components/ProductDetail/ProductInfo';
 import Reviews from '@/components/ProductDetail/Reviews';
 import { useCart } from '@/context/CartContext';
-import type { CartSelection, ProductOptionGroup } from '@/types/commerce';
+import type { CartSelection, Product, ProductOptionGroup } from '@/types/commerce';
 
 type ApiProduct = {
   id: string;
@@ -40,70 +40,105 @@ const formatAttributeValue = (value: ApiProduct['attributeValues'][number]) => {
 };
 
 export default function ProductDetailClient({ product }: { product: ApiProduct }) {
-  const [mainImage, setMainImage] = useState(placeholderImage);
-  const [selectedOptions, setSelectedOptions] = useState<CartSelection[]>([]);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedOptionByGroup, setSelectedOptionByGroup] = useState<Record<string, string>>({});
   const { addProduct } = useCart();
 
-  const images = useMemo(() => (product?.images?.length ? [...product.images].sort((a, b) => a.position - b.position).map((img) => img.imageUrl) : [placeholderImage]), [product]);
+  const images = useMemo(
+    () =>
+      product?.images?.length
+        ? [...product.images].sort((a, b) => a.position - b.position).map((img) => img.imageUrl)
+        : [placeholderImage],
+    [product],
+  );
 
   const optionGroups: ProductOptionGroup[] = useMemo(
-    () => (product.optionGroups ?? []).map((group) => ({ id: group.id, name: group.name, optionValues: group.optionValues.map((value) => ({ id: value.id, label: value.label, priceAdjustment: Number(value.priceAdjustment ?? 0) })) })),
+    () =>
+      (product.optionGroups ?? []).map((group) => ({
+        id: group.id,
+        name: group.name,
+        optionValues: group.optionValues.map((value) => ({
+          id: value.id,
+          label: value.label,
+          priceAdjustment: Number(value.priceAdjustment ?? 0),
+        })),
+      })),
     [product.optionGroups],
   );
 
-  const specs = useMemo(() => (product?.attributeValues?.length ? product.attributeValues.map((item) => ({ label: item.attribute.name, value: formatAttributeValue(item) })) : []), [product]);
+  const specs = useMemo(
+    () =>
+      product?.attributeValues?.length
+        ? product.attributeValues.map((item) => ({
+            label: item.attribute.name,
+            value: formatAttributeValue(item),
+          }))
+        : [],
+    [product],
+  );
 
-  useEffect(() => {
-    if (images.length) setMainImage(images[0]);
-  }, [images]);
-
-  useEffect(() => {
-    setSelectedOptions(
+  const selectedOptions = useMemo(
+    () =>
       optionGroups
         .map((group) => {
-          const first = group.optionValues[0];
-          if (!first) return null;
+          const selectedId = selectedOptionByGroup[group.id];
+          const selectedValue =
+            group.optionValues.find((option) => option.id === selectedId) ?? group.optionValues[0];
+          if (!selectedValue) return null;
+
           return {
             optionGroupId: group.id,
             optionGroupName: group.name,
-            optionValueId: first.id,
-            optionValueLabel: first.label,
-            priceAdjustment: Number(first.priceAdjustment),
+            optionValueId: selectedValue.id,
+            optionValueLabel: selectedValue.label,
+            priceAdjustment: Number(selectedValue.priceAdjustment),
           };
         })
         .filter((v): v is CartSelection => Boolean(v)),
-    );
-  }, [optionGroups]);
+    [optionGroups, selectedOptionByGroup],
+  );
 
   const onSelectOption = (group: ProductOptionGroup, valueId: string) => {
     const value = group.optionValues.find((item) => item.id === valueId);
     if (!value) return;
 
-    setSelectedOptions((prev) => {
-      const rest = prev.filter((item) => item.optionGroupId !== group.id);
-      return [...rest, {
-        optionGroupId: group.id,
-        optionGroupName: group.name,
-        optionValueId: value.id,
-        optionValueLabel: value.label,
-        priceAdjustment: Number(value.priceAdjustment),
-      }];
-    });
+    setSelectedOptionByGroup((prev) => ({
+      ...prev,
+      [group.id]: value.id,
+    }));
   };
 
+  const mainImage = selectedImage && images.includes(selectedImage) ? selectedImage : images[0];
   const price = Number(product.price);
+  const cartProduct: Product = { ...product, optionGroups };
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="max-w-7xl mx-auto px-6 py-4 border-b">
-        <div className="flex items-center gap-2 text-sm text-gray-600">
-          <Link href="/">Inicio</Link><span>/</span><Link href="/catalog">Catalogo</Link><span>/</span><span className="text-gray-900 font-medium">{product.name}</span>
+    <div className="min-h-[calc(100vh-88px)] bg-white">
+      <div className="mx-auto max-w-7xl border-b px-4 py-4 sm:px-6">
+        <div className="flex flex-wrap items-center gap-2 text-sm text-gray-600">
+          <Link href="/" className="transition hover:text-gray-900">Inicio</Link>
+          <span>/</span>
+          <Link href="/catalog" className="transition hover:text-gray-900">Catalogo</Link>
+          <span>/</span>
+          <span className="font-medium text-gray-900">{product.name}</span>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <ProductGallery images={images} mainImage={mainImage} onSelect={setMainImage} />
-          <ProductInfo productId={product.id} title={product.name} price={price} originalPrice={null} optionGroups={optionGroups} specs={specs} description={product.description} inStock={product.stock > 0} selectedOptions={selectedOptions} onSelectOption={onSelectOption} onAddToCart={() => addProduct({ ...product, price, optionGroups } as any, selectedOptions)} />
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:py-12">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
+          <ProductGallery images={images} mainImage={mainImage} onSelect={setSelectedImage} />
+          <ProductInfo
+            productId={product.id}
+            title={product.name}
+            price={price}
+            originalPrice={null}
+            optionGroups={optionGroups}
+            specs={specs}
+            description={product.description}
+            inStock={product.stock > 0}
+            selectedOptions={selectedOptions}
+            onSelectOption={onSelectOption}
+            onAddToCart={() => addProduct(cartProduct, selectedOptions)}
+          />
         </div>
       </div>
       <Reviews reviews={[]} rating={4.8} total={125} />

@@ -1,36 +1,81 @@
-'use client';
+﻿'use client';
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { SearchBar } from "@/components/SearchBar";
-import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetClose } from "./ui/sheet";
-import { ShoppingCart, X, Menu } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetClose } from "./ui/sheet";
+import {
+  ShoppingCart,
+  X,
+  Menu,
+  Smartphone,
+  Watch,
+  Camera,
+  Headphones,
+  Laptop,
+  Gamepad2,
+  Grid2x2,
+  type LucideIcon,
+} from "lucide-react";
+import { Categories } from "@/mocks/categories";
 
-const items = [
+const API = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+const primaryLinks = [
   { title: "Inicio", href: "/" },
-  { title: "Categorías", href: "/catalog" },
+  { title: "Catalogo", href: "/catalog" },
   { title: "Contacto", href: "/contact" },
 ];
 
+function normalizeCategoryKey(value: string) {
+  return value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
+const categoryIconByKey: Record<string, LucideIcon> = {
+  telefonos: Smartphone,
+  "smart watches": Watch,
+  camaras: Camera,
+  auriculares: Headphones,
+  computadoras: Laptop,
+  gaming: Gamepad2,
+};
+
+const quickCatalogLinks = [
+  { id: "all", name: "Ver todo", Icon: Grid2x2 },
+  ...Categories.slice(0, 4).map((category) => ({
+    id: String(category.id),
+    name: category.name,
+    Icon: categoryIconByKey[normalizeCategoryKey(category.name)] ?? Grid2x2,
+  })),
+];
+
 export default function MobileMenu() {
+  const loginHref = API ? `${API}/auth/login` : "/login";
+  const [open, setOpen] = useState(false);
+
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <button
-          aria-label="Abrir menú"
-          className="inline-flex items-center justify-center p-2 rounded-md hover:bg-gray-100"
+          aria-label="Abrir menu"
+          className="inline-flex items-center justify-center rounded-md p-2 hover:bg-gray-100"
         >
-          <Menu className="w-6 h-6" />
+          <Menu className="h-6 w-6" />
         </button>
       </SheetTrigger>
 
       <SheetContent side="right" className="w-4/5 max-w-xs">
-        <SheetHeader className="flex items-center justify-between mb-4">
+        <SheetHeader className="mb-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Image src="/primestore-logo.png" alt="Logo" width={120} height={36} />
           </div>
           <SheetClose asChild>
-            <button aria-label="Cerrar" className="p-2 rounded-md hover:bg-gray-100">
-              <X className="w-5 h-5" />
+            <button aria-label="Cerrar" className="rounded-md p-2 hover:bg-gray-100">
+              <X className="h-5 w-5" />
             </button>
           </SheetClose>
         </SheetHeader>
@@ -41,32 +86,55 @@ export default function MobileMenu() {
 
         <nav className="flex-1 overflow-auto">
           <ul className="space-y-2">
-            {items.map((it) => (
-              <li key={it.href}>
-                <Link href={it.href} className="block py-3 px-2 rounded hover:bg-gray-100" >
-                  <div className="text-sm font-medium">{it.title}</div>
-                </Link>
+            {primaryLinks.map((link) => (
+              <li key={link.href}>
+                <SheetClose asChild>
+                  <Link href={link.href} className="block rounded px-2 py-3 hover:bg-gray-100">
+                    <div className="text-sm font-medium">{link.title}</div>
+                  </Link>
+                </SheetClose>
               </li>
             ))}
-            {/* ejemplo de sublista para categorías */}
+
             <li>
               <details className="group">
-                <summary className="py-3 px-2 rounded cursor-pointer hover:bg-gray-100">Categorías</summary>
-                <ul className="pl-4 mt-2 space-y-2">
-                  <li><Link href="/catalog?category=smartphones" className="block py-2 px-2 rounded hover:bg-gray-100">Smartphones</Link></li>
-                  <li><Link href="/catalog?category=accessories" className="block py-2 px-2 rounded hover:bg-gray-100">Accesorios</Link></li>
+                <summary className="cursor-pointer rounded px-2 py-3 hover:bg-gray-100">Explorar catalogo</summary>
+                <ul className="mt-2 space-y-2 pl-4">
+                  {quickCatalogLinks.map((item) => (
+                    <li key={item.id}>
+                      <SheetClose asChild>
+                        <Link href="/catalog" className="inline-flex w-full items-center gap-2 rounded px-2 py-2 hover:bg-gray-100">
+                          <item.Icon className="h-4 w-4 text-gray-500" />
+                          {item.name}
+                        </Link>
+                      </SheetClose>
+                    </li>
+                  ))}
                 </ul>
               </details>
             </li>
           </ul>
         </nav>
 
-        <div className="mt-4 border-t pt-4 space-y-3">
-          <Link href="/cart" className="flex items-center gap-2 py-2 px-3 rounded hover:bg-gray-100">
-            <ShoppingCart className="w-5 h-5" /> Carrito
-          </Link>
-          <Link href="/profile" className="flex items-center gap-2 py-2 px-3 rounded hover:bg-gray-100">Perfil</Link>
-          <Link href="/login" className="block text-center py-2 px-3 rounded bg-black text-white">Ingresar</Link>
+        <div className="mt-4 space-y-3 border-t pt-4">
+          <SheetClose asChild>
+            <Link href="/cart" className="flex items-center gap-2 rounded px-3 py-2 hover:bg-gray-100">
+              <ShoppingCart className="h-5 w-5" /> Carrito
+            </Link>
+          </SheetClose>
+          <SheetClose asChild>
+            <Link href="/profile" className="flex items-center gap-2 rounded px-3 py-2 hover:bg-gray-100">
+              Perfil
+            </Link>
+          </SheetClose>
+          <SheetClose asChild>
+            <Link
+              href={loginHref}
+              className="block rounded-md bg-gradient-to-r from-[#062a4a] via-[#0b4f7d] to-[#0ea5e9] px-3 py-2 text-center text-white shadow-[0_10px_24px_rgba(2,132,199,0.25)] transition-transform duration-200 hover:-translate-y-0.5"
+            >
+              Ingresar
+            </Link>
+          </SheetClose>
         </div>
       </SheetContent>
     </Sheet>

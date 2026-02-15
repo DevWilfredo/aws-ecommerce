@@ -1,14 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  Truck,
   CreditCard,
-  Pocket,
-  Headphones,
-  Twitter,
   Facebook,
+  Headphones,
+  Pocket,
+  Truck,
   Instagram,
   Linkedin,
+  Twitter,
 } from "lucide-react";
 import GooglePay from "./icons/GooglePay";
 import Visa from "./icons/Visa";
@@ -16,136 +16,129 @@ import Mastercard from "./icons/Mastercard";
 import ApplePay from "./icons/ApplePay";
 import PayPal from "./icons/PayPal";
 
+const featureCards = [
+  { title: "Recogida gratis en tienda", subtitle: "Servicio disponible 24/7", Icon: Truck },
+  { title: "Envio gratis", subtitle: "Servicio disponible 24/7", Icon: Pocket },
+  { title: "Pago flexible", subtitle: "Servicio disponible 24/7", Icon: CreditCard },
+  { title: "Ayuda conveniente", subtitle: "Servicio disponible 24/7", Icon: Headphones },
+];
+
+const footerColumns = [
+  {
+    title: "Acerca de PrimeStore",
+    links: [
+      "Informacion de la empresa",
+      "Noticias",
+      "Inversionistas",
+      "Carreras",
+      "Publicidad con nosotros",
+      "Politicas",
+    ],
+  },
+  {
+    title: "Pedidos y compras",
+    links: [
+      "Verificar estado del pedido",
+      "Envio, entrega y recogida",
+      "Devoluciones e intercambios",
+      "Garantia de precio",
+      "Retirada de productos",
+      "Tarjetas de regalo",
+    ],
+  },
+  {
+    title: "Categorias populares",
+    links: [
+      "Telefonos",
+      "Computadoras",
+      "Relojes inteligentes",
+      "Auriculares",
+      "TV y cine en casa",
+      "Accesorios",
+    ],
+  },
+  {
+    title: "Soporte y servicios",
+    links: [
+      "Centro de vendedores",
+      "Contactanos",
+      "Centro de ayuda",
+      "Garantia de devolucion de dinero",
+      "Politica de garantia",
+    ],
+  },
+];
+
 export default function Footer() {
   return (
     <footer className="bg-[#002443] text-white">
-      <div className="max-w-7xl mx-auto px-6 py-10">
-        {/* Top feature row */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div className="flex items-start gap-4 bg-white p-4 rounded-lg shadow-sm">
-            <div className="w-10 h-10 rounded-md bg-indigo-50 flex items-center justify-center">
-              <Truck className="w-5 h-5 text-indigo-600" />
-            </div>
-            <div>
-              <div className="text-sm font-medium text-gray-700">Recogida gratis en tienda</div>
-              <div className="text-xs text-gray-500">Servicio disponible 24/7</div>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-4 bg-white p-4 rounded-lg shadow-sm">
-            <div className="w-10 h-10 rounded-md bg-indigo-50 flex items-center justify-center">
-              <Pocket className="w-5 h-5 text-indigo-600" />
-            </div>
-            <div>
-              <div className="text-sm font-medium text-gray-700">Envío Gratis</div>
-              <div className="text-xs text-gray-500">Servicio disponible 24/7</div>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-4 bg-white p-4 rounded-lg shadow-sm">
-            <div className="w-10 h-10 rounded-md bg-indigo-50 flex items-center justify-center">
-              <CreditCard className="w-5 h-5 text-indigo-600" />
-            </div>
-            <div>
-              <div className="text-sm font-medium text-gray-700">Pago Flexible</div>
-              <div className="text-xs text-gray-500">Servicio disponible 24/7</div>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-4 bg-white p-4 rounded-lg shadow-sm">
-            <div className="w-10 h-10 rounded-md bg-indigo-50 flex items-center justify-center">
-              <Headphones className="w-5 h-5 text-indigo-600" />
-            </div>
-            <div>
-              <div className="text-sm font-medium text-gray-700">Ayuda Conveniente</div>
-              <div className="text-xs text-gray-500">Servicio disponible 24/7</div>
-            </div>
-          </div>
+      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
+        <div className="mb-8 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          {featureCards.map(({ title, subtitle, Icon }) => (
+            <article key={title} className="flex items-start gap-3 rounded-xl bg-white p-4 shadow-sm">
+              <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-sky-50 text-sky-700">
+                <Icon className="h-5 w-5" />
+              </div>
+              <div>
+                <p className="text-sm font-medium text-slate-900">{title}</p>
+                <p className="text-xs text-slate-500">{subtitle}</p>
+              </div>
+            </article>
+          ))}
         </div>
 
-        {/* Main link columns */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-gray-600 pt-8 pb-8">
-          <div>
-            <h4 className="text-sm font-semibold mb-4 text-white">Acerca de PrimeStore</h4>
-            <ul className="text-xs space-y-2 text-gray-300">
-              <li><Link href="#" className="hover:text-white transition">Información de la empresa</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Noticias</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Inversionistas</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Carreras</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Publicidad con nosotros</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Políticas</Link></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-sm font-semibold mb-4 text-white">Pedidos y Compras</h4>
-            <ul className="text-xs space-y-2 text-gray-300">
-              <li><Link href="#" className="hover:text-white transition">Verificar estado del pedido</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Envío, Entrega y Recogida</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Devoluciones e Intercambios</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Garantía de Precio</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Retirada de Productos</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Tarjetas de Regalo</Link></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-sm font-semibold mb-4 text-white">Categorías Populares</h4>
-            <ul className="text-xs space-y-2 text-gray-300">
-              <li><Link href="#" className="hover:text-white transition">Teléfonos</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Computadoras</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Relojes Inteligentes</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Auriculares</Link></li>
-              <li><Link href="#" className="hover:text-white transition">TV y Cine en Casa</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Accesorios</Link></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-sm font-semibold mb-4 text-white">Soporte y Servicios</h4>
-            <ul className="text-xs space-y-2 text-gray-300">
-              <li><Link href="#" className="hover:text-white transition">Centro de Vendedores</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Contáctanos</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Centro de Ayuda</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Garantía de Devolución de Dinero</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Política de Garantía</Link></li>
-            </ul>
-          </div>
+        <div className="grid gap-8 border-t border-slate-600 py-8 sm:grid-cols-2 lg:grid-cols-4">
+          {footerColumns.map((column) => (
+            <div key={column.title}>
+              <h4 className="mb-4 text-sm font-semibold text-white">{column.title}</h4>
+              <ul className="space-y-2 text-xs text-slate-300">
+                {column.links.map((item) => (
+                  <li key={item}>
+                    <Link href="#" className="transition hover:text-white">
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
-        {/* Bottom row */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 border-t border-gray-600 pt-6">
-          <div className="flex items-center gap-3">
-            <Image 
-              src="/primestore-logo.png" 
-              alt="PrimeStore logo" 
-              width={160} 
-              height={80}
-              className="object-contain"
+        <div className="flex flex-col gap-5 border-t border-slate-600 pt-6 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-3">
+            <Image
+              src="/primestore-logo.png"
+              alt="PrimeStore logo"
+              width={150}
+              height={70}
+              className="h-auto w-[130px]"
             />
-            <div className="text-xs text-gray-300">
-              © {new Date().getFullYear()} PrimeStore. Todos los Derechos Reservados.
-            </div>
+            <p className="text-xs text-slate-300">
+              (c) {new Date().getFullYear()} PrimeStore. Todos los derechos reservados.
+            </p>
           </div>
 
-          <div className="flex items-center gap-6">
-            {/* Payment methods */}
-            <div className="flex items-center gap-2">
-              <GooglePay className="w-10 h-10" />
-              <Visa className="w-10 h-10" aria-label="Visa" />
-              <Mastercard className="w-10 h-10" aria-label="MasterCard" />
-              <ApplePay className="w-10 h-10" aria-label="ApplePay" />
-              <PayPal className="w-10 h-10" aria-label="Paypal"/> 
-            </div>
+          <div className="flex flex-wrap items-center gap-1.5">
+            <GooglePay className="h-10 w-10" />
+            <Visa className="h-10 w-10" aria-label="Visa" />
+            <Mastercard className="h-10 w-10" aria-label="MasterCard" />
+            <ApplePay className="h-10 w-10" aria-label="ApplePay" />
+            <PayPal className="h-10 w-10" aria-label="Paypal" />
           </div>
 
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-3 text-gray-300">
-              <Link href="#" aria-label="facebook" className="hover:text-white transition"><Facebook className="w-4 h-4" /></Link>
-              <Link href="#" aria-label="twitter" className="hover:text-white transition"><Twitter className="w-4 h-4" /></Link>
-              <Link href="#" aria-label="instagram" className="hover:text-white transition"><Instagram className="w-4 h-4" /></Link>
-              <Link href="#" aria-label="linkedin" className="hover:text-white transition"><Linkedin className="w-4 h-4" /></Link>
-            </div>
+          <div className="flex items-center gap-3 text-slate-300">
+            <Link href="#" aria-label="facebook" className="transition hover:text-white">
+              <Facebook className="h-4 w-4" />
+            </Link>
+            <Link href="#" aria-label="twitter" className="transition hover:text-white">
+              <Twitter className="h-4 w-4" />
+            </Link>
+            <Link href="#" aria-label="instagram" className="transition hover:text-white">
+              <Instagram className="h-4 w-4" />
+            </Link>
+            <Link href="#" aria-label="linkedin" className="transition hover:text-white">
+              <Linkedin className="h-4 w-4" />
+            </Link>
           </div>
         </div>
       </div>

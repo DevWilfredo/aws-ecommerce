@@ -1,13 +1,29 @@
 export type ProductOptionValue = {
   id: string;
   label: string;
-  priceAdjustment: number;
+  priceAdjustment: number | string;
 };
 
 export type ProductOptionGroup = {
   id: string;
   name: string;
   optionValues: ProductOptionValue[];
+};
+
+export type ProductAttributeDefinition = {
+  id: string;
+  name: string;
+  unit?: string | null;
+  dataType?: string;
+};
+
+export type ProductAttributeValue = {
+  id?: string;
+  attributeId?: string;
+  attribute?: ProductAttributeDefinition;
+  valueText?: string | null;
+  valueNumber?: string | number | null;
+  valueBoolean?: boolean | null;
 };
 
 export type ProductImage = {
@@ -26,6 +42,7 @@ export type Product = {
   brand?: { id: string; name: string };
   category?: { id: string; name: string; slug?: string };
   optionGroups?: ProductOptionGroup[];
+  attributeValues?: ProductAttributeValue[];
 };
 
 export type CartSelection = {

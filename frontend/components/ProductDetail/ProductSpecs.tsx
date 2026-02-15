@@ -16,7 +16,7 @@ export default function ProductSpecs({ specs }: { specs: SpecItem[] }) {
   }
 
   return (
-    <div className="grid grid-cols-2 gap-4 py-6 border-t border-b">
+    <div className="grid grid-cols-1 gap-3 border-y py-6 sm:grid-cols-2 sm:gap-4">
       {specs.map((spec) => (
         <div key={spec.label} className="flex items-center gap-3">
           <div className="w-4 h-4 rounded-full bg-gray-300" />

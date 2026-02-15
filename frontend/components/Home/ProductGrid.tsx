@@ -40,10 +40,10 @@ export default function ProductGrid({
     setFavorites((s) => ({ ...s, [id]: !s[id] }));
 
   return (
-    <section className="max-w-7xl mx-auto px-6 py-12">
+    <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12">
       {/* Tabs */}
-      <div className="flex items-center justify-start gap-6 mb-6 border-b">
-        <nav className="flex gap-6">
+      <div className="mb-6 border-b">
+        <nav className="flex gap-4 overflow-x-auto pb-1 sm:gap-6">
           {tabs.map((tab) => {
             const isActive = tab === activeTab;
             return (
@@ -65,10 +65,7 @@ export default function ProductGrid({
       {/* Grid */}
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {filtered.map((product) => (
-          <article
-            key={product.id}
-            className="relative bg-white border rounded-lg p-4 shadow-sm flex flex-col overflow-hidden"
-          >
+          <article key={product.id} className="relative flex flex-col overflow-hidden rounded-xl border bg-white p-4 shadow-sm">
             {/* Favorite icon */}
             <button
               aria-label="Toggle favorite"
@@ -99,7 +96,7 @@ export default function ProductGrid({
               <h3 className="text-sm text-gray-800 mb-2 line-clamp-2">{product.title}</h3>
               <div className="mt-auto">
                 <div className="text-lg font-bold mb-3">${product.price}</div>
-                <Button asChild className="w-full">
+                <Button asChild variant="brand" className="w-full">
                   <Link href={product.href ?? "#"} className="block text-center">
                     Agregar al Carrito
                   </Link>

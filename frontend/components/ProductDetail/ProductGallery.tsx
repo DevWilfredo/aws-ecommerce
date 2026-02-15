@@ -8,21 +8,21 @@ type Props = {
 
 export default function ProductGallery({ images, mainImage, onSelect }: Props) {
   return (
-    <div className="space-y-6">
-      <div className="bg-gray-50 rounded-lg overflow-hidden aspect-square flex items-center justify-center">
-        <Image src={mainImage} alt="Product" width={600} height={600} className="object-cover" unoptimized />
+    <div className="space-y-4 sm:space-y-6">
+      <div className="flex aspect-square items-center justify-center overflow-hidden rounded-xl bg-gray-50">
+        <Image src={mainImage} alt="Product" width={600} height={600} className="h-full w-full object-contain p-3 sm:p-4" unoptimized />
       </div>
 
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-4 gap-2 sm:gap-4">
         {images.map((img, index) => (
           <button
             key={index}
             onClick={() => onSelect(img)}
-            className={`aspect-square rounded-lg overflow-hidden bg-gray-50 flex items-center justify-center cursor-pointer transition border-2 ${
+            className={`flex aspect-square cursor-pointer items-center justify-center overflow-hidden rounded-lg border-2 bg-gray-50 transition ${
               mainImage === img ? "border-black" : "border-transparent"
             }`}
           >
-            <Image src={img} alt={`Miniatura ${index + 1}`} width={120} height={120} className="object-contain" unoptimized />
+            <Image src={img} alt={`Miniatura ${index + 1}`} width={120} height={120} className="h-full w-full object-contain p-1.5" unoptimized />
           </button>
         ))}
       </div>

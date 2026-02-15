@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input"
 
 export function SearchBar() {
   return (
-    <ButtonGroup className="items-center">
+    <ButtonGroup className="w-full items-center">
       <Input placeholder="Buscar..." />
       <Button variant="outline" aria-label="Search">
         <SearchIcon />
