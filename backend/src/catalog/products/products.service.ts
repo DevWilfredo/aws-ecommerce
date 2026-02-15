@@ -167,6 +167,47 @@ export class ProductsService {
     });
   }
 
+  async findHomeProducts(perTab: number) {
+    const safePerTab = Math.min(Math.max(Number.isFinite(perTab) ? perTab : 4, 1), 12);
+    const products = await this.findAll();
+
+    const uniqueProducts = Array.from(
+      new Map(products.map((product) => [product.id, product])).values(),
+    );
+
+    const takeWithoutRepeats = (pool: Product[], amount: number) => {
+      const chunk = pool.slice(0, amount);
+      pool.splice(0, chunk.length);
+      return chunk;
+    };
+
+    const randomize = (input: Product[]) => {
+      const list = [...input];
+      for (let i = list.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [list[i], list[j]] = [list[j], list[i]];
+      }
+      return list;
+    };
+
+    const newestPool = [...uniqueProducts];
+    const remainingPool = randomize(uniqueProducts.slice(safePerTab));
+
+    const newArrival = takeWithoutRepeats(newestPool, safePerTab);
+    const bestseller = takeWithoutRepeats(remainingPool, safePerTab);
+    const featured = takeWithoutRepeats(remainingPool, safePerTab);
+
+    return {
+      perTab: safePerTab,
+      totalAvailable: uniqueProducts.length,
+      tabs: {
+        newArrival,
+        bestseller,
+        featured,
+      },
+    };
+  }
+
   async findOne(id: string) {
     const product = await this.productsRepo.findOne({
       where: { id },

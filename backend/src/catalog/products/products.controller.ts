@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFiles } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseInterceptors, UploadedFiles } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -21,6 +21,13 @@ export class ProductsController {
   @Get()
   findAll() {
     return this.productsService.findAll();
+  }
+
+  @Get('home')
+  findHomeProducts(@Query('perTab') perTab?: string) {
+    const parsed = Number.parseInt(perTab ?? '', 10);
+    const safePerTab = Number.isFinite(parsed) ? parsed : 4;
+    return this.productsService.findHomeProducts(safePerTab);
   }
 
   @Get(':id')
