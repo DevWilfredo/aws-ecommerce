@@ -47,7 +47,6 @@ export default function CheckoutSuccessPage() {
             body: JSON.stringify({ orderId, sessionId }),
           });
         } catch {
-          // Webhook can still process payment asynchronously; order fetch below is source of truth.
         }
       }
 

@@ -135,7 +135,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between gap-3">
           <Link href="/" className="flex items-center">
             <Image
-              src="/primestore-logo.png"
+              src={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/primestore-logo.png`}
               alt="PrimeStore Logo"
               width={150}
               height={150}

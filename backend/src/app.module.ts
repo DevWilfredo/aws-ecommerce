@@ -26,7 +26,7 @@ import { PaymentsModule } from './payments/payments.module';
         password: config.get('DB_PASS'),
         database: config.get('DB_NAME'),
         autoLoadEntities: true,
-        synchronize: true,
+        synchronize: false,
       }),
     }),
 

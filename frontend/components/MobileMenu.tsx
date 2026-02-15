@@ -73,7 +73,7 @@ export default function MobileMenu() {
         <div className="flex h-full flex-col px-4 pb-4 pt-5 sm:px-5">
           <SheetHeader className="mb-4 flex-row items-center justify-center border-b border-slate-200 px-0 pb-4 pt-0">
             <div className="flex items-center gap-2">
-              <Image src="/primestore-logo.png" alt="Logo" width={120} height={36} />
+              <Image src={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/primestore-logo.png`} alt="Logo" width={120} height={36} />
             </div>
           </SheetHeader>
 

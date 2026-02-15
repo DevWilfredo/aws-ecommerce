@@ -107,7 +107,7 @@ export default function Footer() {
         <div className="flex flex-col gap-5 border-t border-slate-600 pt-6 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-3">
             <Image
-              src="/primestore-logo.png"
+              src={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/primestore-logo.png`}
               alt="PrimeStore logo"
               width={150}
               height={70}
