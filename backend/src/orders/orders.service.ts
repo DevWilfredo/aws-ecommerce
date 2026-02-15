@@ -1,12 +1,17 @@
-import { BadRequestException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DataSource, Repository } from 'typeorm';
+import { DataSource, In, Repository } from 'typeorm';
 import { Order } from './entities/order.entity';
 import { OrderItem } from './entities/order-item.entity';
-import { CreateOrderDto } from './dtos/create-order.dto'; 
-import { Product } from 'src/catalog/products/entities/product.entity'; 
-import { OrderStatus } from './entities/order-status.enum'; 
-import { UpdateOrderStatusDto } from './dtos/update-order-status.dto'; 
+import { CreateOrderDto } from './dtos/create-order.dto';
+import { Product } from 'src/catalog/products/entities/product.entity';
+import { OrderStatus } from './entities/order-status.enum';
+import { UpdateOrderStatusDto } from './dtos/update-order-status.dto';
 
 @Injectable()
 export class OrdersService {
@@ -20,27 +25,63 @@ export class OrdersService {
     if (!dto.items?.length) throw new BadRequestException('Order must have at least one item');
 
     return this.dataSource.transaction(async (manager) => {
-      // 1) Traer productos y validar cantidades
-      const productIds = dto.items.map(i => i.productId);
-      const products = await manager.getRepository(Product).findBy({ id: productIds as any });
+      const productIds = dto.items.map((i) => i.productId);
+      const products = await manager.getRepository(Product).find({
+        where: { id: In(productIds) },
+        relations: ['optionGroups', 'optionGroups.optionValues'],
+      });
 
       if (products.length !== productIds.length) {
         throw new BadRequestException('One or more products do not exist');
       }
 
-      // 2) Construir items con snapshot y validar stock
       const items: OrderItem[] = [];
       let subtotal = 0;
 
       for (const reqItem of dto.items) {
-        const product = products.find(p => p.id === reqItem.productId)!;
+        const product = products.find((p) => p.id === reqItem.productId);
+        if (!product) throw new BadRequestException('Invalid product in order');
 
         if (reqItem.quantity > product.stock) {
           throw new BadRequestException(`Insufficient stock for product ${product.name}`);
         }
 
-        // Snapshot
-        const unitPrice = Number(product.price); // OJO decimal -> string en algunos drivers
+        const selectedOptions = (reqItem.selectedOptions ?? []).map((item) => ({
+          optionGroupId: item.optionGroupId,
+          optionValueId: item.optionValueId,
+        }));
+
+        const normalizedOptions = product.optionGroups
+          .map((group) => {
+            const selected =
+              selectedOptions.find((option) => option.optionGroupId === group.id)?.optionValueId ??
+              group.optionValues?.[0]?.id;
+
+            if (!selected) return null;
+
+            const value = group.optionValues.find((optionValue) => optionValue.id === selected);
+            if (!value) {
+              throw new BadRequestException(
+                `Invalid option selected for group ${group.name} in product ${product.name}`,
+              );
+            }
+
+            return {
+              optionGroupId: group.id,
+              optionGroupName: group.name,
+              optionValueId: value.id,
+              optionValueLabel: value.label,
+              priceAdjustment: Number(value.priceAdjustment ?? 0),
+            };
+          })
+          .filter((option) => option !== null);
+
+        const optionsPrice = normalizedOptions.reduce(
+          (sum, option) => sum + Number(option?.priceAdjustment ?? 0),
+          0,
+        );
+
+        const unitPrice = Number((Number(product.price) + optionsPrice).toFixed(2));
         const lineTotal = Number((unitPrice * reqItem.quantity).toFixed(2));
         subtotal = Number((subtotal + lineTotal).toFixed(2));
 
@@ -50,18 +91,17 @@ export class OrdersService {
           unitPrice,
           quantity: reqItem.quantity,
           lineTotal,
+          selectedOptions: normalizedOptions,
         });
 
         items.push(item);
       }
 
-      // 3) Calcular extras (por ahora simple; puedes meter cupones / shipping real)
       const shippingCost = 0;
       const tax = 0;
       const discount = 0;
       const total = Number((subtotal + shippingCost + tax - discount).toFixed(2));
 
-      // 4) Crear orden
       const order = manager.getRepository(Order).create({
         userId,
         status: OrderStatus.PENDING,
@@ -86,13 +126,8 @@ export class OrdersService {
 
       const saved = await manager.getRepository(Order).save(order);
 
-      // 5) Descontar stock (si tu flujo lo descuenta al crear; algunos lo descuentan al pagar)
       for (const reqItem of dto.items) {
-        await manager.getRepository(Product).decrement(
-          { id: reqItem.productId },
-          'stock',
-          reqItem.quantity,
-        );
+        await manager.getRepository(Product).decrement({ id: reqItem.productId }, 'stock', reqItem.quantity);
       }
 
       return manager.getRepository(Order).findOne({
@@ -136,7 +171,6 @@ export class OrdersService {
       throw new BadRequestException('Cannot cancel an order that has been shipped/delivered');
     }
 
-    // Si cancelas y ya descontaste stock, devuélvelo
     return this.dataSource.transaction(async (manager) => {
       const full = await manager.getRepository(Order).findOne({
         where: { id: orderId },
