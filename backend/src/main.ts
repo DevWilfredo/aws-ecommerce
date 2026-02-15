@@ -8,13 +8,14 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api/v1');
   app.use(cookieParser());
-  app.useGlobalPipes(new ValidationPipe({
-    whitelist: true,
-    transform: true
-  }));
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      transform: true,
+    }),
+  );
 
-  // ✅ SOLO webhook con raw body
-  app.use('/payments/webhook', raw({ type: 'application/json' }));
+  app.use('/api/v1/payments/webhook', raw({ type: 'application/json' }));
 
   app.enableCors({
     origin: ['http://localhost:3000'],

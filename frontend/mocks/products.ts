@@ -1,4 +1,4 @@
-import type { Product } from "@/components/ProductGrid";
+import type { Product } from "@/components/Home/ProductGrid";
 
 export const mockProducts: Product[] = [
   {

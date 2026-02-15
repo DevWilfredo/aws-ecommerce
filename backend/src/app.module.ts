@@ -8,41 +8,38 @@ import { CategoriesModule } from './catalog/categories/categories.module';
 import { ProductsModule } from './catalog/products/products.module';
 import { AuthModule } from './auth/auth.module';
 import { OrdersModule } from './orders/orders.module';
+import { PaymentsModule } from './payments/payments.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({
-    isGlobal: true,
-  }),
-
-  TypeOrmModule.forRootAsync({
-    inject: [ConfigService],
-    useFactory: (config: ConfigService) => ({
-      type: 'postgres',
-      host: config.get('DB_HOST'),
-      port: config.get<number>('DB_PORT'),
-      username: config.get('DB_USER'),
-      password: config.get('DB_PASS'),
-      database: config.get('DB_NAME'),
-      autoLoadEntities: true,
-      synchronize: true,
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
     }),
-  }),
 
-  UsersModule,
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => ({
+        type: 'postgres',
+        host: config.get('DB_HOST'),
+        port: config.get<number>('DB_PORT'),
+        username: config.get('DB_USER'),
+        password: config.get('DB_PASS'),
+        database: config.get('DB_NAME'),
+        autoLoadEntities: true,
+        synchronize: true,
+      }),
+    }),
 
-  ProductsModule,
-
-  BrandsModule,
-
-  CategoriesModule,
-
-  AwsS3Module,
-
-  AuthModule,
-
-  OrdersModule
+    UsersModule,
+    ProductsModule,
+    BrandsModule,
+    CategoriesModule,
+    AwsS3Module,
+    AuthModule,
+    OrdersModule,
+    PaymentsModule,
   ],
   controllers: [],
   providers: [],
 })
-export class AppModule { }
+export class AppModule {}
