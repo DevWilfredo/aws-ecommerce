@@ -1,7 +1,7 @@
 ﻿'use client';
 
 import Link from 'next/link';
-import { useEffect, useMemo, useState } from 'react';
+import { Suspense, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { CheckCircle2, ReceiptText, ShieldCheck } from 'lucide-react';
 import { toast } from 'sonner';
@@ -21,7 +21,7 @@ const dateFormatter = new Intl.DateTimeFormat('es-ES', {
   timeStyle: 'short',
 });
 
-export default function CheckoutSuccessPage() {
+function CheckoutSuccessPageContent() {
   const searchParams = useSearchParams();
   const { isChecking, isAuthenticated, authError, retryAuthCheck } = useAuthGuard();
   const [order, setOrder] = useState<Order | null>(null);
@@ -222,5 +222,13 @@ export default function CheckoutSuccessPage() {
         </section>
       </div>
     </div>
+  );
+}
+
+export default function CheckoutSuccessPage() {
+  return (
+    <Suspense fallback={null}>
+      <CheckoutSuccessPageContent />
+    </Suspense>
   );
 }

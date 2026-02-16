@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { ClientApiError, clientApiFetch } from '@/services/client-api';
 
 type AuthStatus = 'checking' | 'authorized' | 'unauthorized' | 'service_error';
@@ -12,7 +12,6 @@ const DEFAULT_AUTH_ERROR =
 export function useAuthGuard() {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const [status, setStatus] = useState<AuthStatus>('checking');
   const [authError, setAuthError] = useState<string | null>(null);
   const [retrySeed, setRetrySeed] = useState(0);
@@ -44,8 +43,8 @@ export function useAuthGuard() {
           setAuthError(null);
           setStatus('unauthorized');
 
-          const query = searchParams?.toString();
-          const nextPath = `${pathname ?? '/'}${query ? `?${query}` : ''}`;
+          const query = typeof window !== 'undefined' ? window.location.search : '';
+          const nextPath = `${pathname ?? '/'}${query}`;
           router.replace(`/login?next=${encodeURIComponent(nextPath)}`);
           return;
         }
@@ -60,7 +59,7 @@ export function useAuthGuard() {
     return () => {
       active = false;
     };
-  }, [pathname, retrySeed, router, searchParams]);
+  }, [pathname, retrySeed, router]);
 
   return {
     isChecking: status === 'checking',

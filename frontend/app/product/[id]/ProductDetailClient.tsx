@@ -110,7 +110,17 @@ export default function ProductDetailClient({ product }: { product: ApiProduct }
 
   const mainImage = selectedImage && images.includes(selectedImage) ? selectedImage : images[0];
   const price = Number(product.price);
-  const cartProduct: Product = { ...product, optionGroups };
+  const cartProduct: Product = {
+    id: product.id,
+    name: product.name,
+    description: product.description,
+    price: product.price,
+    stock: product.stock,
+    images: product.images,
+    brand: product.brand,
+    category: product.category,
+    optionGroups,
+  };
 
   return (
     <div className="min-h-[calc(100vh-88px)] bg-white">

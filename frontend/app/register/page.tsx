@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useMemo } from 'react';
+import { Suspense, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { ArrowRight, BadgeCheck, ShieldCheck, UserPlus } from 'lucide-react';
 
@@ -17,7 +17,7 @@ function appendNext(url: string, nextPath: string | null) {
   return `${path}${finalQuery ? `?${finalQuery}` : ''}${hash ? `#${hash}` : ''}`;
 }
 
-export default function RegisterPage() {
+function RegisterPageContent() {
   const searchParams = useSearchParams();
   const nextPath = searchParams?.get('next');
   const registerUrl = useMemo(
@@ -85,5 +85,13 @@ export default function RegisterPage() {
         </section>
       </div>
     </div>
+  );
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense fallback={null}>
+      <RegisterPageContent />
+    </Suspense>
   );
 }

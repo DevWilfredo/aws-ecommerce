@@ -1,6 +1,6 @@
 ﻿'use client';
 
-import { useMemo } from 'react';
+import { Suspense, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { ArrowRight, LockKeyhole, ShieldCheck, Sparkles } from 'lucide-react';
 
@@ -18,7 +18,7 @@ function appendNext(url: string, nextPath: string | null) {
   return `${path}${finalQuery ? `?${finalQuery}` : ''}${hash ? `#${hash}` : ''}`;
 }
 
-export default function LoginPage() {
+function LoginPageContent() {
   const searchParams = useSearchParams();
   const nextPath = searchParams?.get('next');
 
@@ -146,5 +146,13 @@ export default function LoginPage() {
         </section>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={null}>
+      <LoginPageContent />
+    </Suspense>
   );
 }
