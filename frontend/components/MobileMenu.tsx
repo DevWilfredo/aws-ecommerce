@@ -23,7 +23,7 @@ const API = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const primaryLinks = [
   { title: "Inicio", href: "/" },
-  { title: "Catalogo", href: "/catalog" },
+  { title: "Catálogo", href: "/catalog" },
   { title: "Contacto", href: "/contact" },
 ];
 
@@ -62,7 +62,7 @@ export default function MobileMenu() {
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <button
-          aria-label="Abrir menu"
+          aria-label="Abrir menú"
           className="inline-flex items-center justify-center rounded-md p-2 hover:bg-gray-100"
         >
           <Menu className="h-6 w-6" />
@@ -73,7 +73,7 @@ export default function MobileMenu() {
         <div className="flex h-full flex-col px-4 pb-4 pt-5 sm:px-5">
           <SheetHeader className="mb-4 flex-row items-center justify-center border-b border-slate-200 px-0 pb-4 pt-0">
             <div className="flex items-center gap-2">
-              <Image src={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/primestore-logo.png`} alt="Logo" width={120} height={36} />
+               <Image src={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/primestore-logo.png`} alt="Logotipo" width={120} height={36} />
             </div>
           </SheetHeader>
 
@@ -99,7 +99,7 @@ export default function MobileMenu() {
               <li className="pt-1">
                 <details className="group rounded-lg">
                   <summary className="cursor-pointer rounded-lg px-3 py-3 text-sm font-medium text-slate-800 transition hover:bg-slate-100">
-                    Explorar catalogo
+                    Explorar catálogo
                   </summary>
                   <ul className="mt-1.5 space-y-1 pl-3">
                     {quickCatalogLinks.map((item) => (

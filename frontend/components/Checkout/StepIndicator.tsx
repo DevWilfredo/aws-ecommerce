@@ -4,9 +4,9 @@ interface StepIndicatorProps {
 
 export default function StepIndicator({ currentStep }: StepIndicatorProps) {
     const steps = [
-        { number: 1, label: 'Address' },
-        { number: 2, label: 'Shipping' },
-        { number: 3, label: 'Payment' }
+        { number: 1, label: 'Dirección' },
+        { number: 2, label: 'Envío' },
+        { number: 3, label: 'Pago' }
     ];
 
     return (

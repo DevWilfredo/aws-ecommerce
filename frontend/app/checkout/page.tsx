@@ -50,7 +50,7 @@ const shippingFieldMeta = [
   },
   {
     name: 'phone',
-    label: 'Telefono',
+    label: 'Teléfono',
     placeholder: '+34 612 34 56 78',
     autoComplete: 'tel',
     type: 'tel',
@@ -59,7 +59,7 @@ const shippingFieldMeta = [
   },
   {
     name: 'postalCode',
-    label: 'Codigo postal',
+    label: 'Código postal',
     placeholder: '28013',
     autoComplete: 'postal-code',
     type: 'text',
@@ -68,7 +68,7 @@ const shippingFieldMeta = [
   },
   {
     name: 'addressLine1',
-    label: 'Direccion',
+    label: 'Dirección',
     placeholder: 'Calle Gran Via 15',
     autoComplete: 'address-line1',
     type: 'text',
@@ -209,7 +209,7 @@ export default function CheckoutPage() {
     if (!hasItems) return;
 
     if (!isShippingReady(shipping)) {
-      const message = 'Completa los campos obligatorios de envio.';
+      const message = 'Completa los campos obligatorios de envío.';
       setError(message);
       setStep(1);
       setStepDirection(-1);
@@ -243,7 +243,7 @@ export default function CheckoutPage() {
       toast.success('Redirigiendo a Stripe...');
       window.location.href = session.checkoutUrl;
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'No se pudo iniciar checkout';
+      const message = err instanceof Error ? err.message : 'No se pudo iniciar el pago';
       setError(message);
       toast.error(message);
     } finally {
@@ -257,12 +257,12 @@ export default function CheckoutPage() {
 
   if (authError) {
     return (
-      <ApiUnavailableState
-        className="md:px-6"
-        title="No pudimos validar tu sesion"
-        message={authError}
-        onRetry={retryAuthCheck}
-      />
+        <ApiUnavailableState
+          className="md:px-6"
+          title="No pudimos validar tu sesión"
+          message={authError}
+          onRetry={retryAuthCheck}
+        />
     );
   }
 
@@ -276,7 +276,7 @@ export default function CheckoutPage() {
       <div className="mx-auto max-w-7xl px-4 py-10 md:px-6 md:py-12">
         <header className="mb-8 flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white/90 p-6 shadow-sm backdrop-blur">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-            Checkout seguro
+            Pago seguro
           </p>
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
@@ -284,7 +284,7 @@ export default function CheckoutPage() {
                 Finaliza tu compra
               </h1>
               <p className="mt-1 text-sm text-slate-600">
-                Flujo en 2 pasos para revisar direccion y confirmar el pago.
+                Flujo en 2 pasos para revisar dirección y confirmar el pago.
               </p>
             </div>
             <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm text-slate-700">
@@ -300,11 +300,11 @@ export default function CheckoutPage() {
             </div>
             <div className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2">
               <Truck className="h-4 w-4 text-sky-600" />
-              Envio rapido y trazable
+              Envío rápido y trazable
             </div>
             <div className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2">
               <CircleCheckBig className="h-4 w-4 text-sky-600" />
-              Confirmacion antes del pago
+              Confirmación antes del pago
             </div>
           </div>
         </header>
@@ -323,7 +323,7 @@ export default function CheckoutPage() {
                       : 'border-emerald-300 bg-emerald-50 text-emerald-700'
                   }`}
                 >
-                  1. Shipping
+                  1. Envío
                 </div>
                 <div className="h-1.5 rounded-full bg-slate-200">
                   <motion.div
@@ -345,7 +345,7 @@ export default function CheckoutPage() {
 
               <div className="flex items-center justify-between">
                 <h2 className="text-xl font-semibold text-slate-900">
-                  {step === 1 ? 'Datos de envio' : 'Revision final'}
+                  {step === 1 ? 'Datos de envío' : 'Revisión final'}
                 </h2>
                 <span className="rounded-full bg-sky-50 px-3 py-1 text-xs font-medium text-sky-700">
                   Paso {step} de 2
@@ -383,7 +383,7 @@ export default function CheckoutPage() {
                   ))}
 
                   <label className="block">
-                    <span className="mb-1.5 block text-sm font-medium text-slate-700">Pais</span>
+                    <span className="mb-1.5 block text-sm font-medium text-slate-700">País</span>
                     <select
                       className={inputBaseClass}
                       value={shipping.countryCode}
@@ -395,9 +395,9 @@ export default function CheckoutPage() {
                         }));
                       }}
                     >
-                      <option value="ES">Espana</option>
+                      <option value="ES">España</option>
                       <option value="US">Estados Unidos</option>
-                      <option value="MX">Mexico</option>
+                      <option value="MX">México</option>
                       <option value="CO">Colombia</option>
                     </select>
                   </label>
@@ -415,7 +415,7 @@ export default function CheckoutPage() {
                 >
                   <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
                     <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-                      Direccion de entrega
+                      Dirección de entrega
                     </p>
                     <div className="mt-2 text-sm text-slate-700">
                       <p className="font-semibold text-slate-900">{shipping.fullName}</p>
@@ -425,7 +425,7 @@ export default function CheckoutPage() {
                         {shipping.city}, {shipping.state} {shipping.postalCode}
                       </p>
                       <p>{shipping.countryCode}</p>
-                      <p className="mt-1 text-xs text-slate-500">Telefono: {shipping.phone}</p>
+                      <p className="mt-1 text-xs text-slate-500">Teléfono: {shipping.phone}</p>
                     </div>
                   </div>
 
@@ -435,9 +435,9 @@ export default function CheckoutPage() {
                         <CreditCard className="h-5 w-5" />
                       </div>
                       <div>
-                        <p className="text-sm font-semibold text-slate-900">Metodo de pago</p>
+                        <p className="text-sm font-semibold text-slate-900">Método de pago</p>
                         <p className="mt-0.5 text-sm text-slate-600">
-                          Stripe Checkout - seras redirigido para completar el pago de forma segura.
+                          Pago de Stripe: serás redirigido para completar el pago de forma segura.
                         </p>
                       </div>
                     </div>
@@ -458,7 +458,7 @@ export default function CheckoutPage() {
 
             {!hasItems ? (
               <div className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-3 text-sm text-amber-800">
-                Tu carrito esta vacio. Agrega productos para poder pagar.
+                Tu carrito está vacío. Agrega productos para poder pagar.
               </div>
             ) : null}
 
@@ -483,7 +483,7 @@ export default function CheckoutPage() {
                   onClick={onContinueToReview}
                   className="inline-flex h-12 w-full items-center justify-center rounded-xl bg-gradient-to-r from-[#062a4a] via-[#0b4f7d] to-[#0ea5e9] px-5 text-base font-semibold text-white shadow-[0_12px_28px_rgba(2,132,199,0.3)] transition-transform duration-200 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
                 >
-                  Continuar a confirmacion
+                  Continuar a confirmación
                 </button>
               ) : (
                 <button
@@ -501,7 +501,7 @@ export default function CheckoutPage() {
             <div className="mb-5 flex items-center justify-between">
               <h2 className="text-xl font-semibold text-slate-900">Resumen de compra</h2>
               <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">
-                {totalItems} items
+                {totalItems} artículos
               </span>
             </div>
 
@@ -512,7 +512,7 @@ export default function CheckoutPage() {
                   href="/catalog"
                   className="mt-3 inline-flex items-center rounded-lg bg-slate-900 px-3 py-1.5 text-xs font-semibold text-white"
                 >
-                  Ir al catalogo
+                  Ir al catálogo
                 </Link>
               </div>
             ) : (
@@ -569,7 +569,7 @@ export default function CheckoutPage() {
                     <span>{moneyFormatter.format(subtotal)}</span>
                   </div>
                   <div className="flex items-center justify-between text-slate-600">
-                    <span>Envio</span>
+                    <span>Envío</span>
                     <span className="font-medium text-emerald-600">Gratis</span>
                   </div>
                   <div className="flex items-center justify-between border-t border-slate-200 pt-2 text-base font-semibold text-slate-900">

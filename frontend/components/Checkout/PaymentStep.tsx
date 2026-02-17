@@ -26,7 +26,7 @@ export default function PaymentStep({
 }: PaymentStepProps) {
     return (
         <div>
-            <h2 className="text-2xl font-bold mb-8">Payment</h2>
+            <h2 className="text-2xl font-bold mb-8">Pago</h2>
 
             {/* Payment Method Tabs */}
             <div className="flex gap-4 mb-8 border-b border-gray-200">
@@ -38,7 +38,7 @@ export default function PaymentStep({
                             : 'text-gray-600 hover:text-black'
                     }`}
                 >
-                    Credit Card
+                    Tarjeta de crédito
                 </button>
                 <button
                     onClick={() => onSelectPaymentMethod('paypal')}
@@ -58,7 +58,7 @@ export default function PaymentStep({
                             : 'text-gray-600 hover:text-black'
                     }`}
                 >
-                    PayPal Credit
+                    Crédito de PayPal
                 </button>
             </div>
 
@@ -86,7 +86,7 @@ export default function PaymentStep({
             {paymentMethod === 'paypal-credit' && (
                 <div className="text-center py-12">
                     <p className="text-gray-600">
-                        Serás redirigido a PayPal Credit para completar tu compra
+                        Serás redirigido a Crédito de PayPal para completar tu compra
                     </p>
                 </div>
             )}

@@ -15,7 +15,7 @@ export default function BrowseByCategory() {
   return (
     <section className="mx-auto max-w-7xl px-4 py-10 animate-fade-up sm:px-6 sm:py-12">
       <div className="mb-6 flex items-center justify-between">
-        <h2 className="text-xl font-semibold sm:text-2xl">Explorar por categoria</h2>
+        <h2 className="text-xl font-semibold sm:text-2xl">Explorar por categoría</h2>
         <div className="flex gap-2">
           <Button
             variant="ghost"

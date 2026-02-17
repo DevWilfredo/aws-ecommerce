@@ -1,4 +1,4 @@
-export class ApiError extends Error {
+﻿export class ApiError extends Error {
   constructor(
     message: string,
     public status?: number,
@@ -53,10 +53,11 @@ export async function apiFetch<T>(
     return (await res.json()) as T;
   } catch (err: any) {
     if (err?.name === 'AbortError') {
-      throw new ApiError('Timeout llamando al backend', 504);
+      throw new ApiError('Tiempo de espera agotado al llamar al backend', 504);
     }
     throw err;
   } finally {
     clearTimeout(timeout);
   }
 }
+

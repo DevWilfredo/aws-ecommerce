@@ -68,10 +68,10 @@ function parseBackendErrorMessage(body: string) {
 
 function friendlyServerErrorMessage(status: number) {
   if (status === 502 || status === 503 || status === 504) {
-    return 'No pudimos conectar con el servidor. Intenta nuevamente mas tarde.';
+    return 'No pudimos conectar con el servidor. Intenta nuevamente más tarde.';
   }
   if (status >= 500) {
-    return 'El servidor tuvo un problema. Intenta nuevamente mas tarde.';
+    return 'El servidor tuvo un problema. Intenta nuevamente más tarde.';
   }
   return '';
 }
@@ -85,7 +85,7 @@ export async function clientApiRequest(
   init?: ClientApiRequestInit,
 ): Promise<Response> {
   if (!API) {
-    throw new ClientApiError('Configuracion incompleta de la API. Intenta nuevamente mas tarde.', {
+    throw new ClientApiError('Configuración incompleta de la API. Intenta nuevamente más tarde.', {
       code: 'CONFIG',
       retryable: false,
     });
@@ -112,7 +112,7 @@ export async function clientApiRequest(
       const parsedMessage = parseBackendErrorMessage(bodyText);
 
       throw new ClientApiError(
-        friendlyServerErrorMessage(res.status) || parsedMessage || `Request failed: ${res.status}`,
+        friendlyServerErrorMessage(res.status) || parsedMessage || `La solicitud falló: ${res.status}`,
         {
           status: res.status,
           code: 'HTTP',
@@ -128,7 +128,7 @@ export async function clientApiRequest(
 
     if (isAbortError(error)) {
       throw new ClientApiError(
-        'La solicitud tardo demasiado. Intenta nuevamente en unos minutos.',
+        'La solicitud tardó demasiado. Intenta nuevamente en unos minutos.',
         {
           status: 504,
           code: 'TIMEOUT',
@@ -139,7 +139,7 @@ export async function clientApiRequest(
 
     if (error instanceof TypeError) {
       throw new ClientApiError(
-        'No pudimos conectar con el servidor. Intenta nuevamente mas tarde.',
+        'No pudimos conectar con el servidor. Intenta nuevamente más tarde.',
         {
           status: 503,
           code: 'UNAVAILABLE',

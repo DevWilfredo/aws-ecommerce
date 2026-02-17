@@ -8,12 +8,12 @@ import RouteTransition from '@/components/ui/route-transition';
 
 export const metadata: Metadata = {
   title: 'PrimeStore',
-  description: 'Next level Tech Shop',
+  description: 'Tienda de tecnología de primer nivel',
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body className="min-h-screen bg-slate-50 antialiased">
         <CartProvider>
           <div className="flex min-h-screen flex-col">

@@ -18,40 +18,40 @@ import PayPal from "./icons/PayPal";
 
 const featureCards = [
   { title: "Recogida gratis en tienda", subtitle: "Servicio disponible 24/7", Icon: Truck },
-  { title: "Envio gratis", subtitle: "Servicio disponible 24/7", Icon: Pocket },
+  { title: "Envío gratis", subtitle: "Servicio disponible 24/7", Icon: Pocket },
   { title: "Pago flexible", subtitle: "Servicio disponible 24/7", Icon: CreditCard },
   { title: "Ayuda conveniente", subtitle: "Servicio disponible 24/7", Icon: Headphones },
 ];
 
 const footerColumns = [
   {
-    title: "Acerca de PrimeStore",
-    links: [
-      "Informacion de la empresa",
-      "Noticias",
-      "Inversionistas",
-      "Carreras",
-      "Publicidad con nosotros",
-      "Politicas",
-    ],
+      title: "Acerca de PrimeStore",
+      links: [
+        "Información de la empresa",
+        "Noticias",
+        "Inversionistas",
+        "Carreras",
+        "Publicidad con nosotros",
+        "Políticas",
+      ],
   },
   {
     title: "Pedidos y compras",
     links: [
       "Verificar estado del pedido",
-      "Envio, entrega y recogida",
+        "Envío, entrega y recogida",
       "Devoluciones e intercambios",
-      "Garantia de precio",
+        "Garantía de precio",
       "Retirada de productos",
       "Tarjetas de regalo",
     ],
   },
   {
-    title: "Categorias populares",
-    links: [
-      "Telefonos",
-      "Computadoras",
-      "Relojes inteligentes",
+      title: "Categorías populares",
+      links: [
+        "Teléfonos",
+        "Computadoras",
+        "Relojes inteligentes",
       "Auriculares",
       "TV y cine en casa",
       "Accesorios",
@@ -61,11 +61,11 @@ const footerColumns = [
     title: "Soporte y servicios",
     links: [
       "Centro de vendedores",
-      "Contactanos",
-      "Centro de ayuda",
-      "Garantia de devolucion de dinero",
-      "Politica de garantia",
-    ],
+        "Contáctanos",
+        "Centro de ayuda",
+        "Garantía de devolución de dinero",
+        "Política de garantía",
+      ],
   },
 ];
 
@@ -114,7 +114,7 @@ export default function Footer() {
               className="h-auto w-[130px]"
             />
             <p className="text-xs text-slate-300">
-              (c) {new Date().getFullYear()} PrimeStore. Todos los derechos reservados.
+              © {new Date().getFullYear()} PrimeStore. Todos los derechos reservados.
             </p>
           </div>
 

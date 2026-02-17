@@ -34,7 +34,7 @@ export default function CartSummary({
 }: CartSummaryProps) {
     return (
         <div className="bg-gray-50 rounded-lg p-6 sticky top-8">
-            <h3 className="font-bold text-lg mb-6 text-gray-900">Summary</h3>
+            <h3 className="font-bold text-lg mb-6 text-gray-900">Resumen</h3>
 
             {/* Items */}
             <div className="space-y-4 mb-6">
@@ -57,7 +57,7 @@ export default function CartSummary({
                 {/* Address Info */}
                 {currentStep >= 2 && selectedAddress && addresses && (
                     <div className="mb-4">
-                        <h4 className="text-xs font-semibold text-gray-600 uppercase mb-2">Address</h4>
+                        <h4 className="text-xs font-semibold text-gray-600 uppercase mb-2">Dirección</h4>
                         <p className="text-sm text-gray-900">
                             {addresses.find(a => a.id === selectedAddress)?.address}
                         </p>
@@ -67,9 +67,9 @@ export default function CartSummary({
                 {/* Shipping Info */}
                 {currentStep >= 2 && selectedShipping && (
                     <div className="mb-4">
-                        <h4 className="text-xs font-semibold text-gray-600 uppercase mb-2">Shipment method</h4>
+                        <h4 className="text-xs font-semibold text-gray-600 uppercase mb-2">Método de envío</h4>
                         <p className="text-sm text-gray-900">
-                            {selectedShipping === 'free' ? 'Free' : 'Express'}
+                            {selectedShipping === 'free' ? 'Gratis' : 'Exprés'}
                         </p>
                     </div>
                 )}
@@ -82,11 +82,11 @@ export default function CartSummary({
                     <span className="font-semibold">${subtotal}</span>
                 </div>
                 <div className="flex justify-between text-sm text-gray-700">
-                    <span>Estimated Tax</span>
+                    <span>Impuestos estimados</span>
                     <span className="font-semibold">${tax}</span>
                 </div>
                 <div className="flex justify-between text-sm text-gray-700">
-                    <span>Estimated shipping & Handling</span>
+                    <span>Envío y gestión estimados</span>
                     <span className="font-semibold">${shipping}</span>
                 </div>
             </div>
@@ -105,14 +105,14 @@ export default function CartSummary({
                     disabled={currentStep === 1}
                     className="flex-1 py-3 border-2 border-gray-300 rounded-lg font-semibold text-gray-900 hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                    Back
+                    Atrás
                 </button>
                 <button
                     onClick={onNextStep}
                     disabled={currentStep === 3}
                     className="flex-1 py-3 bg-black text-white rounded-lg font-semibold hover:bg-gray-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                    {currentStep === 3 ? 'Pay' : 'Next'}
+                    {currentStep === 3 ? 'Pagar' : 'Siguiente'}
                 </button>
             </div>
         </div>

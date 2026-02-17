@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { Check, Heart, Lock, Truck, Zap } from 'lucide-react';
+import { Check, Lock, Truck, Zap } from 'lucide-react';
 import ProductSpecs from './ProductSpecs';
 import type { CartSelection, ProductOptionGroup } from '@/types/commerce';
 import { cn } from '@/lib/utils';
@@ -180,14 +180,11 @@ export default function ProductInfo({
       <ProductSpecs specs={specs} />
       <p className="text-sm leading-relaxed text-gray-700">{description}</p>
 
-      <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
-        <button className="flex-1 rounded-lg border-2 border-black py-3.5 font-semibold text-black">
-          <Heart className="mr-1 inline h-5 w-5" /> Wishlist
-        </button>
+      <div>
         <button
           onClick={onAddToCart}
           disabled={!inStock}
-          className="flex-1 rounded-lg bg-gradient-to-r from-[#062a4a] via-[#0b4f7d] to-[#0ea5e9] py-3.5 font-semibold text-white shadow-[0_10px_24px_rgba(2,132,199,0.3)] transition-transform duration-200 hover:-translate-y-0.5 disabled:opacity-40"
+          className="w-full rounded-lg bg-gradient-to-r from-[#062a4a] via-[#0b4f7d] to-[#0ea5e9] py-3.5 font-semibold text-white shadow-[0_10px_24px_rgba(2,132,199,0.3)] transition-transform duration-200 hover:-translate-y-0.5 disabled:opacity-40"
         >
           Agregar al carrito
         </button>
@@ -196,7 +193,7 @@ export default function ProductInfo({
       <div className="grid grid-cols-3 gap-2 sm:gap-4">
         <div className="rounded-lg bg-gray-50 p-4 text-center">
           <Truck className="mx-auto mb-2 h-6 w-6 text-gray-700" />
-          <p className="text-xs">Envio</p>
+          <p className="text-xs">Envío</p>
         </div>
         <div className="rounded-lg bg-gray-50 p-4 text-center">
           <Lock className="mx-auto mb-2 h-6 w-6 text-gray-700" />
@@ -204,7 +201,7 @@ export default function ProductInfo({
         </div>
         <div className="rounded-lg bg-gray-50 p-4 text-center">
           <Zap className="mx-auto mb-2 h-6 w-6 text-gray-700" />
-          <p className="text-xs">Garantia</p>
+          <p className="text-xs">Garantía</p>
         </div>
       </div>
     </div>

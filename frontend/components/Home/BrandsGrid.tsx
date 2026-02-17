@@ -7,7 +7,7 @@ interface BrandsGridProps {
   cols?: number;
 }
 
-export default function BrandsGrid({ title = "Explora las marcas Oficiales que trabajan con Nosotros", brands, cols = 6 }: BrandsGridProps) {
+export default function BrandsGrid({ title = "Explora las marcas oficiales que trabajan con nosotros", brands, cols = 6 }: BrandsGridProps) {
   const lgColsClass =
     cols === 3
       ? "lg:grid-cols-3"

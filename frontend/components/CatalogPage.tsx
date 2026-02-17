@@ -95,7 +95,7 @@ export default function Catalog() {
           setLoadError(
             error instanceof Error
               ? error.message
-              : 'No pudimos cargar el catalogo. Intenta nuevamente mas tarde.',
+              : 'No pudimos cargar el catálogo. Intenta nuevamente más tarde.',
           );
         }
       } finally {
@@ -233,14 +233,14 @@ export default function Catalog() {
 
   const categoryLabel = useMemo(() => {
     if (selectedCategories.length === 1) {
-      return categoryNameBySlug.get(selectedCategories[0]) ?? 'Catalogo';
+      return categoryNameBySlug.get(selectedCategories[0]) ?? 'Catálogo';
     }
 
     if (selectedCategories.length > 1) {
       return 'Resultados';
     }
 
-    return products[0]?.category?.name?.trim() || products[0]?.category?.slug?.trim() || 'Catalogo';
+    return products[0]?.category?.name?.trim() || products[0]?.category?.slug?.trim() || 'Catálogo';
   }, [products, selectedCategories]);
 
   const toggleSelection = (
@@ -275,7 +275,7 @@ export default function Catalog() {
 
       <section className="border-b border-slate-200 pb-5">
         <div className="flex items-center justify-between">
-          <h3 className="text-base font-semibold text-slate-900">Categorias</h3>
+          <h3 className="text-base font-semibold text-slate-900">Categorías</h3>
           <ChevronUp className="h-4 w-4 text-slate-500" />
         </div>
 
@@ -301,7 +301,7 @@ export default function Catalog() {
 
       <section className="py-4">
         <div className="flex items-center justify-between">
-          <h3 className="text-base font-semibold text-slate-900">Brand</h3>
+          <h3 className="text-base font-semibold text-slate-900">Marca</h3>
           <ChevronUp className="h-4 w-4 text-slate-500" />
         </div>
 
@@ -309,7 +309,7 @@ export default function Catalog() {
           <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
           <input
             type="text"
-            placeholder="Search"
+            placeholder="Buscar marca"
             value={brandQuery}
             onChange={(event) => setBrandQuery(event.target.value)}
             className="h-10 w-full rounded-md border border-slate-200 bg-slate-50 pl-9 pr-3 text-sm text-slate-700 outline-none transition focus:border-slate-300 focus:ring-2 focus:ring-slate-200"
@@ -335,7 +335,7 @@ export default function Catalog() {
               ))}
             </ul>
           ) : (
-            <p className="text-sm text-slate-500">No hay marcas para ese termino.</p>
+            <p className="text-sm text-slate-500">No hay marcas para ese término.</p>
           )}
         </div>
       </section>
@@ -348,7 +348,7 @@ export default function Catalog() {
     return (
       <ApiUnavailableState
         className="max-w-7xl py-10"
-        title="No pudimos cargar el catalogo"
+        title="No pudimos cargar el catálogo"
         message={loadError}
         onRetry={() => {
           setLoading(true);
@@ -360,11 +360,11 @@ export default function Catalog() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 animate-fade-in sm:px-6">
-      <nav aria-label="Breadcrumb" className="mb-8 text-sm text-slate-500 animate-fade-up">
+      <nav aria-label="Ruta de navegación" className="mb-8 text-sm text-slate-500 animate-fade-up">
         <ol className="flex flex-wrap items-center gap-2">
           <li>
             <Link href="/" className="transition-colors hover:text-slate-900">
-              Home
+              Inicio
             </Link>
           </li>
           <li aria-hidden="true">
@@ -372,7 +372,7 @@ export default function Catalog() {
           </li>
           <li>
             <Link href="/catalog" className="transition-colors hover:text-slate-900">
-              Catalog
+              Catálogo
             </Link>
           </li>
           <li aria-hidden="true">
@@ -406,7 +406,7 @@ export default function Catalog() {
             </SheetTrigger>
             <SheetContent side="left" className="w-[88vw] max-w-sm overflow-y-auto px-4 pb-5 pt-3">
               <SheetHeader className="px-0">
-                <SheetTitle>Filtrar catalogo</SheetTitle>
+                <SheetTitle>Filtrar catálogo</SheetTitle>
               </SheetHeader>
               <div className="pt-2">{renderFiltersPanel()}</div>
               <div className="mt-4">
@@ -432,7 +432,7 @@ export default function Catalog() {
         <div className="animate-fade-up [animation-delay:100ms]">
           <div className="mb-6">
             <p className="text-lg text-slate-700">
-              Selected Products: <span className="font-semibold text-slate-900">{filteredProducts.length}</span>
+              Productos seleccionados: <span className="font-semibold text-slate-900">{filteredProducts.length}</span>
             </p>
           </div>
 
@@ -441,7 +441,7 @@ export default function Catalog() {
               const imageUrl =
                 product.images?.find((img) => img.isFeatured)?.imageUrl ??
                 product.images?.[0]?.imageUrl ??
-                'https://placehold.co/600x400?text=No+Image';
+                'https://placehold.co/600x400?text=Sin+imagen';
 
               return (
                 <article
@@ -484,10 +484,10 @@ export default function Catalog() {
             showingUnavailableCategoriesOnly ? (
               <div className="mt-6 rounded-xl border border-sky-200 bg-sky-50 p-5 text-sm text-sky-900">
                 <p className="font-semibold">
-                  Aun no tenemos productos en {unavailableSelectedCategoryNames.join(', ')}.
+                  Aún no tenemos productos en {unavailableSelectedCategoryNames.join(', ')}.
                 </p>
                 <p className="mt-2 text-sky-800">
-                  Estamos ampliando el catalogo. Por ahora solo tenemos telefonos disponibles.
+                  Estamos ampliando el catálogo. Por ahora solo tenemos teléfonos disponibles.
                 </p>
                 {preferredPhoneCategory ? (
                   <button
@@ -504,8 +504,8 @@ export default function Catalog() {
               </div>
             ) : (
               <p className="mt-6 text-sm text-slate-500">
-                No encontramos productos con esos filtros. Prueba limpiando alguno para ver mas resultados.
-              </p>
+                 No encontramos productos con esos filtros. Prueba limpiando alguno para ver más resultados.
+               </p>
             )
           ) : null}
         </div>

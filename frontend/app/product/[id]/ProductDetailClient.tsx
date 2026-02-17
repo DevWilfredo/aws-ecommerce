@@ -6,6 +6,7 @@ import ProductGallery from '@/components/ProductDetail/ProductGallery';
 import ProductInfo from '@/components/ProductDetail/ProductInfo';
 import Reviews from '@/components/ProductDetail/Reviews';
 import { useCart } from '@/context/CartContext';
+import { getMockReviewsForProduct } from '@/mocks/reviews';
 import type { CartSelection, Product, ProductOptionGroup } from '@/types/commerce';
 
 type ApiProduct = {
@@ -35,8 +36,8 @@ const placeholderImage = 'https://placehold.co/600x600?text=Producto';
 const formatAttributeValue = (value: ApiProduct['attributeValues'][number]) => {
   if (value.valueText) return value.valueText;
   if (value.valueNumber) return value.attribute.unit ? `${value.valueNumber} ${value.attribute.unit}` : value.valueNumber;
-  if (value.valueBoolean !== null) return value.valueBoolean ? 'Si' : 'No';
-  return 'N/A';
+  if (value.valueBoolean !== null) return value.valueBoolean ? 'Sí' : 'No';
+  return 'No aplica';
 };
 
 export default function ProductDetailClient({ product }: { product: ApiProduct }) {
@@ -110,6 +111,16 @@ export default function ProductDetailClient({ product }: { product: ApiProduct }
 
   const mainImage = selectedImage && images.includes(selectedImage) ? selectedImage : images[0];
   const price = Number(product.price);
+  const reviewMock = useMemo(
+    () =>
+      getMockReviewsForProduct({
+        id: product.id,
+        name: product.name,
+        brandName: product.brand?.name,
+        categoryName: product.category?.name,
+      }),
+    [product.brand?.name, product.category?.name, product.id, product.name],
+  );
   const cartProduct: Product = {
     id: product.id,
     name: product.name,
@@ -128,7 +139,7 @@ export default function ProductDetailClient({ product }: { product: ApiProduct }
         <div className="flex flex-wrap items-center gap-2 text-sm text-gray-600">
           <Link href="/" className="transition hover:text-gray-900">Inicio</Link>
           <span>/</span>
-          <Link href="/catalog" className="transition hover:text-gray-900">Catalogo</Link>
+          <Link href="/catalog" className="transition hover:text-gray-900">Catálogo</Link>
           <span>/</span>
           <span className="font-medium text-gray-900">{product.name}</span>
         </div>
@@ -151,7 +162,7 @@ export default function ProductDetailClient({ product }: { product: ApiProduct }
           />
         </div>
       </div>
-      <Reviews reviews={[]} rating={4.8} total={125} />
+      <Reviews reviews={reviewMock.reviews} rating={reviewMock.rating} total={reviewMock.total} />
     </div>
   );
 }

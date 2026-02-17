@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -134,7 +134,7 @@ export function SearchBar({ className, onResultSelect }: SearchBarProps) {
       setIndexError(
         error instanceof Error
           ? error.message
-          : 'No pudimos cargar los resultados de busqueda. Intenta nuevamente mas tarde.',
+          : 'No pudimos cargar los resultados de búsqueda. Intenta nuevamente más tarde.',
       );
     } finally {
       setIsLoadingIndex(false);
@@ -282,3 +282,4 @@ export function SearchBar({ className, onResultSelect }: SearchBarProps) {
     </div>
   );
 }
+

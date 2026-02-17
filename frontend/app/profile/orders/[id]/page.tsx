@@ -152,12 +152,12 @@ export default function OrderDetailPage() {
 
   if (authError) {
     return (
-      <ApiUnavailableState
-        className="max-w-4xl py-10"
-        title="No pudimos validar tu sesion"
-        message={authError}
-        onRetry={retryAuthCheck}
-      />
+        <ApiUnavailableState
+          className="max-w-4xl py-10"
+          title="No pudimos validar tu sesión"
+          message={authError}
+          onRetry={retryAuthCheck}
+        />
     );
   }
 
@@ -174,7 +174,7 @@ export default function OrderDetailPage() {
           className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-sky-700 hover:text-sky-800"
         >
           <ArrowLeft className="h-4 w-4" />
-          Volver a mis ordenes
+          Volver a mis órdenes
         </Link>
       </div>
     );
@@ -205,14 +205,14 @@ export default function OrderDetailPage() {
           className="mb-4 inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-slate-900"
         >
           <ArrowLeft className="h-4 w-4" />
-          Volver a mis ordenes
+          Volver a mis órdenes
         </Link>
 
         <header className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm animate-fade-up">
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-                Detalle de orden
+                  Detalle del pedido
               </p>
               <h1 className="mt-2 text-2xl font-bold text-slate-900 sm:text-3xl">
                 Orden #{order.id.slice(0, 8)}
@@ -224,7 +224,7 @@ export default function OrderDetailPage() {
                 </span>
                 <span className="inline-flex items-center gap-1.5">
                   <PackageSearch className="h-4 w-4 text-sky-700" />
-                  {totalItems} item{totalItems === 1 ? '' : 's'}
+                  {totalItems} artículo{totalItems === 1 ? '' : 's'}
                 </span>
               </div>
             </div>
@@ -301,7 +301,7 @@ export default function OrderDetailPage() {
           <aside className="space-y-4 animate-fade-up lg:sticky lg:top-24 lg:h-fit" style={{ animationDelay: '140ms' }}>
             <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
               <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-slate-500">
-                Envio
+                Envío
               </h3>
               <div className="mt-3 flex items-start gap-2 text-sm text-slate-700">
                 <MapPin className="mt-0.5 h-4 w-4 text-sky-700" />
@@ -328,7 +328,7 @@ export default function OrderDetailPage() {
                   <span>{moneyFormatter.format(Number(order.subtotal || 0))}</span>
                 </div>
                 <div className="flex items-center justify-between text-slate-600">
-                  <span>Envio</span>
+                  <span>Envío</span>
                   <span>
                     {shippingCost > 0 ? moneyFormatter.format(shippingCost) : 'Gratis'}
                   </span>

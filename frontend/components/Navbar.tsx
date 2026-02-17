@@ -136,7 +136,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center">
             <Image
               src={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/primestore-logo.png`}
-              alt="PrimeStore Logo"
+              alt="Logotipo de PrimeStore"
               width={150}
               height={150}
               className="h-auto w-[126px] sm:w-[146px]"
@@ -156,7 +156,7 @@ export default function Navbar() {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger>Catalogo</NavigationMenuTrigger>
+                  <NavigationMenuTrigger>Catálogo</NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <div className="w-[620px] p-4">
                       <div className="grid grid-cols-[220px_1fr] gap-3">
@@ -166,13 +166,13 @@ export default function Navbar() {
                         >
                           <div>
                             <p className="text-xs uppercase tracking-[0.22em] text-slate-300">PrimeStore</p>
-                            <h3 className="mt-3 text-xl font-semibold leading-tight text-white">Ver todo el catalogo</h3>
+                            <h3 className="mt-3 text-xl font-semibold leading-tight text-white">Ver todo el catálogo</h3>
                             <p className="mt-2 text-sm text-slate-200">
-                              Explora todas las categorias y descubre lo mas nuevo en tecnologia.
+                              Explora todas las categorías y descubre lo más nuevo en tecnología.
                             </p>
                           </div>
                           <span className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-white">
-                            Ir a catalogo
+                            Ir al catálogo
                             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                           </span>
                         </Link>
@@ -211,7 +211,7 @@ export default function Navbar() {
             {!checking && me ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="h-10 w-10 rounded-full p-0" title={me.email ?? "Mi cuenta"}>
+                    <Button variant="ghost" className="h-10 w-10 rounded-full p-0" title={me.email ?? "Mi cuenta"}>
                     <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 text-sm font-semibold text-gray-800">
                       {avatarText}
                     </span>
@@ -227,7 +227,7 @@ export default function Navbar() {
 
                   <DropdownMenuItem asChild>
                     <a href={logoutHref} className="flex items-center gap-2">
-                      <LogOut className="h-4 w-4" /> Cerrar sesion
+                      <LogOut className="h-4 w-4" /> Cerrar sesión
                     </a>
                   </DropdownMenuItem>
                 </DropdownMenuContent>

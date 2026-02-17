@@ -18,14 +18,14 @@ export default function CheckoutCancelPage() {
         <section className="rounded-2xl border border-slate-200 bg-white px-6 py-10 text-center shadow-sm">
           <h1 className="text-2xl font-bold text-slate-900 sm:text-3xl">Pago cancelado</h1>
           <p className="mt-3 text-sm text-slate-600">
-            No se proceso ningun cargo. Puedes volver al checkout cuando quieras.
+            No se procesó ningún cargo. Puedes volver al pago cuando quieras.
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
             <Link
               href="/checkout"
               className="inline-flex h-11 items-center justify-center rounded-xl bg-gradient-to-r from-[#062a4a] via-[#0b4f7d] to-[#0ea5e9] px-5 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(2,132,199,0.3)] transition-transform duration-200 hover:-translate-y-0.5"
             >
-              Volver a checkout
+              Volver al pago
             </Link>
             <Link
               href="/cart"

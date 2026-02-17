@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 
 export type LogoType = string | React.ComponentType<React.SVGProps<SVGSVGElement>>;
@@ -21,36 +20,41 @@ export default function BrandCard({ brand, delayMs = 0 }: BrandCardProps) {
   const Logo = typeof brand.logo === "function" ? brand.logo : null;
 
   return (
-    <Link
-      href={brand.href ?? "#"}
-      className="block"
-      aria-label={`Open ${brand.name} store`}
+    <article
+      className="group hover-lift relative block overflow-hidden rounded-xl border border-slate-200 bg-gradient-to-br from-white via-slate-50 to-sky-50/40 p-4 shadow-sm transition-all hover:border-sky-200 hover:shadow-[0_16px_32px_rgba(2,132,199,0.14)]"
+      aria-label={`Marca ${brand.name}`}
     >
       <div
-        className="hover-lift bg-gray-50 rounded-xl p-4 flex items-center gap-4 shadow-sm hover:shadow-md transition-shadow animate-fade-up"
+        className="relative flex items-center gap-4 animate-fade-up"
         style={{ animationDelay: `${Math.min(delayMs, 360)}ms` }}
       >
-        <div className="w-12 h-12 rounded-lg flex items-center justify-center overflow-hidden shrink-0">
+        <span className="pointer-events-none absolute -right-10 -top-10 h-20 w-20 rounded-full bg-sky-200/50 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100" />
+
+        <div className="h-12 w-12 shrink-0 overflow-hidden rounded-lg flex items-center justify-center">
           {typeof brand.logo === "string" ? (
             <Image
               src={brand.logo}
               alt={brand.name}
               width={44}
               height={44}
-              className="object-contain"
+              className="object-contain transition-transform duration-300 group-hover:scale-105"
             />
           ) : Logo ? (
-            <Logo className="w-10 h-10 text-gray-900" />
+            <Logo className="h-10 w-10 text-gray-900 transition-transform duration-300 group-hover:scale-105" />
           ) : (
-            <div className="w-10 h-10 bg-gray-200 rounded" />
+            <div className="h-10 w-10 rounded bg-gray-200" />
           )}
         </div>
 
-        <div className="flex-1 min-w-0">
-          <div className="text-sm font-medium text-gray-900 truncate">{brand.name}</div>
-          <div className="text-xs text-gray-500 truncate">{brand.subtitle ?? "Delivery entre 24/48 hrs"}</div>
+        <div className="min-w-0 flex-1">
+          <div className="truncate text-sm font-medium text-gray-900 transition-colors duration-300 group-hover:text-sky-900">
+            {brand.name}
+          </div>
+          <div className="truncate text-xs text-gray-500 transition-colors duration-300 group-hover:text-sky-700/80">
+            {brand.subtitle ?? "Entrega entre 24/48 h"}
+          </div>
         </div>
       </div>
-    </Link>
+    </article>
   );
 }

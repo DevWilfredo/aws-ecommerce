@@ -45,13 +45,14 @@ export default function CreditCardForm({
 
                         <div className="credentials flex gap-8">
                             <div className="owner flex flex-col w-max">
-                                <span className="text-xs uppercase">Card holder</span>
+                                <span className="text-xs uppercase">Titular</span>
+
                                 <span className="whitespace-nowrap text-lg">
-                                    {cardData.name || 'John DOE'}
+                                    {cardData.name || 'Juan Pérez'}
                                 </span>
                             </div>
                             <div className="expires flex flex-col w-max">
-                                <span className="text-xs uppercase">Expires</span>
+                                <span className="text-xs uppercase">Vence</span>
                                 <span className="whitespace-nowrap text-lg">
                                     {cardData.expiry || '09/21'}
                                 </span>
@@ -70,23 +71,23 @@ export default function CreditCardForm({
             {/* Card Form */}
             <div className="space-y-4">
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Cardholder Name
-                    </label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Nombre del titular
+                        </label>
                     <input
                         type="text"
                         name="name"
                         value={cardData.name}
                         onChange={onCardInputChange}
-                        placeholder="Cardholder Name"
+                        placeholder="Nombre del titular"
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                     />
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Card Number
-                    </label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Número de tarjeta
+                        </label>
                     <input
                         type="text"
                         name="number"
@@ -94,7 +95,7 @@ export default function CreditCardForm({
                         onChange={(e) => {
                             onFormatCardNumber(e.target.value);
                         }}
-                        placeholder="Card Number"
+                        placeholder="Número de tarjeta"
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                         maxLength={19}
                     />
@@ -103,14 +104,14 @@ export default function CreditCardForm({
                 <div className="grid grid-cols-2 gap-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Exp. Date
+                            Fecha de vencimiento
                         </label>
                         <input
                             type="text"
                             name="expiry"
                             value={cardData.expiry}
                             onChange={onCardInputChange}
-                            placeholder="MM/YY"
+                        placeholder="MM/AA"
                             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                         />
                     </div>
@@ -138,7 +139,7 @@ export default function CreditCardForm({
                         className="w-4 h-4 rounded border-gray-300"
                     />
                     <label htmlFor="same-address" className="text-sm text-gray-700">
-                        Same as billing address
+                        Igual que la dirección de facturación
                     </label>
                 </div>
             </div>

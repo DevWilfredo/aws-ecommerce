@@ -23,7 +23,7 @@ export default function CartPage() {
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Mi carrito</p>
           <h1 className="mt-2 text-2xl font-bold text-slate-900 sm:text-3xl">Revisa tus productos</h1>
           <p className="mt-2 text-sm text-slate-600">
-            Ajusta cantidades, verifica configuraciones y continua al checkout cuando estes listo.
+            Ajusta cantidades, verifica configuraciones y continúa al pago cuando estés listo.
           </p>
         </header>
 
@@ -32,15 +32,15 @@ export default function CartPage() {
             <div className="mx-auto inline-flex h-14 w-14 items-center justify-center rounded-full bg-slate-100">
               <ShoppingBag className="h-6 w-6 text-slate-600" />
             </div>
-            <h2 className="mt-4 text-xl font-semibold text-slate-900">Tu carrito esta vacio</h2>
+            <h2 className="mt-4 text-xl font-semibold text-slate-900">Tu carrito está vacío</h2>
             <p className="mt-2 text-sm text-slate-600">
-              Explora el catalogo y agrega productos para iniciar tu compra.
+              Explora el catálogo y agrega productos para iniciar tu compra.
             </p>
             <Link
               className="mt-5 inline-flex h-11 items-center justify-center rounded-xl bg-gradient-to-r from-[#062a4a] via-[#0b4f7d] to-[#0ea5e9] px-5 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(2,132,199,0.3)] transition-transform duration-200 hover:-translate-y-0.5"
               href="/catalog"
             >
-              Ir al catalogo
+              Ir al catálogo
             </Link>
           </section>
         ) : (
@@ -99,7 +99,7 @@ export default function CartPage() {
                             ))}
                           </ul>
                         ) : (
-                          <p className="text-xs text-slate-500">Configuracion por defecto</p>
+                           <p className="text-xs text-slate-500">Configuración por defecto</p>
                         )}
 
                         <div className="flex flex-wrap items-center gap-3 pt-1">
@@ -149,7 +149,7 @@ export default function CartPage() {
                   <span>{moneyFormatter.format(subtotal)}</span>
                 </div>
                 <div className="flex items-center justify-between text-slate-600">
-                  <span>Envio</span>
+                  <span>Envío</span>
                   <span className="font-medium text-emerald-600">Gratis</span>
                 </div>
                 <div className="flex items-center justify-between border-t border-slate-200 pt-3 text-base font-semibold text-slate-900">
@@ -163,7 +163,7 @@ export default function CartPage() {
                   href="/checkout"
                   className="inline-flex h-11 w-full items-center justify-center rounded-xl bg-gradient-to-r from-[#062a4a] via-[#0b4f7d] to-[#0ea5e9] px-4 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(2,132,199,0.3)] transition-transform duration-200 hover:-translate-y-0.5"
                 >
-                  Ir a checkout
+                  Ir al pago
                 </Link>
                 <Link
                   href="/catalog"

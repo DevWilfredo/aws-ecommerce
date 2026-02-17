@@ -81,12 +81,12 @@ function CheckoutSuccessPageContent() {
 
   if (authError) {
     return (
-      <ApiUnavailableState
-        className="max-w-5xl"
-        title="No pudimos validar tu sesion"
-        message={authError}
-        onRetry={retryAuthCheck}
-      />
+        <ApiUnavailableState
+          className="max-w-5xl"
+          title="No pudimos validar tu sesión"
+          message={authError}
+          onRetry={retryAuthCheck}
+        />
     );
   }
 
@@ -122,9 +122,9 @@ function CheckoutSuccessPageContent() {
             <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm text-emerald-800">
               <p className="inline-flex items-center gap-2 font-semibold">
                 <CheckCircle2 className="h-4 w-4" />
-                Transaccion exitosa
+                Transacción exitosa
               </p>
-              <p className="mt-1 text-xs">Stripe confirmo el pago sin incidencias.</p>
+              <p className="mt-1 text-xs">Stripe confirmó el pago sin incidencias.</p>
             </div>
             <div className="rounded-xl border border-sky-200 bg-sky-50 px-3 py-2 text-sm text-sky-800">
               <p className="inline-flex items-center gap-2 font-semibold">
@@ -163,7 +163,7 @@ function CheckoutSuccessPageContent() {
                   <span className="text-slate-700">{dateFormatter.format(new Date(order.createdAt))}</span>
                 </div>
                 <div className="mt-1 flex items-center justify-between gap-2">
-                  <span className="text-slate-500">Items</span>
+                  <span className="text-slate-500">Artículos</span>
                   <span className="text-slate-700">{totalItems}</span>
                 </div>
                 <div className="mt-1 flex items-center justify-between gap-2 border-t border-slate-200 pt-2">

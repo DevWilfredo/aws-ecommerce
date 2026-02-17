@@ -7,7 +7,7 @@ import { ClientApiError, clientApiFetch } from '@/services/client-api';
 type AuthStatus = 'checking' | 'authorized' | 'unauthorized' | 'service_error';
 
 const DEFAULT_AUTH_ERROR =
-  'No pudimos verificar tu sesion en este momento. Intenta nuevamente mas tarde.';
+  'No pudimos verificar tu sesión en este momento. Intenta nuevamente más tarde.';
 
 export function useAuthGuard() {
   const router = useRouter();

@@ -21,7 +21,7 @@ export default function AddressStep({
 }: AddressStepProps) {
     return (
         <div>
-            <h2 className="text-2xl font-bold mb-8">Select Address</h2>
+            <h2 className="text-2xl font-bold mb-8">Selecciona una dirección</h2>
             <div className="space-y-4 mb-8">
                 {addresses.map((address) => (
                     <div
@@ -74,7 +74,7 @@ export default function AddressStep({
 
             <button className="flex items-center justify-center gap-2 w-full py-3 border-2 border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors mb-8">
                 <Plus className="w-5 h-5" />
-                Add New Address
+                Agregar nueva dirección
             </button>
         </div>
     );

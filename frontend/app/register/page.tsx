@@ -35,7 +35,7 @@ function RegisterPageContent() {
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Crear cuenta</p>
           <h1 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">Empieza en PrimeStore</h1>
           <p className="mt-4 text-sm leading-relaxed text-slate-600">
-            Registra tu cuenta para pagar mas rapido, gestionar ordenes y guardar tu historial.
+            Registra tu cuenta para pagar más rápido, gestionar órdenes y guardar tu historial.
           </p>
 
           <div className="mt-7 space-y-3">
@@ -50,17 +50,17 @@ function RegisterPageContent() {
               <ShieldCheck className="mt-0.5 h-4 w-4 text-sky-700" />
               <div>
                 <p className="text-sm font-semibold text-slate-900">Datos protegidos</p>
-                <p className="text-xs text-slate-600">Tu informacion se mantiene cifrada y controlada.</p>
+                <p className="text-xs text-slate-600">Tu información se mantiene cifrada y controlada.</p>
               </div>
             </div>
           </div>
         </section>
 
         <section className="flex flex-col rounded-3xl border border-slate-200 bg-white p-7 shadow-sm sm:p-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Accion</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Acción</p>
           <h2 className="mt-2 text-2xl font-bold text-slate-900">Crear cuenta ahora</h2>
           <p className="mt-2 text-sm text-slate-600">
-            Te redirigiremos al proveedor de autenticacion para completar el registro.
+            Te redirigiremos al proveedor de autenticación para completar el registro.
           </p>
 
           <a
@@ -80,7 +80,7 @@ function RegisterPageContent() {
           </Link>
 
           <p className="mt-auto pt-8 text-xs text-slate-500">
-            Al continuar aceptas terminos de uso y politicas de privacidad.
+            Al continuar aceptas términos de uso y políticas de privacidad.
           </p>
         </section>
       </div>

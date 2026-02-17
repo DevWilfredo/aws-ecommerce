@@ -5,7 +5,7 @@ import { mockBrands } from '@/mocks/brands';
 import { apiFetch } from '@/services/api';
 import type { HomeProductsResponse, Product as CatalogProduct } from '@/types/commerce';
 
-const HOME_TABS = ['New Arrival', 'Bestseller', 'Featured Products'] as const;
+const HOME_TABS = ['Novedades', 'Más vendidos', 'Productos destacados'] as const;
 
 function toProductCard(product: CatalogProduct): ProductCard {
   const featuredImage = product.images?.find((image) => image.isFeatured)?.imageUrl;
@@ -15,7 +15,7 @@ function toProductCard(product: CatalogProduct): ProductCard {
     id: product.id,
     title: product.name,
     price: Number(product.price).toFixed(2),
-    image: featuredImage || fallbackImage || 'https://placehold.co/600x400?text=No+Image',
+    image: featuredImage || fallbackImage || 'https://placehold.co/600x400?text=Sin+imagen',
     href: `/product/${product.id}`,
   };
 }
@@ -28,15 +28,15 @@ async function getHomeProducts() {
     });
 
     return {
-      'New Arrival': response.tabs.newArrival.map(toProductCard),
-      Bestseller: response.tabs.bestseller.map(toProductCard),
-      'Featured Products': response.tabs.featured.map(toProductCard),
+      Novedades: response.tabs.newArrival.map(toProductCard),
+      'Más vendidos': response.tabs.bestseller.map(toProductCard),
+      'Productos destacados': response.tabs.featured.map(toProductCard),
     };
   } catch {
     return {
-      'New Arrival': [] as ProductCard[],
-      Bestseller: [] as ProductCard[],
-      'Featured Products': [] as ProductCard[],
+      Novedades: [] as ProductCard[],
+      'Más vendidos': [] as ProductCard[],
+      'Productos destacados': [] as ProductCard[],
     };
   }
 }
@@ -56,7 +56,7 @@ const Home = async () => {
         <ProductGrid
           productsByTab={homeProductsByTab}
           tabs={[...HOME_TABS]}
-          defaultTab="New Arrival"
+          defaultTab="Novedades"
         />
       </Reveal>
       <Reveal delay={0.12}>

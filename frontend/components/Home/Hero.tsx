@@ -25,7 +25,7 @@ export default function Hero() {
           </div>
 
           <div className="relative col-span-1 flex h-52 items-center justify-center md:col-span-5 md:h-96">
-            <Image src={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/Iphone.webp`} alt="iPhone placeholder" fill className="object-contain" priority />
+              <Image src={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/Iphone.webp`} alt="iPhone" fill className="object-contain" priority />
           </div>
         </div>
       </div>
@@ -35,13 +35,13 @@ export default function Hero() {
           <Link href="/catalog" className="hover-lift relative h-56 overflow-hidden rounded-2xl bg-white animate-fade-up md:h-80" style={{ animationDelay: '80ms' }}>
             <div className="absolute inset-0 grid grid-cols-1 md:grid-cols-2">
               <div className="relative hidden md:block">
-                <Image src={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/PlayStation.webp`} alt="Playstation 5" fill className="object-cover" />
+                 <Image src={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/PlayStation.webp`} alt="PlayStation 5" fill className="object-cover" />
               </div>
               <div className="flex flex-col justify-center p-6 md:p-10">
-                <h2 className="text-3xl font-semibold md:text-4xl">Playstation 5</h2>
-                <p className="mt-4 text-base leading-relaxed text-gray-600">
-                  CPUs y GPUs increiblemente potentes, y un SSD con I/O integrado redefiniran tu experiencia PlayStation.
-                </p>
+                 <h2 className="text-3xl font-semibold md:text-4xl">PlayStation 5</h2>
+                 <p className="mt-4 text-base leading-relaxed text-gray-600">
+                   CPUs y GPUs increíblemente potentes, y un SSD con I/O integrado redefinirán tu experiencia PlayStation.
+                 </p>
               </div>
             </div>
           </Link>
@@ -52,10 +52,10 @@ export default function Hero() {
                 <Image src={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/airpodsmax.webp`} alt="AirPods Max" fill className="object-contain" />
               </div>
               <div>
-                <h4 className="text-xl font-semibold">Apple AirPods Max</h4>
-                <p className="leading-relaxed text-gray-600">Audio computacional. Pruebalos, son muy potentes.</p>
-              </div>
-            </Link>
+                 <h4 className="text-xl font-semibold">Apple AirPods Max</h4>
+                 <p className="leading-relaxed text-gray-600">Audio computacional. Pruébalos, son muy potentes.</p>
+               </div>
+             </Link>
 
             <Link href="/catalog" className="hover-lift flex items-center gap-6 rounded-2xl bg-black p-6 text-white animate-fade-up md:p-8" style={{ animationDelay: '170ms' }}>
               <div className="relative h-20 w-20">
@@ -76,16 +76,16 @@ export default function Hero() {
         >
           <div className="w-full md:w-1/2">
             <h3 className="text-3xl font-light md:text-5xl">
-              Macbook <span className="font-semibold">Air</span>
-            </h3>
-            <p className="mt-4 max-w-full leading-relaxed text-gray-600 md:max-w-sm">
-              El nuevo MacBook Air de 15 pulgadas ofrece mas espacio para lo que amas con una amplia pantalla Liquid Retina.
-            </p>
+               MacBook <span className="font-semibold">Air</span>
+             </h3>
+             <p className="mt-4 max-w-full leading-relaxed text-gray-600 md:max-w-sm">
+               El nuevo MacBook Air de 15 pulgadas ofrece más espacio para lo que amas con una amplia pantalla Liquid Retina.
+             </p>
             <Button className="mt-6 border border-gray-300">Comprar ahora</Button>
           </div>
 
           <div className="relative mt-6 h-40 w-full md:mt-0 md:h-72 md:w-72">
-            <Image src={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/MacBook.webp`} alt="Macbook Air" fill className="object-contain" />
+             <Image src={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/MacBook.webp`} alt="MacBook Air" fill className="object-contain" />
           </div>
         </Link>
       </div>

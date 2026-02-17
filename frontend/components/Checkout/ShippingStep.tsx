@@ -10,21 +10,21 @@ export default function ShippingStep({
     const shippingMethods = [
         {
             id: 'free',
-            name: 'Free',
-            description: 'Delivery in 5-7 business days',
+            name: 'Gratis',
+            description: 'Entrega en 5-7 días hábiles',
             price: 29
         },
         {
             id: 'express',
-            name: 'Express',
-            description: 'Delivery in 2-3 business days',
+            name: 'Exprés',
+            description: 'Entrega en 2-3 días hábiles',
             price: 50
         }
     ];
 
     return (
         <div>
-            <h2 className="text-2xl font-bold mb-8">Select Shipping Method</h2>
+            <h2 className="text-2xl font-bold mb-8">Selecciona el método de envío</h2>
             <div className="space-y-4 mb-8">
                 {shippingMethods.map((method) => (
                     <div

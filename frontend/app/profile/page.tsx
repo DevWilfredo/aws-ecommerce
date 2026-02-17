@@ -124,12 +124,12 @@ export default function ProfilePage() {
 
   if (authError) {
     return (
-      <ApiUnavailableState
-        className="max-w-6xl py-10"
-        title="No pudimos validar tu sesion"
-        message={authError}
-        onRetry={retryAuthCheck}
-      />
+        <ApiUnavailableState
+          className="max-w-6xl py-10"
+          title="No pudimos validar tu sesión"
+          message={authError}
+          onRetry={retryAuthCheck}
+        />
     );
   }
 
@@ -143,9 +143,9 @@ export default function ProfilePage() {
       <div className="mx-auto max-w-6xl px-4 py-10">
         <section className="mb-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm animate-fade-up">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-            Account overview
+            Resumen de la cuenta
           </p>
-          <h1 className="mt-2 text-3xl font-bold text-slate-900">Mis ordenes</h1>
+          <h1 className="mt-2 text-3xl font-bold text-slate-900">Mis órdenes</h1>
           <p className="mt-2 text-sm text-slate-600">
             Revisa el estado de tus compras y entra al detalle de cada pedido.
           </p>
@@ -154,7 +154,7 @@ export default function ProfilePage() {
             <article className="rounded-xl border border-slate-200 bg-slate-50 p-4">
               <div className="flex items-center gap-2 text-slate-500">
                 <Package className="h-4 w-4 text-sky-700" />
-                <span className="text-xs uppercase tracking-[0.16em]">Total ordenes</span>
+                <span className="text-xs uppercase tracking-[0.16em]">Total de órdenes</span>
               </div>
               <p className="mt-2 text-2xl font-semibold text-slate-900">{sortedOrders.length}</p>
             </article>
@@ -260,7 +260,7 @@ export default function ProfilePage() {
                           {dateFormatter.format(new Date(order.createdAt))}
                         </p>
                         <p className="mt-1 text-xs text-slate-500">
-                          {itemCount} item{itemCount === 1 ? '' : 's'}
+                          {itemCount} artículo{itemCount === 1 ? '' : 's'}
                         </p>
                       </div>
 
@@ -276,7 +276,7 @@ export default function ProfilePage() {
                           ))}
                           {order.items.length > 2 ? (
                             <span className="inline-flex rounded-full border border-slate-200 bg-slate-50 px-2 py-1 text-[11px] text-slate-500">
-                              +{order.items.length - 2} mas
+                              +{order.items.length - 2} más
                             </span>
                           ) : null}
                         </div>
@@ -301,8 +301,8 @@ export default function ProfilePage() {
             </div>
           ) : (
             <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-8 text-center">
-              <p className="text-sm font-semibold text-slate-700">No encontramos ordenes con esos filtros</p>
-              <p className="mt-1 text-xs text-slate-500">Prueba limpiando busqueda o cambiando el estado.</p>
+              <p className="text-sm font-semibold text-slate-700">No encontramos órdenes con esos filtros</p>
+              <p className="mt-1 text-xs text-slate-500">Prueba limpiando búsqueda o cambiando el estado.</p>
             </div>
           )}
         </section>

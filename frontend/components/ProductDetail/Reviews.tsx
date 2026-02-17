@@ -1,8 +1,8 @@
 'use client';
-import { useState } from "react";
-import Image from "next/image";
-import { Star } from "lucide-react";
-import React from "react";
+
+import { useMemo, useState } from 'react';
+import Image from 'next/image';
+import { Star } from 'lucide-react';
 
 type Review = {
   id: string;
@@ -14,30 +14,99 @@ type Review = {
   images?: string[];
 };
 
-export default function Reviews({ reviews, rating, total }: { reviews: Review[]; rating: number; total: number }) {
+type RatingRow = {
+  label: string;
+  count: number;
+  percentage: number;
+};
+
+const ratingScale = [
+  { stars: 5, label: 'Excelente' },
+  { stars: 4, label: 'Bueno' },
+  { stars: 3, label: 'Promedio' },
+  { stars: 2, label: 'Por debajo del promedio' },
+  { stars: 1, label: 'Pobre' },
+] as const;
+
+function scaleDistribution(rawCounts: number[], total: number) {
+  const rawTotal = rawCounts.reduce((sum, value) => sum + value, 0);
+  if (rawTotal === 0 || total <= 0) return rawCounts.map(() => 0);
+
+  const scaled = rawCounts.map((count) => Math.floor((count / rawTotal) * total));
+  const fractional = rawCounts
+    .map((count, index) => ({
+      index,
+      fraction: (count / rawTotal) * total - scaled[index],
+    }))
+    .sort((a, b) => b.fraction - a.fraction);
+
+  let assigned = scaled.reduce((sum, value) => sum + value, 0);
+  let cursor = 0;
+
+  while (assigned < total) {
+    scaled[fractional[cursor % fractional.length].index] += 1;
+    assigned += 1;
+    cursor += 1;
+  }
+
+  return scaled;
+}
+
+export default function Reviews({
+  reviews,
+  rating,
+  total,
+}: {
+  reviews: Review[];
+  rating: number;
+  total: number;
+}) {
   const [showAll, setShowAll] = useState(false);
   const displayed = showAll ? reviews : reviews.slice(0, 3);
 
-  const distribution = [
-    { label: "Excelente", count: 101, percentage: 80 },
-    { label: "Bueno", count: 11, percentage: 9 },
-    { label: "Promedio", count: 3, percentage: 2 },
-    { label: "Por debajo del promedio", count: 8, percentage: 6 },
-    { label: "Pobre", count: 2, percentage: 2 },
-  ];
+  const distribution = useMemo<RatingRow[]>(() => {
+    if (!reviews.length) {
+      return ratingScale.map((row) => ({
+        label: row.label,
+        count: 0,
+        percentage: 0,
+      }));
+    }
+
+    const rawCounts = ratingScale.map(
+      (row) => reviews.filter((review) => Math.round(review.rating) === row.stars).length,
+    );
+    const expectedTotal = Math.max(total, reviews.length);
+    const scaledCounts = scaleDistribution(rawCounts, expectedTotal);
+
+    return ratingScale.map((row, index) => {
+      const count = scaledCounts[index] ?? 0;
+      const percentage = expectedTotal > 0 ? Math.round((count / expectedTotal) * 100) : 0;
+      return {
+        label: row.label,
+        count,
+        percentage,
+      };
+    });
+  }, [reviews, total]);
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-16 border-t">
-      <h2 className="text-2xl font-bold mb-12">Reseñas</h2>
+    <div className="mx-auto max-w-7xl border-t px-6 py-16">
+      <h2 className="mb-12 text-2xl font-bold">Reseñas</h2>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         <div className="lg:col-span-1">
           <div className="space-y-6">
             <div className="text-center">
-              <div className="text-5xl font-bold mb-2">{rating}</div>
-              <div className="flex items-center justify-center gap-1 mb-2">
+              <div className="mb-2 text-5xl font-bold">{rating}</div>
+              <div className="mb-2 flex items-center justify-center gap-1">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className={`w-5 h-5 ${i < Math.floor(rating) ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`} />
+                  <Star
+                    key={i}
+                    className={`h-5 w-5 ${
+                      i < Math.round(rating) ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
+                    }`}
+                  />
                 ))}
               </div>
               <p className="text-sm text-gray-600">de {total} reseñas</p>
@@ -46,11 +115,14 @@ export default function Reviews({ reviews, rating, total }: { reviews: Review[];
             <div className="space-y-3">
               {distribution.map((item) => (
                 <div key={item.label} className="flex items-center gap-3">
-                  <span className="text-xs font-medium text-gray-700 min-w-[100px]">{item.label}</span>
-                  <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
-                    <div className="h-full bg-yellow-400 rounded-full" style={{ width: `${item.percentage}%` }} />
+                  <span className="min-w-[140px] text-xs font-medium text-gray-700">{item.label}</span>
+                  <div className="h-2 flex-1 overflow-hidden rounded-full bg-gray-200">
+                    <div
+                      className="h-full rounded-full bg-yellow-400"
+                      style={{ width: `${item.percentage}%` }}
+                    />
                   </div>
-                  <span className="text-xs text-gray-600 min-w-[30px] text-right">{item.count}</span>
+                  <span className="min-w-[30px] text-right text-xs text-gray-600">{item.count}</span>
                 </div>
               ))}
             </div>
@@ -60,56 +132,87 @@ export default function Reviews({ reviews, rating, total }: { reviews: Review[];
         <div className="lg:col-span-2">
           <div className="space-y-6">
             <div>
-              <input type="text" placeholder="Dejar comentario" className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-black" />
+              <input
+                type="text"
+                placeholder="Escribe un comentario"
+                className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-black"
+              />
             </div>
 
-            {displayed.map((r) => (
-              <div key={r.id} className="pb-6 border-b last:border-b-0">
+            {displayed.map((review) => (
+              <article key={review.id} className="border-b pb-6 last:border-b-0">
                 <div className="flex gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="w-10 h-10 rounded-full bg-gray-300 overflow-hidden">
-                      <Image src={r.avatar} alt={r.author} width={40} height={40} className="w-full h-full object-cover" unoptimized />
+                  <div className="shrink-0">
+                    <div className="h-10 w-10 overflow-hidden rounded-full bg-gray-300">
+                      <Image
+                        src={review.avatar}
+                        alt={review.author}
+                        width={40}
+                        height={40}
+                        className="h-full w-full object-cover"
+                        unoptimized
+                      />
                     </div>
                   </div>
 
                   <div className="flex-1">
-                    <div className="flex items-start justify-between mb-2">
+                    <div className="mb-2 flex items-start justify-between">
                       <div>
-                        <p className="font-semibold text-sm">{r.author}</p>
+                        <p className="text-sm font-semibold">{review.author}</p>
                         <div className="flex items-center gap-2">
                           <div className="flex gap-0.5">
                             {[...Array(5)].map((_, i) => (
-                              <Star key={i} className={`w-4 h-4 ${i < Math.floor(r.rating) ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`} />
+                              <Star
+                                key={i}
+                                className={`h-4 w-4 ${
+                                  i < Math.round(review.rating)
+                                    ? 'fill-yellow-400 text-yellow-400'
+                                    : 'text-gray-300'
+                                }`}
+                              />
                             ))}
                           </div>
                         </div>
                       </div>
-                      <span className="text-xs text-gray-500">{r.date}</span>
+                      <span className="text-xs text-gray-500">{review.date}</span>
                     </div>
 
-                    <p className="text-sm text-gray-700 leading-relaxed mb-3">{r.content}</p>
+                    <p className="mb-3 text-sm leading-relaxed text-gray-700">{review.content}</p>
 
-                    {r.images && r.images.length > 0 && (
-                      <div className="flex gap-2">
-                        {r.images.map((img, idx) => (
-                          <div key={idx} className="w-20 h-20 rounded-lg overflow-hidden bg-gray-100">
-                            <Image src={img} alt={`Imagen reseña ${idx + 1}`} width={80} height={80} className="w-full h-full object-cover" unoptimized />
+                    {review.images && review.images.length > 0 ? (
+                      <div className="flex flex-wrap gap-2">
+                        {review.images.map((image, imageIndex) => (
+                          <div
+                            key={`${review.id}-${imageIndex}`}
+                            className="h-20 w-28 overflow-hidden rounded-lg bg-gray-100"
+                          >
+                            <Image
+                              src={image}
+                              alt={`Imagen de reseña ${imageIndex + 1}`}
+                              width={112}
+                              height={80}
+                              className="h-full w-full object-cover"
+                              unoptimized
+                            />
                           </div>
                         ))}
                       </div>
-                    )}
+                    ) : null}
                   </div>
                 </div>
-              </div>
+              </article>
             ))}
 
-            {!showAll && reviews.length > 3 && (
+            {!showAll && reviews.length > 3 ? (
               <div className="flex justify-center pt-6">
-                <button onClick={() => setShowAll(true)} className="px-8 py-2 border border-gray-400 rounded-lg text-sm font-medium hover:bg-gray-50 transition flex items-center gap-2">
+                <button
+                  onClick={() => setShowAll(true)}
+                  className="flex items-center gap-2 rounded-lg border border-gray-400 px-8 py-2 text-sm font-medium transition hover:bg-gray-50"
+                >
                   Ver más <span>↓</span>
                 </button>
               </div>
-            )}
+            ) : null}
           </div>
         </div>
       </div>

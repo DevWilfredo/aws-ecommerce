@@ -37,7 +37,7 @@ function shuffleProducts(list: Product[]) {
 export default function ProductGrid({
   products = [],
   productsByTab: productsByTabFromProps,
-  tabs = ["New Arrival", "Bestseller", "Featured Products"],
+  tabs = ["Novedades", "Más vendidos", "Productos destacados"],
   defaultTab,
 }: ProductGridProps) {
   const normalizedTabs = useMemo(() => (tabs.length ? tabs : ["Productos"]), [tabs]);
@@ -107,7 +107,7 @@ export default function ProductGrid({
 
       {!filtered.length ? (
         <div className="rounded-xl border border-slate-200 bg-white px-4 py-8 text-center text-sm text-slate-600">
-          No hay productos para esta pestana ahora mismo.
+          No hay productos para esta pestaña ahora mismo.
         </div>
       ) : null}
 
@@ -119,7 +119,7 @@ export default function ProductGrid({
             style={{ animationDelay: `${Math.min(index, 11) * 55}ms` }}
           >
             <button
-              aria-label="Toggle favorite"
+              aria-label="Alternar favorito"
               onClick={() => toggleFav(product.id)}
               className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/80 hover:bg-white"
             >
@@ -150,7 +150,7 @@ export default function ProductGrid({
                 <div className="mb-3 text-lg font-bold">${product.price}</div>
                 <Button asChild variant="brand" className="w-full">
                   <Link href={product.href ?? "#"} className="block text-center">
-                    Agregar al Carrito
+                    Agregar al carrito
                   </Link>
                 </Button>
               </div>

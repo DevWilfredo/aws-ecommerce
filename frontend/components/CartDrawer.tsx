@@ -29,12 +29,12 @@ export default function CartDrawer() {
       </SheetTrigger>
       <SheetContent side="right" className="flex w-full flex-col px-8 py-4 sm:w-96">
         <SheetHeader>
-          <SheetTitle>Mi Carrito</SheetTitle>
+          <SheetTitle>Mi carrito</SheetTitle>
         </SheetHeader>
 
         <div className="flex-1 space-y-4 overflow-y-auto py-4">
           {items.length === 0 ? (
-            <p className="text-sm text-gray-500">Tu carrito esta vacio.</p>
+            <p className="text-sm text-gray-500">Tu carrito está vacío.</p>
           ) : (
             items.map((item) => (
               <div key={item.lineId} className="flex gap-3 border-b pb-3">
@@ -60,7 +60,7 @@ export default function CartDrawer() {
                       ))}
                     </ul>
                   ) : (
-                    <p className="mt-1 text-xs text-gray-500">Configuracion por defecto</p>
+                     <p className="mt-1 text-xs text-gray-500">Configuración por defecto</p>
                   )}
 
                   <div className="mt-2 flex items-center gap-2">
@@ -104,7 +104,7 @@ export default function CartDrawer() {
                 variant="brand"
                 className="w-full bg-gradient-to-r from-[#0a3558] via-[#0c5f93] to-[#22b8f7]"
               >
-                <Link href="/checkout">Ir a checkout</Link>
+                 <Link href="/checkout">Ir al pago</Link>
               </Button>
             </SheetClose>
           </div>

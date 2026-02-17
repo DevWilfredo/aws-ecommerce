@@ -69,7 +69,7 @@ function imageFromProduct(product: Product): string {
   return (
     product.images?.find((img) => img.isFeatured)?.imageUrl ??
     product.images?.[0]?.imageUrl ??
-    'https://placehold.co/600x400?text=No+Image'
+    'https://placehold.co/600x400?text=Sin+imagen'
   );
 }
 
@@ -113,9 +113,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     });
 
     if (existingItem) {
-      toast.success(`Se agrego otra unidad de ${product.name}`);
+      toast.success(`Se agregó otra unidad de ${product.name}`);
     } else {
-      toast.success(`${product.name} anadido al carrito`);
+      toast.success(`${product.name} añadido al carrito`);
     }
   }, [items]);
 
@@ -137,7 +137,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const clearCart = useCallback(() => {
     if (!items.length) {
-      toast.info('El carrito ya esta vacio');
+      toast.info('El carrito ya está vacío');
       return;
     }
 
