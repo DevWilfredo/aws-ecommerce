@@ -9,6 +9,7 @@ import { ProductsModule } from './catalog/products/products.module';
 import { AuthModule } from './auth/auth.module';
 import { OrdersModule } from './orders/orders.module';
 import { PaymentsModule } from './payments/payments.module';
+import { HealthController } from './health/health.controller';
 
 @Module({
   imports: [
@@ -39,7 +40,7 @@ import { PaymentsModule } from './payments/payments.module';
     OrdersModule,
     PaymentsModule,
   ],
-  controllers: [],
+  controllers: [HealthController],
   providers: [],
 })
 export class AppModule {}
