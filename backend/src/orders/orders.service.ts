@@ -9,7 +9,7 @@ import { DataSource, In, Repository } from 'typeorm';
 import { Order } from './entities/order.entity';
 import { OrderItem } from './entities/order-item.entity';
 import { CreateOrderDto } from './dtos/create-order.dto';
-import { Product } from 'src/catalog/products/entities/product.entity';
+import { Product } from '../catalog/products/entities/product.entity';
 import { OrderStatus } from './entities/order-status.enum';
 import { UpdateOrderStatusDto } from './dtos/update-order-status.dto';
 

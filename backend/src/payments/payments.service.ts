@@ -3,12 +3,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import Stripe from 'stripe';
 import { DataSource, In, Repository } from 'typeorm';
 
-import { Product } from 'src/catalog/products/entities/product.entity';
-import { Order } from 'src/orders/entities/order.entity';
-import { OrderItem } from 'src/orders/entities/order-item.entity';
+import { Product } from '../catalog/products/entities/product.entity';
+import { Order } from '../orders/entities/order.entity';
+import { OrderItem } from '../orders/entities/order-item.entity';
 import { CreateCheckoutSessionDto } from './dtos/create-checkout-session.dto';
 import { ConfirmCheckoutSessionDto } from './dtos/confirm-checkout-session.dto';
-import { OrderStatus } from 'src/orders/entities/order-status.enum';
+import { OrderStatus } from '../orders/entities/order-status.enum';
 
 @Injectable()
 export class PaymentsService {

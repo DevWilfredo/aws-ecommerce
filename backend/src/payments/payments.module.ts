@@ -3,8 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PaymentsService } from './payments.service';
 import { PaymentsController } from './payments.controller';
 
-import { Order } from 'src/orders/entities/order.entity';
-import { Product } from 'src/catalog/products/entities/product.entity';
+import { Order } from '../orders/entities/order.entity';
+import { Product } from '../catalog/products/entities/product.entity';
 import { PaymentsWebhookController } from './payments-webhook.controller';
 
 @Module({

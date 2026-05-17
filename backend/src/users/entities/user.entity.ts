@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto';
-import { Order } from 'src/orders/entities/order.entity';
+import { Order } from '../../orders/entities/order.entity';
 import {
     Entity,
     PrimaryColumn,

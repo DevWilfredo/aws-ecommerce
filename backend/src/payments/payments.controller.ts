@@ -1,7 +1,7 @@
 import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
 import { PaymentsService } from './payments.service';
 import { CreateCheckoutSessionDto } from './dtos/create-checkout-session.dto';
-import { CognitoAuthGuard } from 'src/auth/guards/auth.guard';
+import { CognitoAuthGuard } from '../auth/guards/auth.guard';
 import { ConfirmCheckoutSessionDto } from './dtos/confirm-checkout-session.dto';
 
 @Controller('payments')

@@ -8,7 +8,7 @@ import {
   Index,
 } from 'typeorm';
 import { Order } from './order.entity';
-import { Product } from 'src/catalog/products/entities/product.entity';
+import { Product } from '../../catalog/products/entities/product.entity';
 
 @Entity()
 export class OrderItem {

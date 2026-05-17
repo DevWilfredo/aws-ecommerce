@@ -1,7 +1,7 @@
 import { Controller, Get, Query, Req, Res, UseGuards } from '@nestjs/common';
 import type { CookieOptions, Response } from 'express';
 import { CognitoAuthGuard } from './guards/auth.guard';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from '../users/users.service';
 
 interface CognitoIdTokenPayload {
   sub?: string;

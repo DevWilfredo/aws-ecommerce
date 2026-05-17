@@ -6,7 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from './entities/product.entity';
 import { In, Repository } from 'typeorm';
 import { ProductImage } from './entities/product-image.entity';
-import { AwsS3Service } from 'src/aws-s3/aws-s3.service';
+import { AwsS3Service } from '../../aws-s3/aws-s3.service';
 import { randomUUID } from 'crypto';
 import { OptionGroup } from './entities/option-group.entity';
 import { AttributeDefinition, AttributeDataType } from './entities/attribute-definition.entity';

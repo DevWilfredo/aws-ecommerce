@@ -9,7 +9,7 @@ import { ProductImage } from './entities/product-image.entity';
 
 import { AttributesModule } from './attributes/attributes.module';
 import { OptionsModule } from './options/options.module';
-import { AwsS3Module } from 'src/aws-s3/aws-s3.module';
+import { AwsS3Module } from '../../aws-s3/aws-s3.module';
 import { OptionGroup } from './entities/option-group.entity';
 import { AttributeDefinition } from './entities/attribute-definition.entity';
 import { ProductAttributeValue } from './entities/product-attribute-value.entity';

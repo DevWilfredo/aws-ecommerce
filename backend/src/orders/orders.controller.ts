@@ -13,8 +13,8 @@ import { CreateOrderDto } from './dtos/create-order.dto';
 import { UpdateOrderStatusDto } from './dtos/update-order-status.dto';
 
 import { User } from '../users/entities/user.entity';
-import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
-import { CognitoAuthGuard } from 'src/auth/guards/auth.guard';
+import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { CognitoAuthGuard } from '../auth/guards/auth.guard';
 
 @Controller('orders')
 @UseGuards(CognitoAuthGuard)

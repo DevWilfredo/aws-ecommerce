@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Strategy, ExtractJwt } from 'passport-jwt';
 import { Repository } from 'typeorm';
 import * as jwksRsa from 'jwks-rsa';
-import { User } from 'src/users/entities/user.entity';
+import { User } from '../../users/entities/user.entity';
 
 function cookieExtractor(req: any): string | null {
     if (!req?.cookies) return null;
